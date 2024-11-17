@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 interface TwoColumnLayoutProps {
   children: ReactNode;
@@ -13,13 +13,20 @@ export function TwoColumnLayout({
   imageAlt,
 }: TwoColumnLayoutProps) {
   return (
-    <div className="grid h-screen grid-cols-1 md:grid-cols-2">
+    (<div className="grid h-screen grid-cols-1 md:grid-cols-2">
       <div className="flex items-center justify-center bg-gray-100 p-4">
         {children}
       </div>
       <div className="relative hidden md:block">
-        <Image src={imageSrc} alt={imageAlt} layout="fill" objectFit="cover" />
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: "cover"
+          }} />
       </div>
-    </div>
+    </div>)
   );
 }
