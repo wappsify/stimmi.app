@@ -1,6 +1,7 @@
+"use client";
 import * as React from "react";
 import { Button, ButtonProps } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { ArrowBigRightDash, Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
 
 interface SubmitButtonProps extends ButtonProps {
@@ -17,7 +18,11 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
   const isLoadingOrPending = isLoading || pending;
   return (
     <Button disabled={isLoadingOrPending || props.disabled} {...props}>
-      {isLoadingOrPending && <Loader2 className="animate-spin" />}
+      {isLoadingOrPending ? (
+        <Loader2 className="animate-spin" />
+      ) : (
+        <ArrowBigRightDash />
+      )}
       {children}
     </Button>
   );
