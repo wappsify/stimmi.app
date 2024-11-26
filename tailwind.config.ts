@@ -57,6 +57,9 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      animation: {
+        logoFadeIn: "logoFadeIn .5s ease-in-out",
+      },
     },
   },
   plugins: [animate],
