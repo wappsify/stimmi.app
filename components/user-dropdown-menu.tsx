@@ -8,15 +8,13 @@ import {
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { User } from "lucide-react";
 
 const UserDropdownMenu: React.FC = () => {
-  const router = useRouter();
   const handleSignOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.replace("/");
+    location.reload();
   };
 
   return (
