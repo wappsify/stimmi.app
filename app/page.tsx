@@ -4,9 +4,10 @@ import Link from "next/link";
 export default async function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-5xl font-bold mb-4">Welcome to stimmi</h1>
+      <div className="text-9xl mb-4 animate-logoFadeIn">🗳️</div>
+      <h1 className="text-5xl font-bold mb-4">Welcome to stimmi.app</h1>
       <p className="text-lg text-gray-700 mb-6">
-        Your personalized app experience is coming soon!
+        Your app for quick and easy ranked choice polls!
       </p>
       <div className="flex space-x-4">
         <Button variant="default" size="lg" asChild>
