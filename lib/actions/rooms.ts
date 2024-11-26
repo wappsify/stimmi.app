@@ -10,7 +10,7 @@ export const createRoom = async (formData: FormData) => {
 
   const supabase = createClient(cookies());
 
-  const roomName = formData.get("roomName") as string;
+  const roomName = formData.get("name") as string;
 
   const { data, error } = await supabase
     .from("rooms")
@@ -49,6 +49,7 @@ export const updateRoom = async (formData: FormData) => {
     .single();
 
   if (error) {
+    console.error("Error updating room:", error);
     throw new Error("Failed to update room");
   }
 
