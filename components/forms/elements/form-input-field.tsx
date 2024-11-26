@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { FormFieldProps } from "./types";
 import { FieldValues } from "react-hook-form";
 
-const FormInputField = <TFieldValues extends FieldValues = FieldValues>({
+export const FormInputField = <TFieldValues extends FieldValues = FieldValues>({
   control,
   name,
   label,
@@ -35,5 +35,3 @@ const FormInputField = <TFieldValues extends FieldValues = FieldValues>({
     />
   );
 };
-
-export default FormInputField;

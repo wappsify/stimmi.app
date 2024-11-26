@@ -2,10 +2,10 @@
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/lib/supabase/client"; // Ensure you have a Supabase client setup
+import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { FormSubmitButton } from "@/components/forms/submit-button";
+import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
 
 export function RegisterForm() {
   const [email, setEmail] = useState("");

@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FormSubmitButton } from "@/components/forms/submit-button";
-import { createClient } from "@/lib/supabase/client"; // Ensure you have a Supabase client setup
+import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
+import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEventHandler, useState } from "react";

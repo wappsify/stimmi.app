@@ -10,7 +10,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { FieldValues } from "react-hook-form";
 import { FormFieldProps } from "./types";
 
-const FormTextareaField = <TFieldValues extends FieldValues = FieldValues>({
+export const FormTextareaField = <
+  TFieldValues extends FieldValues = FieldValues,
+>({
   control,
   name,
   label,
@@ -34,5 +36,3 @@ const FormTextareaField = <TFieldValues extends FieldValues = FieldValues>({
     />
   );
 };
-
-export default FormTextareaField;

@@ -1,5 +1,5 @@
 "use client";
-import { FormSubmitButton } from "@/components/forms/submit-button";
+import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
 import { Form } from "@/components/ui/form";
 import { updateRoom } from "@/lib/actions/rooms";
 import { FormValues, roomEditSchema } from "@/lib/schemas/room-edit";
@@ -8,8 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Room } from "../room.types";
-import FormInputField from "./forms/form-input-field";
-import FormTextareaField from "./forms/form-textarea-field";
+import { FormInputField } from "@/components/forms/elements/form-input-field";
+import { FormTextareaField } from "@/components/forms/elements/form-textarea-field";
 
 const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {
   const form = useForm<FormValues>({
