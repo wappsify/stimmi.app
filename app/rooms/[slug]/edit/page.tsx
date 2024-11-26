@@ -3,9 +3,8 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import RoomEditForm from "@/components/RoomEditForm";
-import { ArrowLeft } from "lucide-react";
 
-const RoomOverviewPage: React.FC<{
+const RoomEditPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
   const supabase = createClient(cookies());
@@ -24,14 +23,12 @@ const RoomOverviewPage: React.FC<{
 
   return (
     <div>
-      <h1 className="text-3xl">
-        You are currently viewing room <strong>{room.name}</strong>
-        <Button variant="outline" asChild>
-          <Link href={`/rooms/${room.slug}/edit`}>Edit</Link>
-        </Button>
+      <h1 className="text-3xl font-bold text-center mb-6">
+        Edit room {room.name}
       </h1>
+      <RoomEditForm room={room} />
     </div>
   );
 };
 
-export default RoomOverviewPage;
+export default RoomEditPage;

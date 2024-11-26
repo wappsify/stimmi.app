@@ -8,10 +8,9 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardFooter,
 } from "@/components/ui/card";
 import { getUserOrRedirect } from "@/lib/server/utils";
-import { DoorOpen, Eye, Pen, PlusCircle } from "lucide-react";
+import { Eye, Pen, PlusCircle } from "lucide-react";
 
 const RoomsPage = async () => {
   const supabase = createClient(cookies());
@@ -21,7 +20,8 @@ const RoomsPage = async () => {
   const { data: rooms, error } = await supabase
     .from("rooms")
     .select("*")
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.error("Error fetching rooms:", error);
@@ -59,7 +59,7 @@ const RoomsPage = async () => {
                   {room.description || "No description available"}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="grid gap-2">
+              <CardContent className="mt-auto grid gap-2">
                 <Button variant="default" size="sm" asChild>
                   <Link href={`/rooms/${room.slug}`}>
                     <Eye />

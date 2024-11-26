@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Frown } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-[80vh]">
+      <Frown size={64} className="mb-4" />
       <h2 className="text-4xl font-bold text-gray-800 mb-4">
         404 - Page Not Found
       </h2>

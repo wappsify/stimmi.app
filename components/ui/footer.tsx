@@ -4,7 +4,7 @@ import { Button } from "./button";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full py-2 bg-slate-200 text-primary border-t border-primary text-center">
+    <footer className="w-full py-2 bg-slate-200 text-primary border-t border-primary text-center mt-4">
       <div className="container mx-auto">
         <p className="prose text-sm mb-2">
           &copy; {new Date().getFullYear()} stimmi.app
