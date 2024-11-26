@@ -11,7 +11,12 @@
     "generate": "npx supabase gen types --lang=typescript --project-id riqtseunihgzwlsgzkkx --schema public > database.types.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-avatar": "^1.1.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.2",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tabs": "^1.1.1",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.1",
     "class-variance-authority": "^0.7.0",
@@ -20,8 +25,10 @@
     "next": "14.2.16",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.53.2",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
