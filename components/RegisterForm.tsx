@@ -9,6 +9,8 @@ import { Form } from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const registerSchema = z.object({
   email: z.string().email(),
@@ -29,13 +31,24 @@ export function RegisterForm() {
   const router = useRouter();
   const supabase = createClient();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async (data: RegisterFormValues) => {
     const { email, password } = data;
+    setIsLoading(true);
+
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) {
       form.setError("root", { message: error.message });
     } else {
       router.push("/rooms");
+      toast.success(
+        <div>
+          <strong>Account created successfully!</strong>
+          <br />
+          You may start using your account right now.
+        </div>
+      );
     }
   };
 
@@ -63,7 +76,11 @@ export function RegisterForm() {
           </p>
         )}
         <div className="flex items-center justify-between">
-          <FormSubmitButton type="submit" className="place-self-center">
+          <FormSubmitButton
+            type="submit"
+            className="place-self-center"
+            isLoading={isLoading}
+          >
             Register
           </FormSubmitButton>
           <Button variant="outline" asChild>

@@ -9,6 +9,8 @@ import { Form } from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -29,8 +31,11 @@ export function LoginForm() {
   const router = useRouter();
   const supabase = createClient();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async (data: LoginFormValues) => {
     const { email, password } = data;
+    setIsLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -39,6 +44,13 @@ export function LoginForm() {
       form.setError("root", { message: error.message });
     } else {
       router.push("/rooms");
+      toast.success(
+        <div>
+          <strong>Logged in successfully!</strong>
+          <br />
+          Go ahead and create some polls.
+        </div>
+      );
     }
   };
 
@@ -66,7 +78,11 @@ export function LoginForm() {
           </p>
         )}
         <div className="flex items-center justify-between">
-          <FormSubmitButton type="submit" className="place-self-center">
+          <FormSubmitButton
+            type="submit"
+            className="place-self-center"
+            isLoading={isLoading}
+          >
             Login
           </FormSubmitButton>
           <Button variant="outline" asChild>
