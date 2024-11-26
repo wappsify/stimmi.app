@@ -5,7 +5,7 @@ import "./globals.css";
 const noto = Noto_Sans({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "stimmi.app",
+  title: "Ranked choice polls | stimmi.app",
   description: "Your app for quick and easy ranked choice polls. 🗳️",
 };
 
