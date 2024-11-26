@@ -20,7 +20,7 @@ export default async function Home() {
       <div className="flex space-x-4">
         {user ? (
           <Button variant="default" size="lg" asChild>
-            <Link href="/rooms">Show me my rooms!</Link>
+            <Link href="/rooms">Show me my rooms</Link>
           </Button>
         ) : (
           <>

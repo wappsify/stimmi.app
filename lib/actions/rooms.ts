@@ -3,17 +3,12 @@
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getUserOrRedirect } from "@/lib/server/utils";
 
 export const createRoom = async (formData: FormData) => {
+  const user = await getUserOrRedirect();
+
   const supabase = createClient(cookies());
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    throw new Error("User not authenticated");
-  }
 
   const roomName = formData.get("roomName") as string;
 

@@ -10,3 +10,12 @@ export async function redirectIfAuthenticated() {
     redirect("/rooms");
   }
 }
+
+export async function getUserOrRedirect() {
+  const supabase = createClient(cookies());
+  const { data } = await supabase.auth.getUser();
+  if (!data.user) {
+    return redirect("/login");
+  }
+  return data.user;
+}
