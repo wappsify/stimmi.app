@@ -2,20 +2,28 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import { getUserOrRedirect } from "@/lib/server/utils";
+import { roomCreationSchema } from "@/lib/schemas/room-creation";
+import { roomEditSchema } from "../schemas/room-edit";
 
 export const createRoom = async (formData: FormData) => {
   const user = await getUserOrRedirect();
 
   const supabase = createClient(cookies());
 
-  const roomName = formData.get("name") as string;
+  const { data: values, success } = roomCreationSchema.safeParse({
+    name: formData.get("name"),
+  });
+
+  if (!success) {
+    throw new Error("Invalid form data");
+  }
 
   const { data, error } = await supabase
     .from("rooms")
     .insert({
-      name: roomName,
+      name: values.name,
       user_id: user.id,
       description: "",
       headline: "",
@@ -32,6 +40,16 @@ export const createRoom = async (formData: FormData) => {
 };
 
 export const updateRoom = async (formData: FormData) => {
+  const { data: values, success } = roomEditSchema.safeParse({
+    id: formData.get("id"),
+    name: formData.get("name"),
+    description: formData.get("description"),
+  });
+
+  if (!success) {
+    throw new Error("Invalid form data");
+  }
+
   const supabase = createClient(cookies());
 
   const roomId = formData.get("id") as string;
@@ -53,5 +71,5 @@ export const updateRoom = async (formData: FormData) => {
     throw new Error("Failed to update room");
   }
 
-  redirect(`/rooms/${data.slug}`);
+  redirect(`/rooms/${data.slug}`, RedirectType.replace);
 };

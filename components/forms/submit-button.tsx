@@ -1,20 +1,20 @@
 "use client";
 import { Button, ButtonProps } from "@/components/ui/button";
 import { ArrowBigRightDash, Loader2 } from "lucide-react";
-import { useFormStatus } from "react-dom";
+import { useFormState } from "react-hook-form";
 
-interface SubmitButtonProps extends ButtonProps {
+interface FormSubmitButtonProps extends ButtonProps {
   isLoading?: boolean;
 }
 
-export const SubmitButton: React.FC<SubmitButtonProps> = ({
+export const FormSubmitButton: React.FC<FormSubmitButtonProps> = ({
   isLoading,
   children,
   ...props
 }) => {
-  const { pending } = useFormStatus();
+  const { isSubmitting } = useFormState();
 
-  const isLoadingOrPending = isLoading || pending;
+  const isLoadingOrPending = isLoading || isSubmitting;
   return (
     <Button disabled={isLoadingOrPending || props.disabled} {...props}>
       {isLoadingOrPending ? (

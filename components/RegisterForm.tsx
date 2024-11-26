@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client"; // Ensure you have a Supabase client setup
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { SubmitButton } from "@/components/ui/submit-button";
+import { FormSubmitButton } from "@/components/forms/submit-button";
 
 export function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -70,14 +70,14 @@ export function RegisterForm() {
       </div>
       {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
       <div className="flex items-center justify-between">
-        <SubmitButton
+        <FormSubmitButton
           variant="default"
           size="lg"
           type="submit"
           isLoading={isLoading}
         >
           Register
-        </SubmitButton>
+        </FormSubmitButton>
         <Button variant="link" size="sm" asChild>
           <Link href="/login">Login</Link>
         </Button>
