@@ -4,7 +4,7 @@ import { Button } from "./button";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full py-2 bg-primary text-secondary text-center">
+    <footer className="w-full py-2 bg-slate-200 text-primary border-t border-primary text-center">
       <div className="container mx-auto">
         <p className="prose text-sm mb-2">
           &copy; {new Date().getFullYear()} stimmi.app
@@ -13,6 +13,8 @@ const Footer: React.FC = () => {
           <a
             href="https://github.com/wappsify/stimmi.app"
             title="View source code on Github"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Github />
           </a>
