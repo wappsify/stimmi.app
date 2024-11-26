@@ -30,3 +30,27 @@ export const createRoom = async (formData: FormData) => {
 
   redirect(`/rooms/${data.slug}`);
 };
+
+export const updateRoom = async (formData: FormData) => {
+  const supabase = createClient(cookies());
+
+  const roomId = formData.get("id") as string;
+  const roomName = formData.get("name") as string;
+  const roomDescription = formData.get("description") as string;
+
+  const { data, error } = await supabase
+    .from("rooms")
+    .update({
+      name: roomName,
+      description: roomDescription,
+    })
+    .eq("id", roomId)
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error("Failed to update room");
+  }
+
+  redirect(`/rooms/${data.slug}`);
+};
