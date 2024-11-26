@@ -23,6 +23,17 @@ body {
   }
 }
 
+@keyframes underlineExpand {
+  from {
+    transform: scaleX(0);
+    transform-origin: bottom left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
