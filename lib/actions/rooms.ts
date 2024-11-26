@@ -52,17 +52,13 @@ export const updateRoom = async (formData: FormData) => {
 
   const supabase = createClient(cookies());
 
-  const roomId = formData.get("id") as string;
-  const roomName = formData.get("name") as string;
-  const roomDescription = formData.get("description") as string;
-
   const { data, error } = await supabase
     .from("rooms")
     .update({
-      name: roomName,
-      description: roomDescription,
+      name: values.name,
+      description: values.description,
     })
-    .eq("id", roomId)
+    .eq("id", values.id)
     .select()
     .single();
 

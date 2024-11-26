@@ -1,7 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import RoomEditForm from "@/components/RoomEditForm";
 
 const RoomEditPage: React.FC<{

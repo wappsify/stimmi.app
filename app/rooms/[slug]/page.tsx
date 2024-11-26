@@ -2,8 +2,6 @@ import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import RoomEditForm from "@/components/RoomEditForm";
-import { ArrowLeft } from "lucide-react";
 
 const RoomOverviewPage: React.FC<{
   params: Promise<{ slug: string }>;
