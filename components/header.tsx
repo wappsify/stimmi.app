@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { UserDropdownMenu } from "@/components/user-dropdown-menu";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
+import Link from "next/link";
 
 const Header: React.FC = async () => {
   const supabase = createClient(cookies());
@@ -11,9 +12,14 @@ const Header: React.FC = async () => {
   } = await supabase.auth.getUser();
 
   return (
-    <header className="p-4 bg-gray-200 border-b-primary border-b">
+    <header className="p-4 bg-gray-200 border-b-primary border-b mb-6">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="logo text-xl font-bold">stimmi</div>
+        <Link href="/" className="flex items-center">
+          <div className="text-3xl mr-2">🗳️</div>
+          <div className="logo text-xl font-semibold text-primary">
+            stimmi.app
+          </div>
+        </Link>
         <div className="user-menu flex items-center gap-4">
           {user ? (
             <UserDropdownMenu />
