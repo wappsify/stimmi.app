@@ -3,8 +3,7 @@ import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 import { Database } from "../../database.types";
 
-export const createClient = (request: NextRequest) => {
-  // Create an unmodified response
+export const createClient = async (request: NextRequest) => {
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers,
@@ -33,6 +32,21 @@ export const createClient = (request: NextRequest) => {
       },
     }
   );
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const allowList = ["/login", "/register", "/auth"];
+
+  if (
+    !user &&
+    !allowList.some((path) => request.nextUrl.pathname.startsWith(path))
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    return NextResponse.redirect(url);
+  }
 
   return supabaseResponse;
 };
