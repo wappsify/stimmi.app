@@ -2,8 +2,16 @@ import { createClient } from "../../lib/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card";
 import { getUserOrRedirect } from "@/lib/server/utils";
+import { DoorOpen, Eye, Pen, PlusCircle } from "lucide-react";
 
 const RoomsPage = async () => {
   const supabase = createClient(cookies());
@@ -22,18 +30,50 @@ const RoomsPage = async () => {
 
   return (
     <div>
-      <h1>Rooms</h1>
-      <Button asChild>
-        <Link href="/rooms/new">Create New Room</Link>
-      </Button>
+      <h1 className="text-3xl font-bold text-center mb-6">All your rooms</h1>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <li className="h-full">
+          <Card className="h-full bg-primary text-secondary">
+            <CardHeader>
+              <CardTitle>Create a new room</CardTitle>
+              <CardDescription className="text-muted">
+                You may create a new room at any time by clicking below!
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-2">
+              <Button variant="secondary" asChild>
+                <Link href={`/rooms/new`}>
+                  <PlusCircle />
+                  Start creating room
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </li>
         {rooms.map((room) => (
-          <li key={room.id}>
-            <Link href={`/rooms/${room.slug}`}>
-              <Card className="cursor-pointer">
-                <CardContent>{room.name}</CardContent>
-              </Card>
-            </Link>
+          <li key={room.id} className="h-full">
+            <Card className="h-full">
+              <CardHeader>
+                <CardTitle>{room.name || <i>No title</i>}</CardTitle>
+                <CardDescription>
+                  {room.description || "No description available"}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="grid gap-2">
+                <Button variant="default" size="sm" asChild>
+                  <Link href={`/rooms/${room.slug}`}>
+                    <Eye />
+                    View room {room.name}
+                  </Link>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href={`/rooms/${room.slug}/edit`}>
+                    <Pen />
+                    Edit room {room.name}
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
           </li>
         ))}
       </ul>

@@ -12,7 +12,7 @@ export default async function Home() {
   } = await supabase.auth.getUser();
 
   return (
-    <main className="min-h-screen bg-gray-100 container mx-auto">
+    <main className="bg-gray-100 container mx-auto">
       {user && (
         <div className="flex justify-end h-[52px] items-center mt-2">
           <UserDropdownMenu />
