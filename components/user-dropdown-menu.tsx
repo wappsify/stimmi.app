@@ -28,6 +28,9 @@ const UserDropdownMenu: React.FC = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
+          <Link href="/rooms">Rooms</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link href="/account">Account</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleSignOut}>Sign Out</DropdownMenuItem>
