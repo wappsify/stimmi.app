@@ -1,29 +1,35 @@
 "use client";
-import { FormEventHandler, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { SubmitButton } from "@/components/ui/submit-button";
 import { createClient } from "@/lib/supabase/client"; // Ensure you have a Supabase client setup
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FormEventHandler, useState } from "react";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const supabase = createClient();
   const router = useRouter();
 
   const handleLogin: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
+
     if (error) {
       setError(error.message);
     } else {
       router.push("/rooms");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -38,8 +44,7 @@ export function LoginForm() {
         >
           Email
         </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        <Input
           id="email"
           type="email"
           placeholder="Email"
@@ -55,8 +60,7 @@ export function LoginForm() {
         >
           Password
         </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        <Input
           id="password"
           type="password"
           placeholder="Password"
@@ -67,9 +71,14 @@ export function LoginForm() {
       </div>
       {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
       <div className="flex items-center justify-between">
-        <Button variant="default" size="lg" type="submit">
+        <SubmitButton
+          variant="default"
+          size="lg"
+          type="submit"
+          isLoading={isLoading}
+        >
           Login
-        </Button>
+        </SubmitButton>
         <Button variant="link" size="sm" asChild>
           <Link href="/register">Register</Link>
         </Button>
