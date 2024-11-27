@@ -8,15 +8,15 @@ function RoomSubpageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <Button variant="outline" asChild>
+    <div className="grid gap-4">
+      <Button variant="outline" asChild className="sm:place-self-start">
         <Link href="/rooms">
           <ArrowLeft />
           Back to list of rooms
         </Link>
       </Button>
       {children}
-    </>
+    </div>
   );
 }
 
