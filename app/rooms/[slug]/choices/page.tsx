@@ -31,13 +31,12 @@ const RoomEditPage: React.FC<{
 
   return (
     <div className="max-w-md mx-auto">
-      <h1 className="text-3xl text-center mb-6">
-        Edit choices of room: <br />
-        <strong>{room.name}</strong>
-      </h1>
+      <h1 className="text-3xl text-center mb-6 font-bold">Edit room choices</h1>
       <p className="prose mb-6">
         You may add as many choices as you like. Keep in mind that more choices
         require more effort when ranking them.
+        <br />
+        <br /> The choices will be displayed in a random order to the voters.
       </p>
       <ChoiceEditForm room={room} choices={choices} />
     </div>

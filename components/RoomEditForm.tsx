@@ -53,7 +53,7 @@ const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {
           "A longer description of the room. It may contain line breaks."
         }
         label="Room description"
-        description="This is the description of your room. It should be a bit longer and give more context about what the room is for. All voters will see it displayed before voting."
+        description="This is the description of your room. It should be a bit longer and give more context about what the room is for. It is optional, so you may leave it empty. All voters will see it displayed before voting."
       />
       <FormSubmitButton type="submit" className="place-self-center">
         Save Changes
