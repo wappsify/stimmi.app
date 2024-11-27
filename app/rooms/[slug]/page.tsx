@@ -71,8 +71,8 @@ const RoomOverviewPage: React.FC<{
             {room.status === "private" && (
               <>
                 The room is currently private and not open for voting. Only you
-                have access to this it. You may add choices to the room and open
-                it for voting.
+                have access to it. You may add choices to the room and open it
+                for voting.
               </>
             )}
             {room.status === "open" && (
