@@ -23,7 +23,7 @@ const Header: React.FC = async () => {
             stimmi.app
           </div>
         </Link>
-        <div className="user-menu flex items-center gap-4">
+        <div className="user-menu flex items-center gap-4 pr-2">
           {user ? (
             <UserDropdownMenu />
           ) : (
