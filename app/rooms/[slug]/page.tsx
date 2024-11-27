@@ -31,6 +31,16 @@ const RoomOverviewPage: React.FC<{
     return <div>Error loading room</div>;
   }
 
+  const { data: choices, error: choicesError } = await supabase
+    .from("choices")
+    .select("*")
+    .eq("room_id", room.id);
+
+  if (choicesError) {
+    console.error("Error fetching choices:", choicesError);
+    return <div>Error loading choices</div>;
+  }
+
   return (
     <div className="grid gap-4">
       <Button
@@ -108,7 +118,11 @@ const RoomOverviewPage: React.FC<{
               </Link>
             </Button>
           ) : (
-            <RoomStatusForm room={room} className="col-span-2" />
+            <RoomStatusForm
+              room={room}
+              choices={choices}
+              className="col-span-2"
+            />
           )}
           <Separator className="col-span-2 my-6" />
           <RoomDeletionForm room={room} className="col-span-2" />

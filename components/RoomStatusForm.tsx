@@ -1,5 +1,5 @@
 "use client";
-import { DoorOpen, Trash } from "lucide-react";
+import { CheckCircle, DoorOpen, Trash } from "lucide-react";
 import {
   AlertDialogHeader,
   AlertDialogFooter,
@@ -21,11 +21,14 @@ import { changeRoomStatus } from "@/lib/actions/rooms";
 import { toast } from "sonner";
 import { useState } from "react";
 import { FormValues, roomStatusSchema } from "@/lib/schemas/room-status";
+import { RoomCheck, validateRoom } from "./room-check";
+import { Choice } from "../choice.types";
 
-export const RoomStatusForm: React.FC<{ room: Room; className?: string }> = ({
-  className,
-  room,
-}) => {
+export const RoomStatusForm: React.FC<{
+  room: Room;
+  choices: Choice[];
+  className?: string;
+}> = ({ className, room, choices }) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(roomStatusSchema),
     defaultValues: {
@@ -79,10 +82,11 @@ export const RoomStatusForm: React.FC<{ room: Room; className?: string }> = ({
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
-
+          <RoomCheck room={room} choices={choices} />
           <AlertDialogFooter>
             <AlertDialogCancel>No, cancel</AlertDialogCancel>
-            <FormSubmitButton>
+
+            <FormSubmitButton disabled={!validateRoom(room, choices)}>
               {room.status === "private"
                 ? "Yes, open room"
                 : "Yes, show results"}
