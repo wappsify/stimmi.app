@@ -8,7 +8,7 @@ import {
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Menu, User } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const UserDropdownMenu: React.FC = () => {
   const handleSignOut = async () => {
@@ -18,22 +18,41 @@ const UserDropdownMenu: React.FC = () => {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Menu />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem asChild>
+    <>
+      <div className="sm:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <Menu />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem asChild>
+              <Link href="/rooms">Rooms</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/account">Account</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleSignOut}>
+              Sign Out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <div className="hidden sm:flex gap-2">
+        <Button variant="link" asChild>
           <Link href="/rooms">Rooms</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
+        </Button>
+        <Button variant="link" asChild>
           <Link href="/account">Account</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleSignOut}>Sign Out</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </Button>
+
+        <Button variant="ghost" onClick={handleSignOut}>
+          Sign Out
+        </Button>
+      </div>
+    </>
   );
 };
 
