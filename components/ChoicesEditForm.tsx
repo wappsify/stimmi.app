@@ -43,10 +43,7 @@ const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
   return (
     <Form {...form} onSubmit={form.handleSubmit(onSubmit)}>
       {fields.map((_, index) => (
-        <div
-          className="grid grid-cols-[1fr_min-content] gap-2 items-center"
-          key={index}
-        >
+        <div className="grid grid-cols-[1fr_min-content] gap-2" key={index}>
           <FormInputField<FormValues>
             name={`choices.${index}.name`}
             control={form.control}
@@ -60,6 +57,7 @@ const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
             size="icon"
             title="Remove this choice"
             onClick={() => remove(index)}
+            className="mt-8"
           >
             <Trash />
           </Button>
