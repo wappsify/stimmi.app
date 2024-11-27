@@ -6,6 +6,7 @@ import { redirect, RedirectType } from "next/navigation";
 import { getUserOrRedirect } from "@/lib/server/utils";
 import { roomCreationSchema } from "@/lib/schemas/room-creation";
 import { roomEditSchema } from "../schemas/room-edit";
+import { roomDeletionSchema } from "../schemas/room-deletion";
 
 export const createRoom = async (formData: FormData) => {
   const user = await getUserOrRedirect();
@@ -67,5 +68,33 @@ export const updateRoom = async (formData: FormData) => {
     throw new Error("Failed to update room");
   }
 
-  redirect(`/rooms/${data.slug}`, RedirectType.replace);
+  redirect(`/rooms/${data.slug}/edit`, RedirectType.replace);
+};
+
+export const deleteRoom = async (formData: FormData) => {
+  console.log("Deleting room", formData.get("id"));
+  const { data: values, success } = roomDeletionSchema.safeParse({
+    id: formData.get("id"),
+  });
+
+  if (!success) {
+    throw new Error("Invalid form data");
+  }
+
+  const supabase = createClient(cookies());
+
+  const { data, error } = await supabase
+    .from("rooms")
+    .delete()
+    .eq("id", values.id)
+
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error deleting room:", error);
+    throw new Error("Failed to delete room");
+  }
+
+  redirect(`/rooms`, RedirectType.replace);
 };
