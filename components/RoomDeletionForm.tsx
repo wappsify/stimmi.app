@@ -22,7 +22,10 @@ import { deleteRoom } from "@/lib/actions/rooms";
 import { toast } from "sonner";
 import { useState } from "react";
 
-export const RoomDeletionForm: React.FC<{ room: Room }> = ({ room }) => {
+export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({
+  className,
+  room,
+}) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(roomDeletionSchema),
     defaultValues: {
@@ -42,7 +45,7 @@ export const RoomDeletionForm: React.FC<{ room: Room }> = ({ room }) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive">
+        <Button size="sm" variant="destructive" className={className}>
           <Trash />
           Delete room
         </Button>

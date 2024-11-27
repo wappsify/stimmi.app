@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
+import { ArrowLeft, Edit } from "lucide-react";
 import { RoomDeletionForm } from "../../../components/RoomDeletionForm";
 
 const RoomOverviewPage: React.FC<{
@@ -23,14 +23,43 @@ const RoomOverviewPage: React.FC<{
   }
 
   return (
-    <div className="grid gap-2">
-      <h1 className="text-3xl">
-        You are currently viewing room <strong>{room.name}</strong>
-      </h1>
-      <Button variant="outline" asChild>
-        <Link href={`/rooms/${room.slug}/edit`}>Edit</Link>
+    <div className="grid gap-4">
+      <Button
+        variant="outline"
+        size="sm"
+        asChild
+        className="sm:place-self-start"
+      >
+        <Link href="/rooms">
+          <ArrowLeft />
+          Back to list of rooms
+        </Link>
       </Button>
-      <RoomDeletionForm room={room} />
+
+      <div className="grid max-w-md mx-auto">
+        <h1 className="text-3xl text-center mb-4">
+          Viewing room: <strong>{room.name}</strong>
+        </h1>
+        <p className="prose mb-6">
+          You may edit the room details, add choices to the room or delete the
+          room from this page.
+        </p>
+        <div className="grid gap-2 grid-cols-2 ">
+          <Button asChild>
+            <Link href={`/rooms/${room.slug}/edit`}>
+              <Edit />
+              Edit room details
+            </Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href={`/rooms/${room.slug}/edit`}>
+              <Edit />
+              Add and edit choices
+            </Link>
+          </Button>
+          <RoomDeletionForm room={room} className="col-span-2" />
+        </div>
+      </div>
     </div>
   );
 };

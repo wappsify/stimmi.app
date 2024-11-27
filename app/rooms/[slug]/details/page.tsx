@@ -21,8 +21,8 @@ const RoomEditPage: React.FC<{
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mb-6">
-        Edit room {room.name}
+      <h1 className="text-3xl text-center mb-6">
+        Edit room: <strong>{room.name}</strong>
       </h1>
       <RoomEditForm room={room} />
     </div>

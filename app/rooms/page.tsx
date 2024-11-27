@@ -10,7 +10,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { getUserOrRedirect } from "@/lib/server/utils";
-import { Eye, Pen, PlusCircle } from "lucide-react";
+import { Edit, Eye, PlusCircle } from "lucide-react";
 
 const RoomsPage = async () => {
   const supabase = createClient(cookies());
@@ -67,9 +67,9 @@ const RoomsPage = async () => {
                   </Link>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <Link href={`/rooms/${room.slug}/edit`}>
-                    <Pen />
-                    Edit room
+                  <Link href={`/rooms/${room.slug}/details`}>
+                    <Edit />
+                    Edit room details
                   </Link>
                 </Button>
               </CardContent>

@@ -15,9 +15,9 @@ function RoomSubpageLayout({
         asChild
         className="sm:place-self-start"
       >
-        <Link href="/rooms">
+        <Link href="./">
           <ArrowLeft />
-          Back to list of rooms
+          Back to room overview
         </Link>
       </Button>
       {children}

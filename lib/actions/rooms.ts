@@ -68,7 +68,7 @@ export const updateRoom = async (formData: FormData) => {
     throw new Error("Failed to update room");
   }
 
-  redirect(`/rooms/${data.slug}/edit`, RedirectType.replace);
+  redirect(`/rooms/${data.slug}/details`, RedirectType.replace);
 };
 
 export const deleteRoom = async (formData: FormData) => {
