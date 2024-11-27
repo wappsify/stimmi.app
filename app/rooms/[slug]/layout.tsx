@@ -9,7 +9,12 @@ function RoomSubpageLayout({
 }>) {
   return (
     <div className="grid gap-4">
-      <Button variant="outline" asChild className="sm:place-self-start">
+      <Button
+        variant="outline"
+        size="sm"
+        asChild
+        className="sm:place-self-start"
+      >
         <Link href="/rooms">
           <ArrowLeft />
           Back to list of rooms
