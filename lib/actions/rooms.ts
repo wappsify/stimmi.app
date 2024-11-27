@@ -8,6 +8,8 @@ import { roomCreationSchema } from "@/lib/schemas/room-creation";
 import { roomEditSchema } from "../schemas/room-edit";
 import { roomDeletionSchema } from "../schemas/room-deletion";
 import { roomStatusSchema } from "../schemas/room-status";
+import { Vote } from "../../vote.types";
+import { Ballot, Borda, Baldwin } from "votes";
 
 export const createRoom = async (formData: FormData) => {
   const user = await getUserOrRedirect();
@@ -110,6 +112,58 @@ export const changeRoomStatus = async (formData: FormData) => {
   }
 
   const supabase = createClient(cookies());
+
+  if (values.status === "results") {
+    // fetch choices of room
+    const { data: choices, error: choicesError } = await supabase
+      .from("choices")
+      .select("id")
+      .eq("room_id", values.id);
+
+    if (choicesError) {
+      console.error("Error fetching choices:", choicesError);
+      throw new Error("Failed to fetch choices");
+    }
+
+    // fetch votes of room
+    const { data: votes, error: votesError } = await supabase
+      .from("votes")
+      .select()
+      .eq("room_id", values.id);
+
+    if (votesError) {
+      console.error("Error fetching votes:", votesError);
+      throw new Error("Failed to fetch votes");
+    }
+
+    const votesByUsers = votes.reduce<{ [key: string]: Vote[] }>(
+      (acc, vote) => {
+        if (!acc[vote.user_id]) {
+          acc[vote.user_id] = [];
+        }
+        acc[vote.user_id].push(vote);
+        return acc;
+      },
+      {}
+    );
+
+    const ballots: Ballot[] = Object.values(votesByUsers).map((userVotes) => ({
+      ranking: [...userVotes]
+        .sort((a, b) => a.rank - b.rank)
+        .map((v) => [v.choice_id]),
+      weight: 1,
+    }));
+
+    const candidates = choices.map((choice) => choice.id);
+
+    const borda = new Borda({ candidates, ballots });
+
+    console.log(borda.scores());
+    console.log(borda.ranking());
+    console.log(borda.matrix);
+
+    return;
+  }
 
   const { data, error } = await supabase
     .from("rooms")
