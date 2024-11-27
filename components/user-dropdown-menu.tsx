@@ -8,7 +8,7 @@ import {
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 
 const UserDropdownMenu: React.FC = () => {
   const handleSignOut = async () => {
@@ -34,7 +34,8 @@ const UserDropdownMenu: React.FC = () => {
               <Link href="/account">Account</Link>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleSignOut}>
-              Sign Out
+              <LogOut />
+              Logout
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -49,7 +50,7 @@ const UserDropdownMenu: React.FC = () => {
         </Button>
 
         <Button variant="ghost" onClick={handleSignOut}>
-          Sign Out
+          <LogOut /> Logout
         </Button>
       </div>
     </>

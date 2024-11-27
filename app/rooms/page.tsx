@@ -31,7 +31,7 @@ const RoomsPage = async () => {
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mb-6">All your rooms</h1>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <li className="h-full">
           <Card className="h-full bg-primary text-secondary">
             <CardHeader>
@@ -63,13 +63,13 @@ const RoomsPage = async () => {
                 <Button variant="default" size="sm" asChild>
                   <Link href={`/rooms/${room.slug}`}>
                     <Eye />
-                    View room {room.name}
+                    View room
                   </Link>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
                   <Link href={`/rooms/${room.slug}/edit`}>
                     <Pen />
-                    Edit room {room.name}
+                    Edit room
                   </Link>
                 </Button>
               </CardContent>
