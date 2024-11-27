@@ -1,5 +1,5 @@
 "use client";
-import { CheckCircle, DoorOpen, Trash } from "lucide-react";
+import { DoorOpen } from "lucide-react";
 import {
   AlertDialogHeader,
   AlertDialogFooter,
