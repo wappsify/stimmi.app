@@ -46,13 +46,13 @@ const RoomOverviewPage: React.FC<{
         </p>
         <div className="grid gap-2 grid-cols-2 ">
           <Button asChild>
-            <Link href={`/rooms/${room.slug}/edit`}>
+            <Link href={`/rooms/${room.slug}/details`}>
               <Edit />
               Edit room details
             </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href={`/rooms/${room.slug}/edit`}>
+            <Link href={`/rooms/${room.slug}/choices`}>
               <Edit />
               Add and edit choices
             </Link>

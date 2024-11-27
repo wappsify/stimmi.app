@@ -83,7 +83,7 @@ export const deleteRoom = async (formData: FormData) => {
 
   const supabase = createClient(cookies());
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("rooms")
     .delete()
     .eq("id", values.id)
