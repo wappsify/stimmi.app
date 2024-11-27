@@ -61,7 +61,9 @@ export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>No, cancel</AlertDialogCancel>
-            <FormSubmitButton>Yes, delete room</FormSubmitButton>
+            <FormSubmitButton variant="destructive">
+              Yes, delete room
+            </FormSubmitButton>
           </AlertDialogFooter>
         </Form>
       </AlertDialogContent>

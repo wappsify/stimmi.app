@@ -111,12 +111,13 @@ export const changeRoomStatus = async (formData: FormData) => {
 
   const supabase = createClient(cookies());
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("rooms")
     .update({
       status: values.status,
     })
     .eq("id", values.id)
+    .select()
     .single();
 
   if (error) {
@@ -124,5 +125,5 @@ export const changeRoomStatus = async (formData: FormData) => {
     throw new Error("Failed to update room status");
   }
 
-  // redirect(`/rooms/${values.id}`, RedirectType.replace);
+  redirect(`/rooms/${data.slug}`, RedirectType.replace);
 };

@@ -59,17 +59,23 @@ const RoomsPage = async () => {
                   {room.description || "You haven't set a description yet."}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="mt-auto grid gap-2">
-                <Button variant="default" size="sm" asChild>
+              <CardContent className="mt-auto grid grid-cols-2 gap-2">
+                <Button className="col-span-2" size="sm" asChild>
                   <Link href={`/rooms/${room.slug}`}>
                     <Eye />
-                    View room
+                    Room overview
                   </Link>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
                   <Link href={`/rooms/${room.slug}/details`}>
                     <Edit />
-                    Edit room details
+                    Edit details
+                  </Link>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href={`/rooms/${room.slug}/choices`}>
+                    <Edit />
+                    Edit choices
                   </Link>
                 </Button>
               </CardContent>

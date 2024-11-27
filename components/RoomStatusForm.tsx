@@ -41,7 +41,7 @@ export const RoomStatusForm: React.FC<{
     const formData = objectToFormData(data);
     await changeRoomStatus(formData);
     setIsOpen(false);
-    toast.success(`Room was deleted successfully`);
+    toast.success(`Room status was updated successfully`);
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +62,7 @@ export const RoomStatusForm: React.FC<{
                 <>Are you sure you want to open the room?</>
               )}
               {room.status === "open" && (
-                <>Are you sure you want to show the results?</>
+                <>Are you sure you want to calculate the results?</>
               )}
             </AlertDialogTitle>
             <AlertDialogDescription>
@@ -75,9 +75,9 @@ export const RoomStatusForm: React.FC<{
               )}
               {room.status === "open" && (
                 <>
-                  This action will show the results of the room to all voters.
-                  It cannot be undone. Anybody that voted in the room will be
-                  able to see the results.
+                  This action will calculate the results of the room to all
+                  voters. It cannot be undone. Anybody that voted in the room
+                  will be able to see the results.
                 </>
               )}
             </AlertDialogDescription>
@@ -89,7 +89,7 @@ export const RoomStatusForm: React.FC<{
             <FormSubmitButton disabled={!validateRoom(room, choices)}>
               {room.status === "private"
                 ? "Yes, open room"
-                : "Yes, show results"}
+                : "Yes, calculate results"}
             </FormSubmitButton>
           </AlertDialogFooter>
         </Form>
