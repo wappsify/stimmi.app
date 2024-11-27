@@ -12,7 +12,7 @@ const Header: React.FC = async () => {
   } = await supabase.auth.getUser();
 
   return (
-    <header className="py-2 bg-gray-200 border-b-primary border-b mb-6">
+    <header className="py-2 bg-gray-200 border-b-primary border-b-2 mb-6">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
