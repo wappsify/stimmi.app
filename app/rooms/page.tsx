@@ -56,7 +56,7 @@ const RoomsPage = async () => {
               <CardHeader>
                 <CardTitle>{room.name || <i>No title</i>}</CardTitle>
                 <CardDescription>
-                  {room.description || "No description available"}
+                  {room.description || "You haven't set a description yet."}
                 </CardDescription>
               </CardHeader>
               <CardContent className="mt-auto grid gap-2">
