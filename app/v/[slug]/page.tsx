@@ -4,10 +4,12 @@ import { createClient } from "@/lib/supabase/server";
 import { Metadata, ResolvingMetadata } from "next";
 import { cookies } from "next/headers";
 
-export async function generateMetadata(
-  { params }: { params: { slug: string }; searchParams: URLSearchParams },
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+  searchParams: URLSearchParams;
+}): Promise<Metadata> {
   // read route params
   const slug = params.slug;
 
@@ -19,7 +21,7 @@ export async function generateMetadata(
     await supabase.auth.signInAnonymously();
   }
 
-  const { data: room, error } = await supabase
+  const { data: room } = await supabase
     .from("rooms")
     .select("*")
     .eq("slug", slug)

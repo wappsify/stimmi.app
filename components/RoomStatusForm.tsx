@@ -70,7 +70,7 @@ export const RoomStatusForm: React.FC<{
                 <>
                   This action will make the room public and allow anyone to vote
                   on it. It cannot be undone. You will not be able to change the
-                  room's details or choices after this action.
+                  room&apos;s details or choices after this action.
                 </>
               )}
               {room.status === "open" && (
