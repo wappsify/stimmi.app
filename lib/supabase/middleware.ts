@@ -37,7 +37,7 @@ export const createClient = async (request: NextRequest) => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const allowList = ["/login", "/register", "/auth"];
+  const allowList = ["/login", "/register", "/auth", "/v/"];
 
   if (
     !user &&

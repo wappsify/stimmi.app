@@ -7,6 +7,7 @@ import { RoomDeletionForm } from "../../../components/RoomDeletionForm";
 import { Room } from "../../../room.types";
 import { Separator } from "../../../components/ui/separator";
 import { RoomStatusForm } from "../../../components/RoomStatusForm";
+import { Input } from "../../../components/ui/input";
 
 const statusMap: { [key in Room["status"]]: string } = {
   private: "Private",
@@ -78,7 +79,13 @@ const RoomOverviewPage: React.FC<{
             {room.status === "open" && (
               <>
                 The room is currently open for voting. Share the link with your
-                friends and let them rank the choices!
+                friends and let them rank the choices! Link:
+                <br />
+                <Input
+                  readOnly
+                  className="mt-2 select-all"
+                  value={`${process.env.NEXT_PUBLIC_BASE_URL}/v/${room.slug}`}
+                />
               </>
             )}
             {room.status === "results" && (
