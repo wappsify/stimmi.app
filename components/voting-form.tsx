@@ -25,31 +25,39 @@ export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
 }) => {
   const [items, setItems] = useState(choices);
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-
-    if (active.id !== over?.id) {
-      setItems((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over?.id);
-        return arrayMove(items, oldIndex, newIndex);
-      });
-    }
-  };
-
   const form = useForm<FormValues>({
     resolver: zodResolver(votingSchema),
     defaultValues: {
       roomId: room.id,
-      choices: items.map((choice) => ({ id: choice.id })),
+      choices: items.map((choice, index) => ({ id: choice.id, rank: index })),
     },
   });
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      const oldIndex = items.findIndex((item) => item.id === active.id);
+      const newIndex = items.findIndex((item) => item.id === over?.id);
+      const newOrder = arrayMove(items, oldIndex, newIndex);
+
+      setItems(newOrder);
+
+      form.setValue(
+        "choices",
+        newOrder.map((choice, index) => ({ id: choice.id, rank: index })),
+        { shouldDirty: true, shouldTouch: true }
+      );
+    }
+  };
 
   const onSubmit = async (data: FormValues) => {
     const formData = objectToFormData(data);
     await submitVotes(formData);
     toast.success("Submitted your ranking successfully!");
   };
+
+  console.log(form.getValues("choices"));
 
   return (
     <div className="grid gap-4">
@@ -68,6 +76,10 @@ export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
               <SortableItem key={choice.id} id={choice.id} choice={choice}>
                 <FormHiddenInputField
                   name={`choices.${index}.id`}
+                  control={form.control}
+                />
+                <FormHiddenInputField
+                  name={`choices.${index}.rank`}
                   control={form.control}
                 />
               </SortableItem>

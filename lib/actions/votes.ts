@@ -1,10 +1,10 @@
 "use server";
 import { cookies } from "next/headers";
+import { redirect, RedirectType } from "next/navigation";
 import { votingSchema } from "../schemas/submit-votes";
+import { getUserOrRedirect } from "../server/utils";
 import { createClient } from "../supabase/server";
 import { formDataToObject } from "../utils";
-import { getUserOrRedirect } from "../server/utils";
-import { redirect, RedirectType } from "next/navigation";
 
 export const submitVotes = async (formData: FormData) => {
   const transformedFormData = formDataToObject(formData);
@@ -14,7 +14,12 @@ export const submitVotes = async (formData: FormData) => {
     error,
   } = votingSchema.safeParse({
     roomId: transformedFormData.roomId,
-    choices: transformedFormData.choices,
+    choices: (
+      transformedFormData.choices as { id: string; rank: string }[]
+    ).map((choice) => ({
+      id: choice.id,
+      rank: parseInt(choice.rank, 10),
+    })),
   });
 
   if (!success) {
@@ -28,7 +33,7 @@ export const submitVotes = async (formData: FormData) => {
 
   const { error: submitError } = await supabase.from("votes").insert(
     values.choices.map((choice, index) => ({
-      rank: index,
+      rank: index + 1,
       room_id: values.roomId,
       choice_id: choice.id,
       user_id: user.id,
