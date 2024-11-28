@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import seedrandom from "seedrandom";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -54,4 +55,14 @@ export const formDataToObject = (
   });
 
   return obj;
+};
+
+export const shuffleArray = <T = unknown>(array: T[], seed: string): T[] => {
+  const rng = seedrandom(seed);
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
 };

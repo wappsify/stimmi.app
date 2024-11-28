@@ -1,8 +1,10 @@
 import { Separator } from "@/components/ui/separator";
 import { VotingSection } from "@/components/voting-section";
 import { createClient } from "@/lib/supabase/server";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
+import { shuffleArray } from "../../../lib/utils";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -14,12 +16,6 @@ export async function generateMetadata({
   const slug = params.slug;
 
   const supabase = createClient(cookies());
-
-  const user = await supabase.auth.getUser();
-
-  if (!user) {
-    await supabase.auth.signInAnonymously();
-  }
 
   const { data: room } = await supabase
     .from("rooms")
@@ -45,12 +41,6 @@ const VotingPage: React.FC<{
 }> = async ({ params }) => {
   const supabase = createClient(cookies());
 
-  const user = await supabase.auth.getUser();
-
-  if (!user) {
-    await supabase.auth.signInAnonymously();
-  }
-
   const { slug } = await params;
 
   const { data: room, error } = await supabase
@@ -64,6 +54,27 @@ const VotingPage: React.FC<{
     return <div>Error loading room</div>;
   }
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { error: roomUsersError, data: existingUsers } = await supabase
+    .from("room_users")
+    .select()
+    .eq("room_id", room.id);
+
+  if (roomUsersError) {
+    console.error(roomUsersError);
+    return <div>Error fetching room users</div>;
+  }
+
+  if (user) {
+    // check if user has already voted
+    if (existingUsers?.some((u) => u.user_id === user.id && u.has_voted)) {
+      redirect(`/v/${room.slug}/results`);
+    }
+  }
+
   const { data: choices, error: choicesError } = await supabase
     .from("choices")
     .select("*")
@@ -73,6 +84,8 @@ const VotingPage: React.FC<{
     console.error("Error fetching choices:", choicesError);
     return <div>Error loading choices</div>;
   }
+
+  const shuffledChoices = shuffleArray(choices, user?.id ?? "");
 
   return (
     <div className="grid">
@@ -86,7 +99,11 @@ const VotingPage: React.FC<{
       </p>
 
       <Separator className="my-6" />
-      <VotingSection room={room} choices={choices} />
+      <VotingSection
+        room={room}
+        choices={shuffledChoices}
+        roomUsers={existingUsers}
+      />
     </div>
   );
 };
