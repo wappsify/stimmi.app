@@ -9,7 +9,7 @@ import { roomEditSchema } from "../schemas/room-edit";
 import { roomDeletionSchema } from "../schemas/room-deletion";
 import { roomStatusSchema } from "../schemas/room-status";
 import { Vote } from "../../vote.types";
-import { Ballot, Borda, Baldwin } from "votes";
+import { Ballot, Borda } from "votes";
 
 export const createRoom = async (formData: FormData) => {
   const user = await getUserOrRedirect();
