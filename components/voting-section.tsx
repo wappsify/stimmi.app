@@ -18,6 +18,7 @@ import { RoomUser } from "../room_user.types";
 import { useUser } from "../lib/hooks/useUser";
 import { Skeleton } from "./ui/skeleton";
 import { VotingForm } from "./voting-form";
+import { shuffleArray } from "../lib/utils";
 
 export const VotingSection: React.FC<{
   room: Room;
@@ -71,7 +72,7 @@ export const VotingSection: React.FC<{
         throw new Error("Error fetching choices");
       }
 
-      setChoices(fetchedChoices);
+      setChoices(shuffleArray(fetchedChoices, user.id));
     };
 
     fetchChoices();
@@ -104,7 +105,7 @@ export const VotingSection: React.FC<{
             onClick={handleJoinClick}
             disabled={isJoining}
           >
-            {isJoining ? <Loader2 /> : <DoorOpen />}
+            {isJoining ? <Loader2 className="animate-spin" /> : <DoorOpen />}
             Join this room and start voting!
           </Button>
         )}
