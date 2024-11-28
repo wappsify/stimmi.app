@@ -9,3 +9,10 @@ export type FormFieldProps<TFieldValues extends FieldValues = FieldValues> = {
   placeholder?: string;
   type?: string;
 };
+
+export type HiddenFormFieldProps<
+  TFieldValues extends FieldValues = FieldValues,
+> = {
+  name: Path<TFieldValues>;
+  control: Control<TFieldValues>;
+};
