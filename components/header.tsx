@@ -24,7 +24,7 @@ const Header: React.FC = async () => {
           </div>
         </Link>
         <div className="user-menu flex items-center gap-4 pr-2">
-          {user ? (
+          {user && !user.is_anonymous ? (
             <UserDropdownMenu />
           ) : (
             <>
