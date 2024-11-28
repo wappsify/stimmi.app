@@ -30,12 +30,12 @@ export const SortableItem: React.FC<{
     <div
       ref={setNodeRef}
       style={style}
-      className="p-4 my-1 border border-gray-300 rounded bg-white shadow-sm cursor-grab focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      className="p-3 border border-gray-300 rounded bg-white shadow-sm text-sm cursor-grab focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       {...attributes}
       {...listeners}
     >
       {children}
-      <span className="mr-2 text-gray-500 text-sm">Rank {index + 1}:</span>{" "}
+      <span className="mr-2 text-gray-500 text-xs">Rank {index + 1}:</span>{" "}
       {choice.name}
     </div>
   );

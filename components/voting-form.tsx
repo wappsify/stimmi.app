@@ -17,6 +17,7 @@ import { SortableItem } from "./sortable-item";
 import { Form } from "./ui/form";
 import { submitVotes } from "../lib/actions/votes";
 import { objectToFormData } from "../lib/utils";
+import { Separator } from "./ui/separator";
 
 export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
   choices,
@@ -73,6 +74,7 @@ export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
             ))}
           </SortableContext>
         </DndContext>
+        <Separator className="my-4" />
         <FormSubmitButton type="submit">
           I&apos;m done ranking!
         </FormSubmitButton>

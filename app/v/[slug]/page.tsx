@@ -3,7 +3,6 @@ import { VotingSection } from "@/components/voting-section";
 import { createClient } from "@/lib/supabase/server";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { shuffleArray } from "../../../lib/utils";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata({
