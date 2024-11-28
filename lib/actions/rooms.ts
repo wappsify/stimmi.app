@@ -1,15 +1,15 @@
 "use server";
 
+import { roomCreationSchema } from "@/lib/schemas/room-creation";
+import { getUserOrRedirect } from "@/lib/server/utils";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
-import { getUserOrRedirect } from "@/lib/server/utils";
-import { roomCreationSchema } from "@/lib/schemas/room-creation";
-import { roomEditSchema } from "../schemas/room-edit";
-import { roomDeletionSchema } from "../schemas/room-deletion";
-import { roomStatusSchema } from "../schemas/room-status";
+import { Ballot, Borda, RandomCandidates } from "votes";
 import { Vote } from "../../vote.types";
-import { Ballot, Borda } from "votes";
+import { roomDeletionSchema } from "../schemas/room-deletion";
+import { roomEditSchema } from "../schemas/room-edit";
+import { roomStatusSchema } from "../schemas/room-status";
 
 export const createRoom = async (formData: FormData) => {
   const user = await getUserOrRedirect();
@@ -158,11 +158,32 @@ export const changeRoomStatus = async (formData: FormData) => {
 
     const borda = new Borda({ candidates, ballots });
 
-    console.log(borda.scores());
-    console.log(borda.ranking());
-    console.log(borda.matrix);
+    const scores = borda.scores();
+    const ranking = borda.ranking();
+    const placements = Object.entries(scores).map(([choice_id, score]) => ({
+      choice_id,
+      points: score,
+      room_id: values.id,
+    }));
 
-    return;
+    if (ranking[0].length > 1) {
+      const randomTieBreaker = new RandomCandidates({ candidates: ranking[0] });
+      const [tiebreakWinner] = randomTieBreaker.ranking();
+      const tiebreakWinningIndex = placements.findIndex(
+        (p) => p.choice_id === tiebreakWinner[0]
+      );
+      const tiebreak = placements[tiebreakWinningIndex];
+      tiebreak.points += 1;
+    }
+
+    const { error: resultsError } = await supabase
+      .from("results")
+      .insert(placements);
+
+    if (resultsError) {
+      console.error("Error inserting results:", resultsError);
+      throw new Error("Failed to insert results");
+    }
   }
 
   const { data, error } = await supabase
@@ -179,5 +200,9 @@ export const changeRoomStatus = async (formData: FormData) => {
     throw new Error("Failed to update room status");
   }
 
-  redirect(`/rooms/${data.slug}`, RedirectType.replace);
+  if (values.status === "results") {
+    redirect(`/v/${data.slug}/results`, RedirectType.replace);
+  } else {
+    redirect(`/rooms/${data.slug}`, RedirectType.replace);
+  }
 };
