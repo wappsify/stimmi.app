@@ -1,10 +1,8 @@
-import { ActiveUsersText } from "@/components/active-users-text";
 import { Separator } from "@/components/ui/separator";
 import { createClient } from "@/lib/supabase/server";
-import { LoaderPinwheel } from "lucide-react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { RoomStatusForm } from "../../../../components/RoomStatusForm";
+import { ResultsView } from "../../../../components/results-view";
 
 const ResultsPage: React.FC<{
   params: Promise<{ slug: string }>;
@@ -67,27 +65,12 @@ const ResultsPage: React.FC<{
         <br /> <strong className="text-2xl">{room.name}</strong>
       </h1>
       <Separator className="mb-6" />
-
-      {room.user_id === user.id && room.status === "open" && (
-        <div className="grid gap-4 mb-6">
-          <p className="text-sm text-center">
-            To calculate the results, close the room. Only you as room owner can
-            do this.
-          </p>
-          <RoomStatusForm room={room} choices={choices} />
-        </div>
-      )}
-
-      {room.status === "open" && (
-        <div className="grid gap-4">
-          <ActiveUsersText roomUsers={roomUsers} roomId={room.id} />
-          <LoaderPinwheel className="size-20 animate-spinSlow text-slate-400 place-self-center" />
-          <p className="text-center text-sm">
-            We&apos;re still waiting for the room owner to close the room before
-            the results are calculated!
-          </p>
-        </div>
-      )}
+      <ResultsView
+        room={room}
+        roomUsers={roomUsers}
+        choices={choices}
+        user={user}
+      />
     </div>
   );
 };

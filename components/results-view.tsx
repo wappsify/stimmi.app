@@ -1,0 +1,74 @@
+"use client";
+
+import { User } from "@supabase/supabase-js";
+import { LoaderPinwheel } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { Choice } from "../choice.types";
+import { useRealtimeResults } from "../lib/hooks/useRealtimeResults";
+import { useRealtimeRoom } from "../lib/hooks/useRealtimeRoom";
+import { Room } from "../room.types";
+import { RoomUser } from "../room_user.types";
+import { ActiveUsersText } from "./active-users-text";
+import { RoomStatusForm } from "./RoomStatusForm";
+import { ShowResults } from "./show-results";
+
+const MotionPinwheel = motion.create(LoaderPinwheel);
+export const ResultsView: React.FC<{
+  room: Room;
+  roomUsers: RoomUser[];
+  choices: Choice[];
+  user: User;
+}> = ({ room: serverRoom, roomUsers, choices, user }) => {
+  const room = useRealtimeRoom(serverRoom);
+  const results = useRealtimeResults(room.id);
+
+  return (
+    <>
+      {room.user_id === user.id && room.status === "open" && (
+        <div className="grid gap-4 mb-6">
+          <p className="text-sm text-center">
+            To calculate the results, close the room. Only you as room owner can
+            do this.
+          </p>
+          <RoomStatusForm room={room} choices={choices} />
+        </div>
+      )}
+      <div className="grid gap-4">
+        <AnimatePresence mode="wait">
+          {room.status === "open" ? (
+            <>
+              <motion.div
+                key="open-active-users"
+                exit={{ scale: 0, opacity: 0 }}
+              >
+                <ActiveUsersText roomUsers={roomUsers} roomId={room.id} />
+              </motion.div>
+              <MotionPinwheel
+                key="open-icon"
+                className="size-20 animate-spinSlow text-slate-400 place-self-center"
+                exit={{ opacity: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+              />
+              <motion.p
+                key="open"
+                className="text-center text-sm"
+                exit={{ scale: 0, opacity: 0 }}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+              >
+                We&apos;re still waiting for the room owner to close the room
+                before the results are calculated!
+              </motion.p>
+            </>
+          ) : (
+            <ShowResults
+              results={results}
+              showResultsInitially={serverRoom.status === "results"}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+    </>
+  );
+};
