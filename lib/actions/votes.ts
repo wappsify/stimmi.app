@@ -1,7 +1,5 @@
 "use server";
-import { cookies } from "next/headers";
 import { votingSchema } from "../schemas/submit-votes";
-import { createClient } from "../supabase/server";
 import { formDataToObject } from "../utils";
 
 export const submitVotes = async (formData: FormData) => {
@@ -19,8 +17,6 @@ export const submitVotes = async (formData: FormData) => {
     console.error("Invalid form data:", error);
     throw new Error("Invalid form data");
   }
-
-  const supabase = createClient(cookies());
 
   console.log({ values });
 
