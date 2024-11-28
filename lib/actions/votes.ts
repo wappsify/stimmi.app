@@ -1,6 +1,10 @@
 "use server";
+import { cookies } from "next/headers";
 import { votingSchema } from "../schemas/submit-votes";
+import { createClient } from "../supabase/server";
 import { formDataToObject } from "../utils";
+import { getUserOrRedirect } from "../server/utils";
+import { redirect, RedirectType } from "next/navigation";
 
 export const submitVotes = async (formData: FormData) => {
   const transformedFormData = formDataToObject(formData);
@@ -18,21 +22,45 @@ export const submitVotes = async (formData: FormData) => {
     throw new Error("Invalid form data");
   }
 
-  console.log({ values });
+  const supabase = createClient(cookies());
 
-  //   const { data, error } = await supabase
-  //     .from("votes")
-  //     .upsert({
-  //       room_id: values.roomId,
-  //       votes: values.votes,
-  //     })
-  //     .select()
-  //     .single();
+  const user = await getUserOrRedirect();
 
-  //   if (error) {
-  //     console.error("Error submitting votes:", error);
-  //     throw new Error("Failed to submit votes");
-  //   }
+  const { error: submitError } = await supabase.from("votes").insert(
+    values.choices.map((choice, index) => ({
+      rank: index,
+      room_id: values.roomId,
+      choice_id: choice.id,
+      user_id: user.id,
+    }))
+  );
 
-  //   redirect(`/rooms/${data.slug}/results`, RedirectType.replace);
+  if (submitError) {
+    console.error("Error submitting votes:", submitError);
+    throw new Error("Failed to submit votes");
+  }
+
+  const { error: updateError } = await supabase
+    .from("room_users")
+    .update({ has_voted: true })
+    .eq("room_id", values.roomId)
+    .eq("user_id", user.id);
+
+  if (updateError) {
+    console.error("Error updating room_users:", updateError);
+    throw new Error("Failed to update room_users");
+  }
+
+  const { data: room, error: roomError } = await supabase
+    .from("rooms")
+    .select("*")
+    .eq("id", values.roomId)
+    .single();
+
+  if (roomError) {
+    console.error("Error fetching room:", roomError);
+    throw new Error("Failed to fetch room");
+  }
+
+  redirect(`/v/${room.slug}/results`, RedirectType.replace);
 };
