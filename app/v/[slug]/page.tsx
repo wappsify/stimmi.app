@@ -75,18 +75,6 @@ const VotingPage: React.FC<{
     }
   }
 
-  const { data: choices, error: choicesError } = await supabase
-    .from("choices")
-    .select("*")
-    .eq("room_id", room.id);
-
-  if (choicesError) {
-    console.error("Error fetching choices:", choicesError);
-    return <div>Error loading choices</div>;
-  }
-
-  const shuffledChoices = shuffleArray(choices, user?.id ?? "");
-
   return (
     <div className="grid">
       <h1 className="text-3xl text-center mb-4">
@@ -99,11 +87,7 @@ const VotingPage: React.FC<{
       </p>
 
       <Separator className="my-6" />
-      <VotingSection
-        room={room}
-        choices={shuffledChoices}
-        roomUsers={existingUsers}
-      />
+      <VotingSection room={room} roomUsers={existingUsers} />
     </div>
   );
 };

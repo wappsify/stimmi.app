@@ -21,9 +21,8 @@ import { VotingForm } from "./voting-form";
 
 export const VotingSection: React.FC<{
   room: Room;
-  choices: Choice[];
   roomUsers: RoomUser[];
-}> = ({ room, choices, roomUsers: serverRoomUsers }) => {
+}> = ({ room, roomUsers: serverRoomUsers }) => {
   const [isJoining, setIsJoining] = useState(false);
   const [isInRoom, setIsInRoom] = useState(false);
 
@@ -46,13 +45,37 @@ export const VotingSection: React.FC<{
     if (roomUsersError) {
       console.error("Error adding room user", roomUsersError);
       setIsJoining(false);
-      return;
+      throw new Error("Error fetching choices");
     }
 
     setIsJoining(false);
   };
 
   const roomUsers = useRealtimeRoomUsers(room.id, serverRoomUsers);
+
+  const [choices, setChoices] = useState<Choice[]>([]);
+
+  useEffect(() => {
+    const fetchChoices = async () => {
+      if (!room || !user || choices.length > 0) {
+        return;
+      }
+
+      const { data: fetchedChoices, error } = await supabase
+        .from("choices")
+        .select("*")
+        .eq("room_id", room.id);
+
+      if (error) {
+        console.error("Error fetching choices", error);
+        throw new Error("Error fetching choices");
+      }
+
+      setChoices(fetchedChoices);
+    };
+
+    fetchChoices();
+  }, [room, user, choices]);
 
   useEffect(() => {
     if (!user || !roomUsers) {
@@ -71,7 +94,7 @@ export const VotingSection: React.FC<{
         )}
       </CardHeader>
       <CardContent className="grid">
-        {!user ? (
+        {!user || !choices.length ? (
           <Skeleton className="h-[40px] w-full" />
         ) : isInRoom ? (
           <VotingForm choices={choices} room={room} />
