@@ -19,10 +19,11 @@ export const SortableItem: React.FC<{
   } = useSortable({ id });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     transition,
     opacity: isDragging ? 0.5 : 1,
     cursor: isDragging ? "grabbing" : "grab",
+    touchAction: "none",
   };
 
   return (
