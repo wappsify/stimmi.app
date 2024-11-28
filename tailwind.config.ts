@@ -60,6 +60,7 @@ const config: Config = {
       animation: {
         logoFadeIn: "logoFadeIn .5s ease-in-out",
         underlineExpand: "underlineExpand 1s 1s ease forwards",
+        spinSlow: "spin 3s linear infinite",
       },
     },
   },
