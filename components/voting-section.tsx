@@ -74,7 +74,7 @@ export const VotingSection: React.FC<{
         {!user ? (
           <Skeleton className="h-[40px] w-full" />
         ) : isInRoom ? (
-          <VotingForm choices={choices} />
+          <VotingForm choices={choices} room={room} />
         ) : (
           <Button
             className="place-self-center"
