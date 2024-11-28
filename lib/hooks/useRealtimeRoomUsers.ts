@@ -15,15 +15,21 @@ export const useRealtimeRoomUsers = (
       .on<RoomUser>(
         "postgres_changes",
         {
-          event: "INSERT",
+          event: "*",
           schema: "public",
           table: "room_users",
           filter: `room_id=eq.${roomId}`,
         },
-        (payload) => {
-          setRoomUsers((prev) => {
-            return [...prev, payload.new];
-          });
+        async () => {
+          const { data, error } = await supabase
+            .from("room_users")
+            .select("*")
+            .eq("room_id", roomId);
+          if (error) {
+            console.error("Error fetching room users", error);
+            return;
+          }
+          setRoomUsers(data);
         }
       )
       .subscribe();
