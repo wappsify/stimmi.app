@@ -25,7 +25,7 @@ const Form = <TFieldValues extends FieldValues = FieldValues>({
 }) => {
   return (
     <FormProvider {...props}>
-      <form className="grid gap-4 max-w-md mx-auto" onSubmit={onSubmit}>
+      <form className="grid gap-4 max-w-md mx-auto w-full" onSubmit={onSubmit}>
         {children}
       </form>
     </FormProvider>
