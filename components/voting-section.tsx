@@ -75,7 +75,7 @@ export const VotingSection: React.FC<{
     };
 
     fetchChoices();
-  }, [room, user, choices]);
+  }, [room, user, choices, supabase]);
 
   useEffect(() => {
     if (!user || !roomUsers) {
