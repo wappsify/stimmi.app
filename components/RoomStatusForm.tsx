@@ -75,14 +75,16 @@ export const RoomStatusForm: React.FC<{
               )}
               {room.status === "open" && (
                 <>
-                  This action will calculate the results of the room to all
-                  voters. It cannot be undone. Anybody that voted in the room
-                  will be able to see the results.
+                  This action will calculate the results of the room. It cannot
+                  be undone. Anybody that voted in the room will be able to see
+                  the results.
                 </>
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <RoomCheck room={room} choices={choices} />
+          {room.status === "private" && (
+            <RoomCheck room={room} choices={choices} />
+          )}
           <AlertDialogFooter>
             <AlertDialogCancel>No, cancel</AlertDialogCancel>
 
