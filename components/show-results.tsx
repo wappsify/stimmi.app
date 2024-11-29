@@ -51,7 +51,11 @@ export const ShowResults: React.FC<{
       initial="hidden"
       animate="show"
       className="grid gap-2"
-      onAnimationComplete={shootConfetti}
+      onAnimationComplete={() => {
+        if (!showResultsInitially) {
+          shootConfetti();
+        }
+      }}
     >
       {results.map((result, index) => (
         <motion.div
