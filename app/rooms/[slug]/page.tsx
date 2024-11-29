@@ -60,11 +60,12 @@ const RoomOverviewPage: React.FC<{
         <h1 className="text-3xl text-center mb-4">
           Room <strong>≫{room.name}≪</strong>
         </h1>
-        <p className="prose mb-6">
+        <p className="prose">
           You may edit the room details, add choices to the room and open the
           room for voting.
         </p>
-        <div className="mb-6">
+        <Separator className="my-6" />
+        <div>
           <h2 className="text-xl">
             Current room status: <strong>{statusMap[room.status]}</strong>
           </h2>
@@ -96,6 +97,8 @@ const RoomOverviewPage: React.FC<{
             )}
           </p>
         </div>
+        <Separator className="my-6" />
+
         <div className="grid gap-2 grid-cols-2 ">
           <Button
             asChild
@@ -119,7 +122,7 @@ const RoomOverviewPage: React.FC<{
           </Button>
           {room.status === "results" ? (
             <Button asChild className="col-span-2">
-              <Link href={`/rooms/${room.slug}/results`}>
+              <Link href={`/v/${room.slug}/results`}>
                 <Crown />
                 View room results
               </Link>

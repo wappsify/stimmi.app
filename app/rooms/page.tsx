@@ -62,9 +62,9 @@ const RoomsPage = async () => {
               <CardContent className="mt-auto grid grid-cols-2 gap-2">
                 {room.status === "results" ? (
                   <Button className="col-span-2" size="sm" asChild>
-                    <Link href={`/rooms/${room.slug}/results`}>
+                    <Link href={`/v/${room.slug}/results`}>
                       <Crown />
-                      Go to results
+                      View room results
                     </Link>
                   </Button>
                 ) : (
