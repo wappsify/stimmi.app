@@ -57,8 +57,6 @@ export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
     toast.success("Submitted your ranking successfully!");
   };
 
-  console.log(form.getValues("choices"));
-
   return (
     <div className="grid gap-4">
       <p className="prose">
