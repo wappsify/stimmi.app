@@ -11,7 +11,7 @@ export const useRealtimeRoomUsers = (
     const supabase = createClient();
 
     const changes = supabase
-      .channel("table-filter-changes")
+      .channel("messages-roomusers")
       .on<RoomUser>(
         "postgres_changes",
         {

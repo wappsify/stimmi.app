@@ -8,7 +8,7 @@ export const useRealtimeRoom = (initialRoom: Room) => {
     const supabase = createClient();
 
     const changes = supabase
-      .channel("table-filter-changes")
+      .channel("messages-room")
       .on<Room>(
         "postgres_changes",
         {
@@ -20,7 +20,7 @@ export const useRealtimeRoom = (initialRoom: Room) => {
         async () => {
           const { data, error } = await supabase
             .from("rooms")
-            .select("*")
+            .select()
             .eq("id", initialRoom.id)
             .single();
           if (error) {

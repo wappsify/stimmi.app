@@ -42,8 +42,8 @@ export const useRealtimeResults = (roomId: string) => {
     };
 
     const changes = supabase
-      .channel("table-filter-changes")
-      .on<Choice>(
+      .channel("messages-results")
+      .on<Results>(
         "postgres_changes",
         {
           event: "*",
