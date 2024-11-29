@@ -40,7 +40,7 @@ const RoomsPage = async () => {
                 You may create a new room at any time by clicking below!
               </CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-2">
+            <CardContent className="grid gap-2 mt-auto">
               <Button variant="secondary" asChild>
                 <Link href={`/rooms/new`}>
                   <PlusCircle />
