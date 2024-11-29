@@ -4,7 +4,11 @@ import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-const Header: React.FC = async () => {
+interface HeaderProps {
+  hideNavigation?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = async ({ hideNavigation }) => {
   const supabase = createClient(cookies());
 
   const {
@@ -23,16 +27,18 @@ const Header: React.FC = async () => {
             stimmi.app
           </div>
         </Link>
-        <div className="user-menu flex items-center gap-4 pr-2">
-          {user && !user.is_anonymous ? (
-            <UserDropdownMenu />
-          ) : (
-            <>
-              <Button variant="link">Login</Button>
-              <Button variant="link">Register</Button>
-            </>
-          )}
-        </div>
+        {!hideNavigation && (
+          <div className="user-menu flex items-center gap-4 pr-2">
+            {user && !user.is_anonymous ? (
+              <UserDropdownMenu />
+            ) : (
+              <>
+                <Button variant="link">Login</Button>
+                <Button variant="link">Register</Button>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </header>
   );

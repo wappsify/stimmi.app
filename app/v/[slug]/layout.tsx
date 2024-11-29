@@ -7,7 +7,7 @@ function VotingLayout({
 }>) {
   return (
     <>
-      <Header />
+      <Header hideNavigation={true} />
       <div className="px-4">
         <main className="max-w-lg mx-auto">{children}</main>
       </div>
