@@ -10,7 +10,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { getUserOrRedirect } from "@/lib/server/utils";
-import { Edit, Eye, PlusCircle } from "lucide-react";
+import { Crown, Edit, Eye, PlusCircle } from "lucide-react";
 
 const RoomsPage = async () => {
   const supabase = createClient(cookies());
@@ -60,24 +60,35 @@ const RoomsPage = async () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="mt-auto grid grid-cols-2 gap-2">
-                <Button className="col-span-2" size="sm" asChild>
-                  <Link href={`/rooms/${room.slug}`}>
-                    <Eye />
-                    Room overview
-                  </Link>
-                </Button>
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={`/rooms/${room.slug}/details`}>
-                    <Edit />
-                    Edit details
-                  </Link>
-                </Button>
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={`/rooms/${room.slug}/choices`}>
-                    <Edit />
-                    Edit choices
-                  </Link>
-                </Button>
+                {room.status === "results" ? (
+                  <Button className="col-span-2" size="sm" asChild>
+                    <Link href={`/rooms/${room.slug}/results`}>
+                      <Crown />
+                      Go to results
+                    </Link>
+                  </Button>
+                ) : (
+                  <>
+                    <Button className="col-span-2" size="sm" asChild>
+                      <Link href={`/rooms/${room.slug}`}>
+                        <Eye />
+                        Room overview
+                      </Link>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <Link href={`/rooms/${room.slug}/details`}>
+                        <Edit />
+                        Edit details
+                      </Link>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <Link href={`/rooms/${room.slug}/choices`}>
+                        <Edit />
+                        Edit choices
+                      </Link>
+                    </Button>
+                  </>
+                )}
               </CardContent>
             </Card>
           </li>
