@@ -35,7 +35,8 @@ export const updateSession = async (
 
   if (
     !user &&
-    !allowList.some((path) => request.nextUrl.pathname.startsWith(path))
+    !allowList.some((path) => request.nextUrl.pathname.startsWith(path)) &&
+    request.nextUrl.pathname !== "/"
   ) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
