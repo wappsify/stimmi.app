@@ -35,6 +35,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.53.2",
+    "resolve-accept-language": "^3.1.10",
     "seedrandom": "^3.0.5",
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.5.4",
