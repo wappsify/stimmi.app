@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { UserDropdownMenu } from "@/components/user-dropdown-menu";
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
@@ -15,6 +16,8 @@ const Header: React.FC<HeaderProps> = async ({ hideNavigation }) => {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const t = await getTranslations();
+
   return (
     <header className="py-2 bg-gray-200 border-b-primary border-b-2 mb-6">
       <div className="container mx-auto flex justify-between items-center">
@@ -24,7 +27,7 @@ const Header: React.FC<HeaderProps> = async ({ hideNavigation }) => {
         >
           <div className="text-3xl mr-2">🗳️</div>
           <div className="logo text-xl font-semibold text-primary">
-            stimmi.app
+            {t("header.name")}
           </div>
         </Link>
         {!hideNavigation && (
@@ -33,8 +36,8 @@ const Header: React.FC<HeaderProps> = async ({ hideNavigation }) => {
               <UserDropdownMenu />
             ) : (
               <>
-                <Button variant="link">Login</Button>
-                <Button variant="link">Register</Button>
+                <Button variant="link">{t("home.login")}</Button>
+                <Button variant="link">{t("home.register")}</Button>
               </>
             )}
           </div>

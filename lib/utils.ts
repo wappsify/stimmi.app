@@ -2,6 +2,8 @@ import { clsx, type ClassValue } from "clsx";
 import seedrandom from "seedrandom";
 import { twMerge } from "tailwind-merge";
 import confetti from "canvas-confetti";
+import { Choice } from "../choice.types";
+import { Room } from "../room.types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -96,4 +98,19 @@ export const shootConfetti = () => {
       origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
     });
   }, 250);
+};
+
+export const roomChecks = [
+  {
+    name: "Room details are filled.",
+    check: (room: Room) => !!room.name,
+  },
+  {
+    name: "At least three choices have been added.",
+    check: (_: Room, choices: Choice[]) => choices.length >= 3,
+  },
+];
+
+export const validateRoom = (room: Room, choices: Choice[]) => {
+  return roomChecks.every(({ check }) => check(room, choices));
 };

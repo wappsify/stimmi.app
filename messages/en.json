@@ -1,6 +1,99 @@
-    {
-        "home": {
-            "headline": "Welcome to {appName}",
-            "subline": "Your app for quick and easy ranked choice polls!"
-        }
+{
+    "home": {
+        "headline": "Welcome to <appname>{name}</appname>",
+        "subline": "Your app for quick and easy ranked choice polls!",
+        "show_rooms": "Show me my rooms!",
+        "register": "Register",
+        "login": "Login"
+    },
+    "not_found": {
+        "title": "404 - Page Not Found",
+        "message": "Sorry, we couldn't find the page you're looking for.",
+        "return_home": "Return Home"
+    },
+    "header": {
+        "name": "stimmi.app",
+        "rooms": "Rooms",
+        "account": "Account",
+        "logout": "Logout"
+    },
+    "login": {
+        "email_label": "Email",
+        "email_description": "Enter your email address.",
+        "password_label": "Password",
+        "password_description": "Enter your password.",
+        "login_button": "Login",
+        "register_instead": "Register instead",
+        "login_success": "Logged in successfully!",
+        "login_success_message": "Go ahead and create some polls.",
+        "login_image_alt": "Login Image"
+    },
+    "register": {
+        "email_label": "Email",
+        "email_description": "Enter your email address.",
+        "password_label": "Password",
+        "password_description": "Enter a password with at least 8 characters.",
+        "register_button": "Register",
+        "login_instead": "Login instead",
+        "register_success": "Account created successfully!",
+        "register_success_message": "You may start using your account right now.",
+        "register_image_alt": "Register Image"
+    },
+    "results": {
+        "users_voted": "{usersWhoVoted} of {totalUsers, plural, =0 {0 users have} =1 {1 user has} other {# users have}} voted.",
+        "close_room_to_calculate": "To calculate the results, close the room. Only you as room owner can do this.",
+        "waiting_for_owner": "We're still waiting for the room owner to close the room before the results are calculated!"
+    },
+    "choices_edit": {
+        "update_success": "Choices were updated successfully",
+        "choice_placeholder": "My new choice",
+        "choice_label": "Choice {index}",
+        "choice_description": "Enter the title of choice #{index}. Keep it short and descriptive.",
+        "remove_choice": "Remove this choice",
+        "add_choice": "Add another choice",
+        "reset_changes": "Reset changes",
+        "save_choices": "Save choices",
+        "edit_room_choices": "Edit room choices",
+        "edit_room_choices_description": "You may add as many choices as you like. Keep in mind that more choices require more effort when ranking them. The choices will be displayed in a random order to the voters.",
+        "error_loading": "Error loading choices"
+    },
+    "room_edit": {
+        "back_to_room_overview": "Back to room overview",
+        "edit_room": "Edit room: <strong>{name}</strong>",
+        "error_loading": "Error loading room"
+    },
+    "rooms": {
+        "error_loading": "Error loading rooms",
+        "all_rooms": "All your rooms",
+        "create_new_room": "Create a new room",
+        "create_new_room_description": "You may create a new room at any time by clicking below!",
+        "start_creating_room": "Start creating room",
+        "no_title": "No title",
+        "no_description": "You haven't set a description yet.",
+        "view_room_results": "View room results",
+        "room_overview": "Room overview",
+        "edit_details": "Edit details",
+        "edit_choices": "Edit choices"
+    },
+    "room_overview": {
+        "back_to_list_of_rooms": "Back to list of rooms",
+        "room": "Room <strong>≫{name}≪</strong>",
+        "description": "You may edit the room details, add choices to the room and open the room for voting.",
+        "edit_room_details": "Edit room details",
+        "add_and_edit_choices": "Add and edit choices",
+        "view_room_results": "View room results",
+        "current_room_status": "Current room status: <strong>{status}</strong>",
+        "private_status_description": "The room is currently private and not open for voting. Only you have access to it. You may add choices to the room and open it for voting.",
+        "open_status_description": "The room is currently open for voting. Share the link with your friends and let them rank the choices! Link:",
+        "results_status_description": "The room is closed for voting. You and anybody that voted on it may view the results of the room.",
+        "error_loading_room": "Error loading room",
+        "error_loading_choices": "Error loading choices",
+        "private": "Private",
+        "open": "Open for voting",
+        "results": "Results available"
+    },
+    "new_room": {
+        "title": "Create a new room",
+        "subtitle": "What do you want to call your room?"
     }
+}

@@ -13,6 +13,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Choice } from "../choice.types";
 import { Room } from "../room.types";
+import { useTranslations } from "next-intl";
 
 const getInitialChoices = (choices: Choice[]) =>
   choices.length > 0 ? choices.map(({ name }) => ({ name })) : [{ name: "" }];
@@ -21,6 +22,7 @@ const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
   room,
   choices,
 }) => {
+  const t = useTranslations("choices_edit");
   const form = useForm<FormValues>({
     resolver: zodResolver(choicesEditSchema),
     defaultValues: {
@@ -32,7 +34,7 @@ const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
   const onSubmit = async (data: FormValues) => {
     const formData = objectToFormData(data);
     await updateChoices(formData);
-    toast.success(`Choices were updated successfully`);
+    toast.success(t("update_success"));
   };
 
   const { fields, append, remove } = useFieldArray<FormValues>({
@@ -47,15 +49,15 @@ const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
           <FormInputField<FormValues>
             name={`choices.${index}.name`}
             control={form.control}
-            placeholder="My new choice"
-            label={`Choice ${index + 1}`}
-            description={`Enter the title of choice #${index + 1}. Keep it short and descriptive.`}
+            placeholder={t("choice_placeholder")}
+            label={t("choice_label", { index: index + 1 })}
+            description={t("choice_description", { index: index + 1 })}
           />
           <Button
             type="button"
             variant="secondary"
             size="icon"
-            title="Remove this choice"
+            title={t("remove_choice")}
             onClick={() => remove(index)}
             className="mt-8"
           >
@@ -78,15 +80,15 @@ const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
           onClick={() => append({ name: "" })}
         >
           <Plus />
-          Add another choice
+          {t("add_choice")}
         </Button>
         <Button type="button" variant="outline" onClick={() => form.reset()}>
           <DatabaseBackup />
-          Reset changes
+          {t("reset_changes")}
         </Button>
 
         <FormSubmitButton type="submit" className="col-span-2">
-          Save choices
+          {t("save_choices")}
         </FormSubmitButton>
       </div>
     </Form>

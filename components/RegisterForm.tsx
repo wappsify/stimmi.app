@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const registerSchema = z.object({
   email: z.string().email(),
@@ -20,6 +21,7 @@ const registerSchema = z.object({
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export function RegisterForm() {
+  const t = useTranslations("register");
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -44,9 +46,9 @@ export function RegisterForm() {
       router.push("/rooms");
       toast.success(
         <div>
-          <strong>Account created successfully!</strong>
+          <strong>{t("register_success")}</strong>
           <br />
-          You may start using your account right now.
+          {t("register_success_message")}
         </div>
       );
     }
@@ -59,16 +61,16 @@ export function RegisterForm() {
           name="email"
           control={form.control}
           placeholder="Email"
-          label="Email"
-          description="Enter your email address."
+          label={t("email_label")}
+          description={t("email_description")}
         />
         <FormInputField<RegisterFormValues>
           name="password"
           control={form.control}
           type="password"
           placeholder="Password"
-          label="Password"
-          description="Enter a password with at least 8 characters."
+          label={t("password_label")}
+          description={t("password_description")}
         />
         {form.formState.errors.root && (
           <p className="text-red-500 text-xs italic mb-4">
@@ -81,10 +83,10 @@ export function RegisterForm() {
             className="place-self-center"
             isLoading={isLoading}
           >
-            Register
+            {t("register_button")}
           </FormSubmitButton>
           <Button variant="outline" asChild>
-            <Link href="/login">Login instead</Link>
+            <Link href="/login">{t("login_instead")}</Link>
           </Button>
         </div>
       </Form>

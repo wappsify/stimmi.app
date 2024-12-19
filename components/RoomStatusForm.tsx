@@ -16,12 +16,12 @@ import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Room } from "../room.types";
-import { objectToFormData } from "@/lib/utils";
+import { objectToFormData, validateRoom } from "@/lib/utils";
 import { changeRoomStatus } from "@/lib/actions/rooms";
 import { toast } from "sonner";
 import { useState } from "react";
 import { FormValues, roomStatusSchema } from "@/lib/schemas/room-status";
-import { RoomCheck, validateRoom } from "./room-check";
+import { RoomCheck } from "./room-check";
 import { Choice } from "../choice.types";
 
 export const RoomStatusForm: React.FC<{

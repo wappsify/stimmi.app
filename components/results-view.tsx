@@ -11,6 +11,7 @@ import { RoomUser } from "../room_user.types";
 import { ActiveUsersText } from "./active-users-text";
 import { RoomStatusForm } from "./RoomStatusForm";
 import { ShowResults } from "./show-results";
+import { useTranslations } from "next-intl";
 
 const MotionPinwheel = motion.create(LoaderPinwheel);
 export const ResultsView: React.FC<{
@@ -21,15 +22,13 @@ export const ResultsView: React.FC<{
 }> = ({ room: serverRoom, roomUsers, choices, user }) => {
   const room = useRealtimeRoom(serverRoom);
   const results = useRealtimeResults(room.id);
+  const t = useTranslations("results");
 
   return (
     <>
       {room.user_id === user.id && room.status === "open" && (
         <div className="grid gap-4 mb-6">
-          <p className="text-sm text-center">
-            To calculate the results, close the room. Only you as room owner can
-            do this.
-          </p>
+          <p className="text-sm text-center">{t("close_room_to_calculate")}</p>
           <RoomStatusForm room={room} choices={choices} />
         </div>
       )}
@@ -57,8 +56,7 @@ export const ResultsView: React.FC<{
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
               >
-                We&apos;re still waiting for the room owner to close the room
-                before the results are calculated!
+                {t("waiting_for_owner")}
               </motion.p>
             </>
           ) : (

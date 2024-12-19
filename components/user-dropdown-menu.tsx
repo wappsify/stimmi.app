@@ -9,6 +9,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { LogOut, Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const UserDropdownMenu: React.FC = () => {
   const handleSignOut = async () => {
@@ -16,6 +17,8 @@ const UserDropdownMenu: React.FC = () => {
     await supabase.auth.signOut();
     location.reload();
   };
+
+  const t = useTranslations("header");
 
   return (
     <>
@@ -28,14 +31,14 @@ const UserDropdownMenu: React.FC = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem asChild>
-              <Link href="/rooms">Rooms</Link>
+              <Link href="/rooms">{t("rooms")}</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/account">Account</Link>
+              <Link href="/account">{t("account")}</Link>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleSignOut}>
               <LogOut />
-              Logout
+              {t("logout")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -43,14 +46,14 @@ const UserDropdownMenu: React.FC = () => {
 
       <div className="hidden sm:flex gap-2">
         <Button variant="link" asChild>
-          <Link href="/rooms">Rooms</Link>
+          <Link href="/rooms">{t("rooms")}</Link>
         </Button>
         <Button variant="link" asChild>
-          <Link href="/account">Account</Link>
+          <Link href="/account">{t("account")}</Link>
         </Button>
 
         <Button variant="ghost" onClick={handleSignOut}>
-          <LogOut /> Logout
+          <LogOut /> {t("logout")}
         </Button>
       </div>
     </>

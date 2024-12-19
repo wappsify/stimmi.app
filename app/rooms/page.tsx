@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/card";
 import { getUserOrRedirect } from "@/lib/server/utils";
 import { Crown, Edit, Eye, PlusCircle } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 const RoomsPage = async () => {
+  const t = await getTranslations("rooms");
   const supabase = createClient(cookies());
 
   const user = await getUserOrRedirect();
@@ -25,26 +27,26 @@ const RoomsPage = async () => {
 
   if (error) {
     console.error("Error fetching rooms:", error);
-    return <div>Error loading rooms</div>;
+    return <div>{t("error_loading")}</div>;
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mb-6">All your rooms</h1>
+      <h1 className="text-3xl font-bold text-center mb-6">{t("all_rooms")}</h1>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <li className="h-full">
           <Card className="h-full bg-primary text-secondary">
             <CardHeader>
-              <CardTitle>Create a new room</CardTitle>
+              <CardTitle>{t("create_new_room")}</CardTitle>
               <CardDescription className="text-muted">
-                You may create a new room at any time by clicking below!
+                {t("create_new_room_description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-2 mt-auto">
               <Button variant="secondary" asChild>
                 <Link href={`/rooms/new`}>
                   <PlusCircle />
-                  Start creating room
+                  {t("start_creating_room")}
                 </Link>
               </Button>
             </CardContent>
@@ -54,9 +56,9 @@ const RoomsPage = async () => {
           <li key={room.id} className="h-full">
             <Card className="h-full">
               <CardHeader>
-                <CardTitle>{room.name || <i>No title</i>}</CardTitle>
+                <CardTitle>{room.name || <i>{t("no_title")}</i>}</CardTitle>
                 <CardDescription>
-                  {room.description || "You haven't set a description yet."}
+                  {room.description || t("no_description")}
                 </CardDescription>
               </CardHeader>
               <CardContent className="mt-auto grid grid-cols-2 gap-2">
@@ -64,7 +66,7 @@ const RoomsPage = async () => {
                   <Button className="col-span-2" size="sm" asChild>
                     <Link href={`/v/${room.slug}/results`}>
                       <Crown />
-                      View room results
+                      {t("view_room_results")}
                     </Link>
                   </Button>
                 ) : (
@@ -72,19 +74,19 @@ const RoomsPage = async () => {
                     <Button className="col-span-2" size="sm" asChild>
                       <Link href={`/rooms/${room.slug}`}>
                         <Eye />
-                        Room overview
+                        {t("room_overview")}
                       </Link>
                     </Button>
                     <Button variant="outline" size="sm" asChild>
                       <Link href={`/rooms/${room.slug}/details`}>
                         <Edit />
-                        Edit details
+                        {t("edit_details")}
                       </Link>
                     </Button>
                     <Button variant="outline" size="sm" asChild>
                       <Link href={`/rooms/${room.slug}/choices`}>
                         <Edit />
-                        Edit choices
+                        {t("edit_choices")}
                       </Link>
                     </Button>
                   </>

@@ -4,22 +4,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Crown, Edit } from "lucide-react";
 import { RoomDeletionForm } from "../../../components/RoomDeletionForm";
-import { Room } from "../../../room.types";
 import { Separator } from "../../../components/ui/separator";
 import { RoomStatusForm } from "../../../components/RoomStatusForm";
 import { Input } from "../../../components/ui/input";
-
-const statusMap: { [key in Room["status"]]: string } = {
-  private: "Private",
-  open: "Open for voting",
-  results: "Results available",
-};
+import { getTranslations } from "next-intl/server";
 
 const RoomOverviewPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
   const supabase = createClient(cookies());
   const { slug } = await params;
+  const t = await getTranslations("room_overview");
 
   const { data: room, error } = await supabase
     .from("rooms")
@@ -29,7 +24,7 @@ const RoomOverviewPage: React.FC<{
 
   if (error) {
     console.error("Error fetching room:", error);
-    return <div>Error loading room</div>;
+    return <div>{t("error_loading_room")}</div>;
   }
 
   const { data: choices, error: choicesError } = await supabase
@@ -39,7 +34,7 @@ const RoomOverviewPage: React.FC<{
 
   if (choicesError) {
     console.error("Error fetching choices:", choicesError);
-    return <div>Error loading choices</div>;
+    return <div>{t("error_loading_choices")}</div>;
   }
 
   return (
@@ -52,35 +47,31 @@ const RoomOverviewPage: React.FC<{
       >
         <Link href="/rooms">
           <ArrowLeft />
-          Back to list of rooms
+          {t("back_to_list_of_rooms")}
         </Link>
       </Button>
 
       <div className="grid max-w-md mx-auto">
         <h1 className="text-3xl text-center mb-4">
-          Room <strong>≫{room.name}≪</strong>
+          {t.rich("room", {
+            name: room.name,
+            strong: (children) => <strong>{children}</strong>,
+          })}
         </h1>
-        <p className="prose">
-          You may edit the room details, add choices to the room and open the
-          room for voting.
-        </p>
+        <p className="prose">{t("description")}</p>
         <Separator className="my-6" />
         <div>
           <h2 className="text-xl">
-            Current room status: <strong>{statusMap[room.status]}</strong>
+            {t.rich("current_room_status", {
+              status: t(room.status),
+              strong: (children) => <strong>{children}</strong>,
+            })}
           </h2>
           <p className="text-sm text-gray-500">
-            {room.status === "private" && (
-              <>
-                The room is currently private and not open for voting. Only you
-                have access to it. You may add choices to the room and open it
-                for voting.
-              </>
-            )}
+            {room.status === "private" && t("private_status_description")}
             {room.status === "open" && (
               <>
-                The room is currently open for voting. Share the link with your
-                friends and let them rank the choices! Link:
+                {t("open_status_description")}
                 <br />
                 <Input
                   readOnly
@@ -89,12 +80,7 @@ const RoomOverviewPage: React.FC<{
                 />
               </>
             )}
-            {room.status === "results" && (
-              <>
-                The room is closed for voting. You and anybody that voted on it
-                may view the results of the room.
-              </>
-            )}
+            {room.status === "results" && t("results_status_description")}
           </p>
         </div>
         <Separator className="my-6" />
@@ -107,7 +93,7 @@ const RoomOverviewPage: React.FC<{
           >
             <Link href={`/rooms/${room.slug}/details`}>
               <Edit />
-              Edit room details
+              {t("edit_room_details")}
             </Link>
           </Button>
           <Button
@@ -117,14 +103,14 @@ const RoomOverviewPage: React.FC<{
           >
             <Link href={`/rooms/${room.slug}/choices`}>
               <Edit />
-              Add and edit choices
+              {t("add_and_edit_choices")}
             </Link>
           </Button>
           {room.status === "results" ? (
             <Button asChild className="col-span-2">
               <Link href={`/v/${room.slug}/results`}>
                 <Crown />
-                View room results
+                {t("view_room_results")}
               </Link>
             </Button>
           ) : (

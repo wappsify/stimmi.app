@@ -2,11 +2,13 @@
 import React from "react";
 import { RoomUser } from "@/room_user.types";
 import { useRealtimeRoomUsers } from "@/lib/hooks/useRealtimeRoomUsers";
+import { useTranslations } from "next-intl";
 
 export const ActiveUsersText: React.FC<{
   roomUsers: RoomUser[];
   roomId: string;
 }> = ({ roomUsers, roomId }) => {
+  const t = useTranslations("results");
   const realtimeRoomUsers = useRealtimeRoomUsers(roomId, roomUsers);
   const totalUsers = realtimeRoomUsers.length;
   const usersWhoVoted = realtimeRoomUsers.filter(
@@ -15,7 +17,7 @@ export const ActiveUsersText: React.FC<{
 
   return (
     <p className="text-center text-sm">
-      {usersWhoVoted} out of {totalUsers} users have voted.
+      {t("users_voted", { usersWhoVoted, totalUsers })}
     </p>
   );
 };

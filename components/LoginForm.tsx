@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -20,6 +21,7 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
+  const t = useTranslations("login");
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -46,9 +48,9 @@ export function LoginForm() {
       router.push("/rooms");
       toast.success(
         <div>
-          <strong>Logged in successfully!</strong>
+          <strong>{t("login_success")}</strong>
           <br />
-          Go ahead and create some polls.
+          {t("login_success_message")}
         </div>
       );
     }
@@ -61,16 +63,16 @@ export function LoginForm() {
           name="email"
           control={form.control}
           placeholder="Email"
-          label="Email"
-          description="Enter your email address."
+          label={t("email_label")}
+          description={t("email_description")}
         />
         <FormInputField<LoginFormValues>
           name="password"
           control={form.control}
           type="password"
           placeholder="Password"
-          label="Password"
-          description="Enter your password."
+          label={t("password_label")}
+          description={t("password_description")}
         />
         {form.formState.errors.root && (
           <p className="text-red-500 text-xs italic mb-4">
@@ -83,10 +85,10 @@ export function LoginForm() {
             className="place-self-center"
             isLoading={isLoading}
           >
-            Login
+            {t("login_button")}
           </FormSubmitButton>
           <Button variant="outline" asChild>
-            <Link href="/register">Register instead</Link>
+            <Link href="/register">{t("register_instead")}</Link>
           </Button>
         </div>
       </Form>

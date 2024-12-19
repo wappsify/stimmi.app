@@ -1,12 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import ChoiceEditForm from "../../../../components/ChoicesEditForm";
+import { getTranslations } from "next-intl/server";
 
 const RoomEditPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
   const supabase = createClient(cookies());
   const { slug } = await params;
+  const t = await getTranslations("choices_edit");
 
   const { data: room, error: roomError } = await supabase
     .from("rooms")
@@ -16,7 +18,7 @@ const RoomEditPage: React.FC<{
 
   if (roomError) {
     console.error("Error fetching room:", roomError);
-    return <div>Error loading room</div>;
+    return <div>{t("error_loading")}</div>;
   }
 
   const { data: choices, error: choicesError } = await supabase
@@ -26,18 +28,15 @@ const RoomEditPage: React.FC<{
 
   if (choicesError) {
     console.error("Error fetching data:", choicesError);
-    return <div>Error loading choices</div>;
+    return <div>{t("error_loading")}</div>;
   }
 
   return (
     <div className="max-w-md mx-auto">
-      <h1 className="text-3xl text-center mb-6 font-bold">Edit room choices</h1>
-      <p className="prose mb-6">
-        You may add as many choices as you like. Keep in mind that more choices
-        require more effort when ranking them.
-        <br />
-        <br /> The choices will be displayed in a random order to the voters.
-      </p>
+      <h1 className="text-3xl text-center mb-6 font-bold">
+        {t("edit_room_choices")}
+      </h1>
+      <p className="prose mb-6">{t("edit_room_choices_description")}</p>
       <ChoiceEditForm room={room} choices={choices} />
     </div>
   );
