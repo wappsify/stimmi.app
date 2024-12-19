@@ -151,5 +151,12 @@
     },
     "footer": {
         "github_button_title": "View source code on Github"
+    },
+    "room_creation": {
+        "name_label": "Room name",
+        "name_description": "This is the name of your room. It should be descriptive and easy to remember.",
+        "name_placeholder": "Fantastic book club voting room",
+        "create_success": "Room was created successfully",
+        "create_button": "Create Room"
     }
 }

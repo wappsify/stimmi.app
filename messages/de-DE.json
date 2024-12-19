@@ -151,5 +151,12 @@
     },
     "footer": {
         "github_button_title": "Quellcode auf Github ansehen"
+    },
+    "room_creation": {
+        "name_label": "Raumname",
+        "name_description": "Das ist der Name deines Raums. Er sollte beschreibend und leicht zu merken sein.",
+        "name_placeholder": "Fantastischer Buchclub-Abstimmungsraum",
+        "create_success": "Raum wurde erfolgreich erstellt",
+        "create_button": "Raum erstellen"
     }
 }

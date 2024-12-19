@@ -8,8 +8,10 @@ import { Form } from "@/components/ui/form";
 import { FormInputField } from "@/components/forms/elements/form-input-field";
 import { objectToFormData } from "@/lib/utils";
 import { FormValues, roomCreationSchema } from "@/lib/schemas/room-creation";
+import { useTranslations } from "next-intl";
 
 const RoomCreationForm: React.FC = () => {
+  const t = useTranslations("room_creation");
   const form = useForm<FormValues>({
     resolver: zodResolver(roomCreationSchema),
     defaultValues: {
@@ -20,7 +22,7 @@ const RoomCreationForm: React.FC = () => {
   const onSubmit = async (data: FormValues) => {
     const formData = objectToFormData(data);
     await createRoom(formData);
-    toast.success(`Room was created successfully`);
+    toast.success(t("room_creation"));
   };
 
   return (
@@ -28,12 +30,12 @@ const RoomCreationForm: React.FC = () => {
       <FormInputField<FormValues>
         name="name"
         control={form.control}
-        placeholder="Fantastic book club voting room"
-        label="Room name"
-        description="This is the name of your room. It should be descriptive and easy to remember."
+        placeholder={t("name_placeholder")}
+        label={t("name_label")}
+        description={t("name_description")}
       />
       <FormSubmitButton type="submit" className="place-self-center">
-        Create Room
+        {t("create_button")}
       </FormSubmitButton>
     </Form>
   );
