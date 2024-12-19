@@ -158,5 +158,9 @@
         "name_placeholder": "Fantastic book club voting room",
         "create_success": "Room was created successfully",
         "create_button": "Create Room"
+    },
+    "room_checks": {
+        "details_are_filled": "Room details are filled.",
+        "choices_are_filled": "At least three choices have been added."
     }
 }

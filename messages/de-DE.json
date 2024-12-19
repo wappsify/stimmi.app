@@ -158,5 +158,10 @@
         "name_placeholder": "Fantastischer Buchclub-Abstimmungsraum",
         "create_success": "Raum wurde erfolgreich erstellt",
         "create_button": "Raum erstellen"
+    },
+
+    "room_checks": {
+        "details_are_filled": "Room-Details sind ausgefüllt.",
+        "choices_are_filled": "Mindestens drei Optionen wurden hinzugefügt."
     }
 }

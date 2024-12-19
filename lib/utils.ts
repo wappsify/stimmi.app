@@ -102,11 +102,11 @@ export const shootConfetti = () => {
 
 export const roomChecks = [
   {
-    name: "Room details are filled.",
+    name: "details_are_filled" as const,
     check: (room: Room) => !!room.name,
   },
   {
-    name: "At least three choices have been added.",
+    name: "choices_are_filled" as const,
     check: (_: Room, choices: Choice[]) => choices.length >= 3,
   },
 ];
