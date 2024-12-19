@@ -5,10 +5,10 @@ import { resolveAcceptLanguage } from "resolve-accept-language";
 export const FALLBACK_LOCALE = "de-DE";
 export const AVAILABLE_LOCALES = ["en-US", "de-DE"];
 
-export const getLocale = async (user: User) => {
+export const getLocale = async (user: User | null) => {
   const acceptLanguageHeader = headers().get("Accept-Language");
 
-  const desiredLocale = user.user_metadata?.locale;
+  const desiredLocale = user?.user_metadata?.locale;
   const locale = acceptLanguageHeader
     ? resolveAcceptLanguage(
         desiredLocale ?? acceptLanguageHeader,
