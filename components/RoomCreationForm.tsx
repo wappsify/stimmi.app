@@ -22,7 +22,7 @@ const RoomCreationForm: React.FC = () => {
   const onSubmit = async (data: FormValues) => {
     const formData = objectToFormData(data);
     await createRoom(formData);
-    toast.success(t("room_creation"));
+    toast.success(t("create_success"));
   };
 
   return (
