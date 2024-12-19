@@ -10,7 +10,6 @@ export default getRequestConfig(async () => {
   const supabase = createClient(cookies());
   const user = await supabase.auth.getUser();
   const acceptLanguageHeader = headers().get("Accept-Language");
-  console.log("acl", acceptLanguageHeader);
 
   const locale =
     user?.data.user?.user_metadata.locale ??
