@@ -162,5 +162,11 @@
     "room_checks": {
         "details_are_filled": "Room details are filled.",
         "choices_are_filled": "At least three choices have been added."
+    },
+    "account": {
+        "account_settings": "Account Settings",
+        "select_locale": "Select your preferred locale:",
+        "english": "English",
+        "german": "German"
     }
 }

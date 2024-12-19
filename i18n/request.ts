@@ -1,25 +1,11 @@
 import { getRequestConfig } from "next-intl/server";
-import { createClient } from "../lib/supabase/server";
-import { cookies, headers } from "next/headers";
-import { resolveAcceptLanguage } from "resolve-accept-language";
-
-const FALLBACK_LOCALE = "de-DE";
-const AVAILABLE_LOCALES = ["en-US", "de-DE"];
+import { getUserOrRedirect } from "../lib/server/utils";
+import { getLocale } from "./getLocale";
 
 export default getRequestConfig(async () => {
-  const supabase = createClient(cookies());
-  const user = await supabase.auth.getUser();
-  const acceptLanguageHeader = headers().get("Accept-Language");
+  const user = await getUserOrRedirect();
 
-  const locale =
-    user?.data.user?.user_metadata.locale ??
-    (acceptLanguageHeader
-      ? resolveAcceptLanguage(
-          acceptLanguageHeader,
-          AVAILABLE_LOCALES,
-          FALLBACK_LOCALE
-        )
-      : FALLBACK_LOCALE);
+  const locale = await getLocale(user);
 
   return {
     locale,
