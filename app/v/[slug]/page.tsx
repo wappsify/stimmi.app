@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -11,7 +12,7 @@ export async function generateMetadata({
   params: { slug: string };
   searchParams: URLSearchParams;
 }): Promise<Metadata> {
-  // read route params
+  const t = await getTranslations("voting_page");
   const slug = params.slug;
 
   const supabase = createClient(cookies());
@@ -24,13 +25,13 @@ export async function generateMetadata({
 
   if (!room) {
     return {
-      title: "Vote in room | stimmi.app",
+      title: t("metadata_default_title"),
     };
   }
 
   return {
-    title: `Vote in ${room.name} | stimmi.app`,
-    description: `Someone wants you to vote in the room ${room.name}! Rank your choices now on stimmi.app.`,
+    title: t("metadata_title", { roomName: room.name }),
+    description: t("metadata_description", { roomName: room.name }),
     robots: { index: false, follow: false },
   };
 }
@@ -38,6 +39,7 @@ export async function generateMetadata({
 const VotingPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
+  const t = await getTranslations("voting_page");
   const supabase = createClient(cookies());
 
   const { slug } = await params;
@@ -50,7 +52,7 @@ const VotingPage: React.FC<{
 
   if (error) {
     console.error("Error fetching room:", error);
-    return <div>Error loading room</div>;
+    return <div>{t("error_loading_room")}</div>;
   }
 
   const {
@@ -64,7 +66,7 @@ const VotingPage: React.FC<{
 
   if (roomUsersError) {
     console.error(roomUsersError);
-    return <div>Error fetching room users</div>;
+    return <div>{t("error_fetching_room_users")}</div>;
   }
 
   if (user) {
@@ -77,13 +79,13 @@ const VotingPage: React.FC<{
   return (
     <div className="grid">
       <h1 className="text-3xl text-center mb-4">
-        Hey there, welcome to <strong>stimmi.app</strong>!
+        {t.rich("welcome_message", {
+          strong: (children) => <strong>{children}</strong>,
+        })}
         <br />
       </h1>
 
-      <p className="text-xl text-center">
-        Whoever sent you this link wants you to rank some choices.
-      </p>
+      <p className="text-xl text-center">{t("instruction_message")}</p>
 
       <Separator className="my-6" />
       <VotingSection room={room} roomUsers={existingUsers} />

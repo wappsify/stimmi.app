@@ -19,11 +19,13 @@ import { useUser } from "../lib/hooks/useUser";
 import { Skeleton } from "./ui/skeleton";
 import { VotingForm } from "./voting-form";
 import { shuffleArray } from "../lib/utils";
+import { useTranslations } from "next-intl";
 
 export const VotingSection: React.FC<{
   room: Room;
   roomUsers: RoomUser[];
 }> = ({ room, roomUsers: serverRoomUsers }) => {
+  const t = useTranslations("voting_section");
   const [isJoining, setIsJoining] = useState(false);
   const [isInRoom, setIsInRoom] = useState(false);
 
@@ -44,9 +46,9 @@ export const VotingSection: React.FC<{
       .insert([{ room_id: room.id, user_id: user.id, has_voted: false }]);
 
     if (roomUsersError) {
-      console.error("Error adding room user", roomUsersError);
+      console.error(t("error_adding_room_user"), roomUsersError);
       setIsJoining(false);
-      throw new Error("Error fetching choices");
+      throw new Error(t("error_fetching_choices"));
     }
 
     setIsJoining(false);
@@ -68,15 +70,15 @@ export const VotingSection: React.FC<{
         .eq("room_id", room.id);
 
       if (error) {
-        console.error("Error fetching choices", error);
-        throw new Error("Error fetching choices");
+        console.error(t("error_fetching_choices"), error);
+        throw new Error(t("error_fetching_choices"));
       }
 
       setChoices(shuffleArray(fetchedChoices, user.id));
     };
 
     fetchChoices();
-  }, [room, user, choices, supabase]);
+  }, [room, user, choices, supabase, t]);
 
   useEffect(() => {
     if (!user || !roomUsers) {
@@ -106,7 +108,7 @@ export const VotingSection: React.FC<{
             disabled={isJoining}
           >
             {isJoining ? <Loader2 className="animate-spin" /> : <DoorOpen />}
-            Join this room and start voting!
+            {t("join_button")}
           </Button>
         )}
       </CardContent>

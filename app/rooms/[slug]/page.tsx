@@ -85,7 +85,7 @@ const RoomOverviewPage: React.FC<{
         </div>
         <Separator className="my-6" />
 
-        <div className="grid gap-2 grid-cols-2 ">
+        <div className="grid gap-2 grid-cols-2">
           <Button
             asChild
             variant="outline"
@@ -93,7 +93,7 @@ const RoomOverviewPage: React.FC<{
           >
             <Link href={`/rooms/${room.slug}/details`}>
               <Edit />
-              {t("edit_room_details")}
+              <span className="truncate">{t("edit_room_details")}</span>
             </Link>
           </Button>
           <Button
@@ -103,7 +103,7 @@ const RoomOverviewPage: React.FC<{
           >
             <Link href={`/rooms/${room.slug}/choices`}>
               <Edit />
-              {t("add_and_edit_choices")}
+              <span className="truncate">{t("add_and_edit_choices")}</span>
             </Link>
           </Button>
           {room.status === "results" ? (

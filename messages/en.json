@@ -60,7 +60,15 @@
     "room_edit": {
         "back_to_room_overview": "Back to room overview",
         "edit_room": "Edit room: <strong>{name}</strong>",
-        "error_loading": "Error loading room"
+        "error_loading": "Error loading room",
+        "name_label": "Room name",
+        "name_description": "This is the name of your room. It should be descriptive and easy to remember. Choose it wisely as the URL of your room depends on it.",
+        "name_placeholder": "Fantastic book club voting room",
+        "description_label": "Room description",
+        "description_description": "This is the description of your room. It should be a bit longer and give more context about what the room is for. It is optional, so you may leave it empty. All voters will see it displayed before voting.",
+        "description_placeholder": "A longer description of the room. It may contain line breaks.",
+        "update_success": "Room was updated successfully",
+        "save_changes": "Save changes"
     },
     "rooms": {
         "error_loading": "Error loading rooms",
@@ -95,5 +103,53 @@
     "new_room": {
         "title": "Create a new room",
         "subtitle": "What do you want to call your room?"
+    },
+    "room_status_form": {
+        "change_room_status": "Change room status",
+        "open_room_confirmation": "Are you sure you want to open the room?",
+        "calculate_results_confirmation": "Are you sure you want to calculate the results?",
+        "open_room_description": "This action will make the room public and allow anyone to vote on it. It cannot be undone. You will not be able to change the room's details or choices after this action.",
+        "calculate_results_description": "This action will calculate the results of the room. It cannot be undone. Anybody that voted in the room will be able to see the results.",
+        "cancel": "No, cancel",
+        "open_room_button": "Yes, open room",
+        "calculate_results_button": "Yes, calculate results"
+    },
+    "room_deletion_form": {
+        "delete_room": "Delete room",
+        "confirmation_title": "Are you absolutely sure?",
+        "confirmation_description": "This action cannot be undone. This will permanently delete the room and any choices you have added to it.",
+        "cancel": "No, cancel",
+        "confirm_button": "Yes, delete room"
+    },
+    "voting_page": {
+        "welcome_message": "Hey there, welcome to <strong>stimmi.app</strong>!",
+        "instruction_message": "Whoever sent you this link wants you to rank some choices.",
+        "error_loading_room": "Error loading room",
+        "error_fetching_room_users": "Error fetching room users",
+        "metadata_default_title": "Vote in room | stimmi.app",
+        "metadata_title": "Vote in {roomName} | stimmi.app",
+        "metadata_description": "Someone wants you to vote in the room {roomName}! Rank your choices now on stimmi.app."
+    },
+    "voting_section": {
+        "join_button": "Join this room and start voting!",
+        "error_adding_room_user": "Error adding room user",
+        "error_fetching_choices": "Error fetching choices",
+        "rank_instructions": "Rank the following choices by dragging them into the order you prefer. The topmost choice is the one you like the most, the bottommost choice is the one you like the least.",
+        "submit_ranking": "I'm done ranking!",
+        "submit_success": "Submitted your ranking successfully!"
+    },
+    "results_page": {
+        "error_loading_room": "Error loading room",
+        "error_loading_room_users": "Error loading room users",
+        "error_loading_choices": "Error loading choices",
+        "results_title": "Results of <nameWrapper>{roomName}</nameWrapper>"
+    },
+    "show_results": {
+        "results_in": "The results are in...",
+        "winner_announcement": "And we have a winner!",
+        "points_label": "({points} points)"
+    },
+    "footer": {
+        "github_button_title": "View source code on Github"
     }
 }

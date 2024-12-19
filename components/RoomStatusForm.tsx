@@ -23,6 +23,7 @@ import { useState } from "react";
 import { FormValues, roomStatusSchema } from "@/lib/schemas/room-status";
 import { RoomCheck } from "./room-check";
 import { Choice } from "../choice.types";
+import { useTranslations } from "next-intl";
 
 export const RoomStatusForm: React.FC<{
   room: Room;
@@ -46,39 +47,29 @@ export const RoomStatusForm: React.FC<{
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const t = useTranslations("room_status_form");
+
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
         <Button size="lg" className={className}>
           <DoorOpen />
-          Change room status
+          {t("change_room_status")}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <Form {...form} onSubmit={form.handleSubmit(onSubmit)}>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {room.status === "private" && (
-                <>Are you sure you want to open the room?</>
-              )}
+              {room.status === "private" && <>{t("open_room_confirmation")}</>}
               {room.status === "open" && (
-                <>Are you sure you want to calculate the results?</>
+                <>{t("calculate_results_confirmation")}</>
               )}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              {room.status === "private" && (
-                <>
-                  This action will make the room public and allow anyone to vote
-                  on it. It cannot be undone. You will not be able to change the
-                  room&apos;s details or choices after this action.
-                </>
-              )}
+              {room.status === "private" && <>{t("open_room_description")}</>}
               {room.status === "open" && (
-                <>
-                  This action will calculate the results of the room. It cannot
-                  be undone. Anybody that voted in the room will be able to see
-                  the results.
-                </>
+                <>{t("calculate_results_description")}</>
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -86,12 +77,12 @@ export const RoomStatusForm: React.FC<{
             <RoomCheck room={room} choices={choices} />
           )}
           <AlertDialogFooter>
-            <AlertDialogCancel>No, cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
 
             <FormSubmitButton disabled={!validateRoom(room, choices)}>
               {room.status === "private"
-                ? "Yes, open room"
-                : "Yes, calculate results"}
+                ? t("open_room_button")
+                : t("calculate_results_button")}
             </FormSubmitButton>
           </AlertDialogFooter>
         </Form>

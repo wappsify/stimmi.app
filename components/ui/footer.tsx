@@ -1,8 +1,11 @@
 import { Github } from "lucide-react";
 import * as React from "react";
 import { Button } from "./button";
+import { useTranslations } from "next-intl";
 
 const Footer: React.FC = () => {
+  const t = useTranslations("footer");
+
   return (
     <footer className="w-full py-2 bg-slate-200 text-primary text-center mt-12">
       <div className="container mx-auto">
@@ -12,7 +15,7 @@ const Footer: React.FC = () => {
         <Button variant="ghost" size="sm" asChild>
           <a
             href="https://github.com/wappsify/stimmi.app"
-            title="View source code on Github"
+            title={t("github_button_title")}
             target="_blank"
             rel="noopener noreferrer"
           >

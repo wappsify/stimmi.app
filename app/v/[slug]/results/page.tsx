@@ -3,10 +3,12 @@ import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ResultsView } from "../../../../components/results-view";
+import { getTranslations } from "next-intl/server";
 
 const ResultsPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
+  const t = await getTranslations("results_page");
   const supabase = createClient(cookies());
 
   const { slug } = await params;
@@ -19,7 +21,7 @@ const ResultsPage: React.FC<{
 
   if (error) {
     console.error("Error fetching room:", error);
-    return <div>Error loading room</div>;
+    return <div>{t("error_loading_room")}</div>;
   }
 
   // check if user is in room_users and has voted
@@ -38,7 +40,7 @@ const ResultsPage: React.FC<{
 
   if (roomUsersError) {
     console.error("Error fetching room users:", roomUsersError);
-    return <div>Error loading room users</div>;
+    return <div>{t("error_loading_room_users")}</div>;
   }
 
   if (
@@ -55,14 +57,21 @@ const ResultsPage: React.FC<{
 
   if (choicesError) {
     console.error("Error fetching choices:", choicesError);
-    return <div>Error loading choices</div>;
+    return <div>{t("error_loading_choices")}</div>;
   }
 
   return (
     <div className="grid">
       <h1 className="text-xl text-center mb-4">
-        Results of
-        <br /> <strong className="text-2xl">{room.name}</strong>
+        {t.rich("results_title", {
+          roomName: room.name,
+          nameWrapper: (children) => (
+            <>
+              <br />
+              <strong className="text-2xl">{children}</strong>
+            </>
+          ),
+        })}
       </h1>
       <Separator className="mb-6" />
       <ResultsView

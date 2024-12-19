@@ -21,6 +21,7 @@ import { objectToFormData } from "@/lib/utils";
 import { deleteRoom } from "@/lib/actions/rooms";
 import { toast } from "sonner";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({
   className,
@@ -42,27 +43,28 @@ export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const t = useTranslations("room_deletion_form");
+
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
         <Button size="sm" variant="destructive" className={className}>
           <Trash />
-          Delete room
+          {t("delete_room")}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <Form {...form} onSubmit={form.handleSubmit(onSubmit)}>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t("confirmation_title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the
-              room and any choices you have added to it.
+              {t("confirmation_description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>No, cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
             <FormSubmitButton variant="destructive">
-              Yes, delete room
+              {t("confirm_button")}
             </FormSubmitButton>
           </AlertDialogFooter>
         </Form>

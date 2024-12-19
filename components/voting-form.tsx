@@ -18,11 +18,13 @@ import { Form } from "./ui/form";
 import { submitVotes } from "../lib/actions/votes";
 import { objectToFormData } from "../lib/utils";
 import { Separator } from "./ui/separator";
+import { useTranslations } from "next-intl";
 
 export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
   choices,
   room,
 }) => {
+  const t = useTranslations("voting_section");
   const [items, setItems] = useState(choices);
 
   const form = useForm<FormValues>({
@@ -54,16 +56,12 @@ export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
   const onSubmit = async (data: FormValues) => {
     const formData = objectToFormData(data);
     await submitVotes(formData);
-    toast.success("Submitted your ranking successfully!");
+    toast.success(t("submit_success"));
   };
 
   return (
     <div className="grid gap-4">
-      <p className="prose">
-        Rank the following choices by dragging them into the order you prefer.
-        The topmost choice is the one you like the most, the bottommost choice
-        is the one you like the least.
-      </p>
+      <p className="prose">{t("rank_instructions")}</p>
       <Form {...form} onSubmit={form.handleSubmit(onSubmit)}>
         <DndContext
           collisionDetection={closestCenter}
@@ -85,9 +83,7 @@ export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
           </SortableContext>
         </DndContext>
         <Separator className="my-4" />
-        <FormSubmitButton type="submit">
-          I&apos;m done ranking!
-        </FormSubmitButton>
+        <FormSubmitButton type="submit">{t("submit_ranking")}</FormSubmitButton>
       </Form>
     </div>
   );

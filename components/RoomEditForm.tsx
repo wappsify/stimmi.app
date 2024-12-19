@@ -11,8 +11,10 @@ import { toast } from "sonner";
 import { Room } from "../room.types";
 import { FormInputField } from "@/components/forms/elements/form-input-field";
 import { FormTextareaField } from "@/components/forms/elements/form-textarea-field";
+import { useTranslations } from "next-intl";
 
 const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {
+  const t = useTranslations("room_edit");
   const form = useForm<FormValues>({
     resolver: zodResolver(roomEditSchema),
     defaultValues: {
@@ -25,7 +27,7 @@ const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {
   const onSubmit = async (data: FormValues) => {
     const formData = objectToFormData(data);
     await updateRoom(formData);
-    toast.success(`Room was updated successfully`);
+    toast.success(t("update_success"));
   };
 
   return (
@@ -41,22 +43,20 @@ const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {
       <FormInputField<FormValues>
         name="name"
         control={form.control}
-        placeholder="Fantastic book club voting room"
-        label="Room name"
-        description="This is the name of your room. It should be descriptive and easy to remember. Choose it wisely as the URL of your room depends on it."
+        placeholder={t("name_placeholder")}
+        label={t("name_label")}
+        description={t("name_description")}
       />
 
       <FormTextareaField<FormValues>
         name="description"
         control={form.control}
-        placeholder={
-          "A longer description of the room. It may contain line breaks."
-        }
-        label="Room description"
-        description="This is the description of your room. It should be a bit longer and give more context about what the room is for. It is optional, so you may leave it empty. All voters will see it displayed before voting."
+        placeholder={t("description_placeholder")}
+        label={t("description_label")}
+        description={t("description_description")}
       />
       <FormSubmitButton type="submit" className="place-self-center">
-        Save Changes
+        {t("save_changes")}
       </FormSubmitButton>
     </Form>
   );

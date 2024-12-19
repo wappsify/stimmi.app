@@ -3,12 +3,15 @@ import { delay, motion } from "motion/react";
 import { useState } from "react";
 import { ResultWithChoice } from "../lib/hooks/useRealtimeResults";
 import { cn, shootConfetti } from "../lib/utils";
+import { useTranslations } from "next-intl";
+
 const MotionCheck = motion.create(CheckCircle);
 
 export const ShowResults: React.FC<{
   results: ResultWithChoice[];
   showResultsInitially: boolean;
 }> = ({ results, showResultsInitially }) => {
+  const t = useTranslations("show_results");
   const [showResults, setShowResults] = useState(showResultsInitially);
 
   if (!showResults) {
@@ -32,10 +35,10 @@ export const ShowResults: React.FC<{
           }}
         >
           <motion.h2 className="text-center text-xl" variants={variants}>
-            The results are in...
+            {t("results_in")}
           </motion.h2>
           <motion.h2 className="text-center text-xl" variants={variants}>
-            And we have a winner!
+            {t("winner_announcement")}
           </motion.h2>
         </motion.div>
       </>
@@ -66,7 +69,7 @@ export const ShowResults: React.FC<{
           variants={choiceVariants}
         >
           <div className="text-gray-500 text-xs text-right absolute right-4 top-2">
-            ({result.points} points)
+            {t("points_label", { points: result.points })}
           </div>
           <span className="mr-2">#{index + 1}:</span>
           <motion.span className="text-lg font-semibold">

@@ -2,7 +2,7 @@ import { getRequestConfig } from "next-intl/server";
 
 export default getRequestConfig(async () => {
   // TODO: fetch locale from user / browser settings
-  const locale = "en";
+  const locale = "de";
 
   return {
     locale,
