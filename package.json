@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint",
     "format": "prettier --write .",
     "generate": "npx supabase gen types --lang=typescript --project-id riqtseunihgzwlsgzkkx --schema public > database.types.ts",
     "prepare": "husky"
@@ -68,7 +68,8 @@
     "prettier": "3.4.2",
     "supabase": "2.2.1",
     "tailwindcss": "3.4.17",
-    "typescript": "5.6.3"
+    "typescript": "5.6.3",
+    "typescript-eslint": "8.19.1"
   },
   "overrides": {
     "@types/react": "19.0.3",
