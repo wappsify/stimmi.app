@@ -22,7 +22,12 @@ const nextPlugin = {
 };
 
 const ignores = {
-  ignores: ["node_modules", ".next", "*.config.mjs", "database.types.ts"],
+  ignores: [
+    "node_modules",
+    ".next",
+    "*.config.mjs",
+    "lib/supabase/database.types.ts",
+  ],
 };
 
 const ruleOverrides = {

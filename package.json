@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
-    "generate": "npx supabase gen types --lang=typescript --project-id riqtseunihgzwlsgzkkx --schema public > database.types.ts",
+    "generate": "npx supabase gen types --lang=typescript --project-id riqtseunihgzwlsgzkkx --schema public > lib/supabase/database.types.ts",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -73,5 +73,8 @@
   "overrides": {
     "@types/react": "19.0.3",
     "@types/react-dom": "19.0.2"
+  },
+  "volta": {
+    "node": "20.18.1"
   }
 }
