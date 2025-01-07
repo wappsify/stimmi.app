@@ -1,24 +1,25 @@
 import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
+import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import {
   arrayMove,
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Choice } from "../choice.types";
+import { submitVotes } from "../lib/actions/votes";
 import { FormValues, votingSchema } from "../lib/schemas/submit-votes";
+import { objectToFormData } from "../lib/utils";
 import { Room } from "../room.types";
 import { FormHiddenInputField } from "./forms/elements/form-hidden-input-field";
 import { FormSubmitButton } from "./forms/elements/form-submit-button";
 import { SortableItem } from "./sortable-item";
 import { Form } from "./ui/form";
-import { submitVotes } from "../lib/actions/votes";
-import { objectToFormData } from "../lib/utils";
 import { Separator } from "./ui/separator";
-import { useTranslations } from "next-intl";
 
 export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
   choices,
@@ -66,6 +67,7 @@ export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
         <DndContext
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
+          modifiers={[restrictToWindowEdges]}
         >
           <SortableContext items={items} strategy={verticalListSortingStrategy}>
             {items.map((choice, index) => (
