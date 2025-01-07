@@ -17,6 +17,7 @@ const nextPlugin = {
   },
   files: ["**/*.ts", "**/*.tsx"],
   rules: {
+    ...pluginNext.configs.recommended.rules,
     ...pluginNext.configs["core-web-vitals"].rules,
   },
 };
@@ -33,6 +34,7 @@ const ignores = {
 const ruleOverrides = {
   rules: {
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "@typescript-eslint/consistent-type-imports": ["error"],
   },
 };
 

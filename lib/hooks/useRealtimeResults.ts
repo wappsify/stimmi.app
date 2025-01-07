@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "../supabase/client";
-import { Choice } from "../../choice.types";
-import { Results } from "../../results.types";
+import type { Choice } from "../supabase/choice.types";
+import type { Results } from "../supabase/results.types";
 
 export type ResultWithChoice = Results & { choice: Choice };
 

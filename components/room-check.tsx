@@ -1,6 +1,6 @@
 import { CheckCircle, XCircle } from "lucide-react";
-import { Choice } from "../choice.types";
-import { Room } from "../room.types";
+import type { Choice } from "@/lib/supabase/choice.types";
+import type { Room } from "@/lib/supabase/room.types";
 import { roomChecks } from "../lib/utils";
 import { useTranslations } from "next-intl";
 

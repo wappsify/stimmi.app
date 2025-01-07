@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createClient } from "../supabase/client";
-import { RoomUser } from "../../room_user.types";
+import type { RoomUser } from "../supabase/room_user.types";
 
 export const useRealtimeRoomUsers = (
   roomId: string,

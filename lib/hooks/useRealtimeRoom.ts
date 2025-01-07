@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createClient } from "../supabase/client";
-import { Room } from "../../room.types";
+import type { Room } from "../supabase/room.types";
 
 export const useRealtimeRoom = (initialRoom: Room) => {
   const [room, setRoom] = useState(initialRoom);

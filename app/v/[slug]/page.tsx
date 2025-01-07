@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import { VotingSection } from "@/components/voting-section";
 import { createClient } from "@/lib/supabase/server";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -9,11 +9,10 @@ import { getTranslations } from "next-intl/server";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
-  searchParams: URLSearchParams;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const t = await getTranslations("voting_page");
-  const slug = params.slug;
+  const slug = (await params).slug;
 
   const supabase = createClient(cookies());
 

@@ -15,14 +15,15 @@ import { FormSubmitButton } from "@/components/forms/elements/form-submit-button
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Room } from "../room.types";
+import type { Room } from "@/lib/supabase/room.types";
 import { objectToFormData, validateRoom } from "@/lib/utils";
 import { changeRoomStatus } from "@/lib/actions/rooms";
 import { toast } from "sonner";
 import { useState } from "react";
-import { FormValues, roomStatusSchema } from "@/lib/schemas/room-status";
+import type { FormValues } from "@/lib/schemas/room-status";
+import { roomStatusSchema } from "@/lib/schemas/room-status";
 import { RoomCheck } from "./room-check";
-import { Choice } from "../choice.types";
+import type { Choice } from "@/lib/supabase/choice.types";
 import { useTranslations } from "next-intl";
 
 export const RoomStatusForm: React.FC<{

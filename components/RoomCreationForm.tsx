@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { FormInputField } from "@/components/forms/elements/form-input-field";
 import { objectToFormData } from "@/lib/utils";
-import { FormValues, roomCreationSchema } from "@/lib/schemas/room-creation";
+import type { FormValues } from "@/lib/schemas/room-creation";
+import { roomCreationSchema } from "@/lib/schemas/room-creation";
 import { useTranslations } from "next-intl";
 
 const RoomCreationForm: React.FC = () => {

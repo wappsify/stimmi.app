@@ -1,7 +1,7 @@
 import { CheckCircle } from "lucide-react";
 import { delay, motion } from "motion/react";
 import { useState } from "react";
-import { ResultWithChoice } from "../lib/hooks/useRealtimeResults";
+import type { ResultWithChoice } from "../lib/hooks/useRealtimeResults";
 import { cn, shootConfetti } from "../lib/utils";
 import { useTranslations } from "next-intl";
 
@@ -64,7 +64,7 @@ export const ShowResults: React.FC<{
         <motion.div
           key={result.choice_id}
           className={cn(
-            "p-4 border border-gray-300 rounded shadow-sm relative bg-background"
+            "p-4 border border-gray-300 rounded shadow-sm relative bg-background",
           )}
           variants={choiceVariants}
         >

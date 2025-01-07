@@ -1,5 +1,5 @@
 import RoomCreationForm from "@/components/RoomCreationForm";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {

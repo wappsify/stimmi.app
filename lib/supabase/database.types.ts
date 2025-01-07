@@ -176,7 +176,9 @@ export type Database = {
         ];
       };
     };
-    Views: Record<never, never>;
+    Views: {
+      [_ in never]: never;
+    };
     Functions: {
       slugify: {
         Args: {
@@ -200,7 +202,9 @@ export type Database = {
     Enums: {
       room_status: "private" | "open" | "results";
     };
-    CompositeTypes: Record<never, never>;
+    CompositeTypes: {
+      [_ in never]: never;
+    };
   };
 };
 

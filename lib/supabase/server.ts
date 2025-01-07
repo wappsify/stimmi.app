@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
-import { Database } from "../../database.types";
+import type { cookies } from "next/headers";
+import type { Database } from "./database.types";
 
 export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
   return createServerClient<Database>(

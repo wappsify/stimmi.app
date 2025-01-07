@@ -9,12 +9,12 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { Room } from "../room.types";
-import { Choice } from "../choice.types";
+import type { Room } from "@/lib/supabase/room.types";
+import type { Choice } from "@/lib/supabase/choice.types";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRealtimeRoomUsers } from "../lib/hooks/useRealtimeRoomUsers";
-import { RoomUser } from "../room_user.types";
+import type { RoomUser } from "@/lib/supabase/room_user.types";
 import { useUser } from "../lib/hooks/useUser";
 import { Skeleton } from "./ui/skeleton";
 import { VotingForm } from "./voting-form";

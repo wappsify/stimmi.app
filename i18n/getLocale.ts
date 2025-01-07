@@ -1,4 +1,4 @@
-import { User } from "@supabase/supabase-js";
+import type { User } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import { resolveAcceptLanguage } from "resolve-accept-language";
 

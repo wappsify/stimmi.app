@@ -1,5 +1,6 @@
 "use client";
-import { Button, ButtonProps } from "@/components/ui/button";
+import type { ButtonProps } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { ArrowBigRightDash, Loader2 } from "lucide-react";
 import { useFormState } from "react-hook-form";
 

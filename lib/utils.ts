@@ -2,8 +2,8 @@ import { clsx, type ClassValue } from "clsx";
 import seedrandom from "seedrandom";
 import { twMerge } from "tailwind-merge";
 import confetti from "canvas-confetti";
-import { Choice } from "../choice.types";
-import { Room } from "../room.types";
+import type { Choice } from "@/lib/supabase/choice.types";
+import type { Room } from "@/lib/supabase/room.types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

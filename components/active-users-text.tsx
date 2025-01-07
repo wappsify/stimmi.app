@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { RoomUser } from "@/room_user.types";
+import type { RoomUser } from "@/lib/supabase/room_user.types";
 import { useRealtimeRoomUsers } from "@/lib/hooks/useRealtimeRoomUsers";
 import { useTranslations } from "next-intl";
 
@@ -12,7 +12,7 @@ export const ActiveUsersText: React.FC<{
   const realtimeRoomUsers = useRealtimeRoomUsers(roomId, roomUsers);
   const totalUsers = realtimeRoomUsers.length;
   const usersWhoVoted = realtimeRoomUsers.filter(
-    (user) => user.has_voted
+    (user) => user.has_voted,
   ).length;
 
   return (

@@ -1,13 +1,13 @@
 "use client";
 
-import { User } from "@supabase/supabase-js";
+import type { User } from "@supabase/supabase-js";
 import { LoaderPinwheel } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { Choice } from "../choice.types";
+import type { Choice } from "@/lib/supabase/choice.types";
 import { useRealtimeResults } from "../lib/hooks/useRealtimeResults";
 import { useRealtimeRoom } from "../lib/hooks/useRealtimeRoom";
-import { Room } from "../room.types";
-import { RoomUser } from "../room_user.types";
+import type { Room } from "@/lib/supabase/room.types";
+import type { RoomUser } from "@/lib/supabase/room_user.types";
 import { ActiveUsersText } from "./active-users-text";
 import { RoomStatusForm } from "./RoomStatusForm";
 import { ShowResults } from "./show-results";

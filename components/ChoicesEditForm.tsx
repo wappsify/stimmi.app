@@ -5,14 +5,15 @@ import { FormSubmitButton } from "@/components/forms/elements/form-submit-button
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { updateChoices } from "@/lib/actions/choices";
-import { choicesEditSchema, FormValues } from "@/lib/schemas/choices-edit";
+import type { FormValues } from "@/lib/schemas/choices-edit";
+import { choicesEditSchema } from "@/lib/schemas/choices-edit";
 import { objectToFormData } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DatabaseBackup, Plus, Trash } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { Choice } from "../choice.types";
-import { Room } from "../room.types";
+import type { Choice } from "@/lib/supabase/choice.types";
+import type { Room } from "@/lib/supabase/room.types";
 import { useTranslations } from "next-intl";
 
 const getInitialChoices = (choices: Choice[]) =>

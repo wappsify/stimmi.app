@@ -1,4 +1,5 @@
-import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
+import type { DragEndEvent } from "@dnd-kit/core";
+import { closestCenter, DndContext } from "@dnd-kit/core";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import {
   arrayMove,
@@ -10,11 +11,12 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { Choice } from "../choice.types";
+import type { Choice } from "@/lib/supabase/choice.types";
 import { submitVotes } from "../lib/actions/votes";
-import { FormValues, votingSchema } from "../lib/schemas/submit-votes";
+import type { FormValues } from "../lib/schemas/submit-votes";
+import { votingSchema } from "../lib/schemas/submit-votes";
 import { objectToFormData } from "../lib/utils";
-import { Room } from "../room.types";
+import type { Room } from "@/lib/supabase/room.types";
 import { FormHiddenInputField } from "./forms/elements/form-hidden-input-field";
 import { FormSubmitButton } from "./forms/elements/form-submit-button";
 import { SortableItem } from "./sortable-item";
@@ -49,7 +51,7 @@ export const VotingForm: React.FC<{ choices: Choice[]; room: Room }> = ({
       form.setValue(
         "choices",
         newOrder.map((choice, index) => ({ id: choice.id, rank: index })),
-        { shouldDirty: true, shouldTouch: true }
+        { shouldDirty: true, shouldTouch: true },
       );
     }
   };

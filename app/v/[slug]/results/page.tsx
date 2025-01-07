@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ResultsView } from "../../../../components/results-view";
 import { getTranslations } from "next-intl/server";
+import type { User } from "@supabase/supabase-js";
 
 const ResultsPage: React.FC<{
   params: Promise<{ slug: string }>;
@@ -78,7 +79,7 @@ const ResultsPage: React.FC<{
         room={room}
         roomUsers={roomUsers}
         choices={choices}
-        user={user}
+        user={user as User}
       />
     </div>
   );

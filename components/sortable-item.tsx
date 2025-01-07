@@ -1,7 +1,7 @@
 "use client";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Choice } from "../choice.types";
+import type { Choice } from "@/lib/supabase/choice.types";
 
 export const SortableItem: React.FC<{
   id: string;

@@ -7,8 +7,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { FieldValues } from "react-hook-form";
-import { FormFieldProps } from "./types";
+import type { FieldValues } from "react-hook-form";
+import type { FormFieldProps } from "./types";
 
 export const FormTextareaField = <
   TFieldValues extends FieldValues = FieldValues,

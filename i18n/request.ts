@@ -2,7 +2,7 @@ import { getRequestConfig } from "next-intl/server";
 import { cookies } from "next/headers";
 import { createClient } from "../lib/supabase/server";
 import { getLocale } from "./getLocale";
-import { Messages } from "../global";
+import type { Messages } from "../global";
 
 export default getRequestConfig(async () => {
   const supabase = createClient(cookies());
