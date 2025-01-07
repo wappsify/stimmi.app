@@ -1,172 +1,172 @@
 {
-    "home": {
-        "headline": "Willkommen bei <appname>{name}</appname>",
-        "subline": "Deine App für schnelle und einfache \"Ranked Choice\"-Umfragen!",
-        "show_rooms": "Zeig' mir meine Räume!",
-        "register": "Registrieren",
-        "login": "Anmelden"
-    },
-    "not_found": {
-        "title": "404 - Seite nicht gefunden",
-        "message": "Sorry, diese Seite konnte nicht gefunden werden.",
-        "return_home": "Zur Startseite"
-    },
-    "header": {
-        "name": "stimmi.app",
-        "rooms": "Räume",
-        "account": "Account",
-        "logout": "Logout"
-    },
-    "login": {
-        "email_label": "Email",
-        "email_description": "Gib deine E-Mail-Adresse ein.",
-        "password_label": "Passwort",
-        "password_description": "Gib dein Passwort ein.",
-        "login_button": "Anmelden",
-        "register_instead": "Stattdessen registrieren",
-        "login_success": "Erfolgreich angemeldet!",
-        "login_success_message": "Los geht's, erstell' ein paar Umfragen.",
-        "login_image_alt": "Anmeldungs-Bild"
-    },
-    "register": {
-        "email_label": "Email",
-        "email_description": "Gib deine E-Mail-Adresse ein.",
-        "password_label": "Passwort",
-        "password_description": "Gib ein Passwort mit mindestens 8 Zeichen ein.",
-        "register_button": "Registrieren",
-        "login_instead": "Stattdessen anmelden",
-        "register_success": "Account erfolgreich angelegt!",
-        "register_success_message": "Du kannst direkt loslegen, deinen Account zu nutzen.",
-        "register_image_alt": "Registrierungs-Bild"
-    },
-    "results": {
-        "users_voted": "{usersWhoVoted} von {totalUsers, plural, =0 {0 Niemand hat} =1 {Eine Person hat} other {# Leute haben}} abgestimmt.",
-        "close_room_to_calculate": "Um die Ergebnisse zu berechnen, schließe den Raum. Nur Du als Raumbesitzer kannst das tun.",
-        "waiting_for_owner": "Wir warten noch darauf, dass der Raumbesitzer den Raum schließt, bevor die Ergebnisse berechnet werden!"
-    },
-    "choices_edit": {
-        "update_success": "Optionen wurden erfolgreich aktualisiert",
-        "choice_placeholder": "Meine neue Option",
-        "choice_label": "Option {index}",
-        "choice_description": "Gib den Titel von Option #{index} ein. Halte sie kurz und prägnant.",
-        "remove_choice": "Diese Option entfernen",
-        "add_choice": "Option hinzufügen",
-        "reset_changes": "Änderungen zurücksetzen",
-        "save_choices": "Optionen speichern",
-        "edit_room_choices": "Optionen bearbeiten",
-        "edit_room_choices_description": "Du kannst so viele Optionen hinzufügen, wie Du magst. Beachte, dass mehr Optionen mehr Aufwand beim Ranking erfordern. Die Optionen werden den Abstimmenden in zufälliger Reihenfolge angezeigt.",
-        "error_loading": "Fehler beim Laden der Optionen"
-    },
-    "room_edit": {
-        "back_to_room_overview": "Zurück zur Raumübersicht",
-        "edit_room": "Raum bearbeiten: <strong>{name}</strong>",
-        "error_loading": "Fehler beim Laden des Raums",
-        "name_label": "Raumname",
-        "name_description": "Das ist der Name deines Raums. Er sollte beschreibend und leicht zu merken sein. Wähle ihn weise, da die URL deines Raums davon abhängt.",
-        "name_placeholder": "Fantastischer Buchclub-Abstimmungsraum",
-        "description_label": "Raumbeschreibung",
-        "description_description": "Das ist die Beschreibung deines Raums. Sie sollte etwas länger sein und mehr Kontext darüber geben, wofür der Raum gedacht ist. Sie ist optional, du kannst sie also leer lassen. Alle Abstimmenden werden sie vor der Abstimmung angezeigt bekommen.",
-        "description_placeholder": "Eine längere Beschreibung des Raums. Sie kann Zeilenumbrüche enthalten.",
-        "update_success": "Raum wurde erfolgreich aktualisiert",
-        "save_changes": "Änderungen speichern"
-    },
-    "rooms": {
-        "error_loading": "Fehler beim Laden der Räume",
-        "all_rooms": "Alle deine Räume",
-        "create_new_room": "Neuen Raum erstellen",
-        "create_new_room_description": "Du kannst jederzeit einen neuen Raum erstellen, indem du hier unten klickst!",
-        "start_creating_room": "Anfangen, einen Raum zu erstellen",
-        "no_title": "Kein Titel",
-        "no_description": "Du hast noch keine Beschreibung hinzugefügt.",
-        "view_room_results": "Raumergebnisse anzeigen",
-        "room_overview": "Raumübersicht",
-        "edit_details": "Details",
-        "edit_choices": "Optionen"
-    },
-    "room_overview": {
-        "back_to_list_of_rooms": "Zurück zur Liste der Räume",
-        "room": "Raum <strong>{name}</strong>",
-        "description": "Hier kannst du die Raumdetails bearbeiten, Optionen zum Raum hinzufügen und den Raum zur Abstimmung öffnen.",
-        "edit_room_details": "Raumdetails anpassen",
-        "add_and_edit_choices": "Optionen anpassen",
-        "view_room_results": "Raumergebnisse anzeigen",
-        "current_room_status": "Aktueller Raumstatus: <strong>{status}</strong>",
-        "private_status_description": "Der Raum ist derzeit privat und nicht zur Abstimmung geöffnet. Nur du hast Zugriff auf ihn. Du kannst Optionen zum Raum hinzufügen und ihn zur Abstimmung öffnen.",
-        "open_status_description": "Der Raum ist gerade zur Abstimmung geöffnet. Teile den Link mit deinen Freunden und lass sie die Auswahlen ranken! Link:",
-        "results_status_description": "Der Raum ist für die Abstimmung geschlossen. Du und alle, die abgestimmt haben, können die Ergebnisse des Raums einsehen.",
-        "error_loading_room": "Fehler beim Laden des Raums",
-        "error_loading_choices": "Fehler beim Laden der Optionen",
-        "private": "Privat",
-        "open": "Zur Abstimmung geöffnet",
-        "results": "Ergebnisse verfügbar"
-    },
-    "new_room": {
-        "title": "Einen neuen Raum erstellen",
-        "subtitle": "Wie möchten du den Raum nennen?"
-    },
-    "room_status_form": {
-        "change_room_status": "Raumstatus ändern",
-        "open_room_confirmation": "Bist du sicher, dass du den Raum öffnen möchtest?",
-        "calculate_results_confirmation": "Bist du sicher, dass du die Ergebnisse berechnen möchtest?",
-        "open_room_description": "Diese Aktion wird den Raum öffentlich machen und jedem erlauben, abzustimmen. Dies kann nicht rückgängig gemacht werden. Du wirst die Details oder Optionen des Raums nach dieser Aktion nicht mehr ändern können.",
-        "calculate_results_description": "Das wird die Ergebnisse des Raums berechnen und kann nicht rückgängig gemacht werden. Alle, die im Raum abgestimmt hat, werden die Ergebnisse sehen können.",
-        "cancel": "Nein, abbrechen",
-        "open_room_button": "Ja, Raum öffnen",
-        "calculate_results_button": "Ja, Ergebnisse berechnen"
-    },
-    "room_deletion_form": {
-        "delete_room": "Raum löschen",
-        "confirmation_title": "Bist du dir absolut sicher?",
-        "confirmation_description": "Diese Aktion kann nicht rückgängig gemacht werden. Es wird den Raum und alle hinzugefügten Optionen dauerhaft löschen.",
-        "cancel": "Nein, abbrechen",
-        "confirm_button": "Ja, Raum löschen"
-    },
-    "voting_page": {
-        "welcome_message": "Hallo, willkommen bei <strong>stimmi.app</strong>!",
-        "instruction_message": "Wer auch immer dir diesen Link geschickt hat, möchte, dass du einige Optionen sortierst.",
-        "error_loading_room": "Fehler beim Laden des Raums",
-        "error_fetching_room_users": "Fehler beim Abrufen der Raumbenutzer",
-        "metadata_default_title": "Im Raum abstimmen | stimmi.app",
-        "metadata_title": "Im Raum {roomName} abstimmen | stimmi.app",
-        "metadata_description": "Jemand möchte, dass du im Raum {roomName} abstimmst! Ranke jetzt die Optionen auf stimmi.app."
-    },
-    "voting_section": {
-        "join_button": "Tritt dem Raum bei und leg' los!",
-        "error_adding_room_user": "Fehler beim Hinzufügen des Raumbenutzers",
-        "error_fetching_choices": "Fehler beim Abrufen der Optionen",
-        "rank_instructions": "Sortiere die folgenden Optionen, indem du sie in die gewünschte Reihenfolge ziehst. Die oberste Option ist die, die dir am besten gefällt, die unterste Option ist die, die dir am wenigsten gefällt.",
-        "submit_ranking": "Ich hab fertig sortiert!",
-        "submit_success": "Deine Bewertung wurde erfolgreich übermittelt!"
-    },
-    "results_page": {
-        "error_loading_room": "Fehler beim Laden des Raums",
-        "error_loading_room_users": "Fehler beim Laden der Raumbenutzer",
-        "error_loading_choices": "Fehler beim Laden der Optionen",
-        "results_title": "Ergebnisse von <nameWrapper>{roomName}</nameWrapper>"
-    },
-    "show_results": {
-        "results_in": "Die Ergebnisse sind da...",
-        "winner_announcement": "Und wir haben einen Gewinner!",
-        "points_label": "({points} Punkte)"
-    },
-    "footer": {
-        "github_button_title": "Quellcode auf Github ansehen"
-    },
-    "room_creation": {
-        "name_label": "Raumname",
-        "name_description": "Das ist der Name deines Raums. Er sollte beschreibend und leicht zu merken sein.",
-        "name_placeholder": "Fantastischer Buchclub-Abstimmungsraum",
-        "create_success": "Raum wurde erfolgreich erstellt",
-        "create_button": "Raum erstellen"
-    },
-    "room_checks": {
-        "details_are_filled": "Room-Details sind ausgefüllt.",
-        "choices_are_filled": "Mindestens drei Optionen wurden hinzugefügt."
-    },
-    "account": {
-        "account_settings": "Kontoeinstellungen",
-        "select_locale": "Wähle deine bevorzugte Sprache:",
-        "english": "Englisch",
-        "german": "Deutsch"
-    }
+  "home": {
+    "headline": "Willkommen bei <appname>{name}</appname>",
+    "subline": "Deine App für schnelle und einfache \"Ranked Choice\"-Umfragen!",
+    "show_rooms": "Zeig' mir meine Räume!",
+    "register": "Registrieren",
+    "login": "Anmelden"
+  },
+  "not_found": {
+    "title": "404 - Seite nicht gefunden",
+    "message": "Sorry, diese Seite konnte nicht gefunden werden.",
+    "return_home": "Zur Startseite"
+  },
+  "header": {
+    "name": "stimmi.app",
+    "rooms": "Räume",
+    "account": "Account",
+    "logout": "Logout"
+  },
+  "login": {
+    "email_label": "Email",
+    "email_description": "Gib deine E-Mail-Adresse ein.",
+    "password_label": "Passwort",
+    "password_description": "Gib dein Passwort ein.",
+    "login_button": "Anmelden",
+    "register_instead": "Stattdessen registrieren",
+    "login_success": "Erfolgreich angemeldet!",
+    "login_success_message": "Los geht's, erstell' ein paar Umfragen.",
+    "login_image_alt": "Anmeldungs-Bild"
+  },
+  "register": {
+    "email_label": "Email",
+    "email_description": "Gib deine E-Mail-Adresse ein.",
+    "password_label": "Passwort",
+    "password_description": "Gib ein Passwort mit mindestens 8 Zeichen ein.",
+    "register_button": "Registrieren",
+    "login_instead": "Stattdessen anmelden",
+    "register_success": "Account erfolgreich angelegt!",
+    "register_success_message": "Du kannst direkt loslegen, deinen Account zu nutzen.",
+    "register_image_alt": "Registrierungs-Bild"
+  },
+  "results": {
+    "users_voted": "{usersWhoVoted} von {totalUsers, plural, =0 {0 Niemand hat} =1 {Eine Person hat} other {# Leute haben}} abgestimmt.",
+    "close_room_to_calculate": "Um die Ergebnisse zu berechnen, schließe den Raum. Nur Du als Raumbesitzer kannst das tun.",
+    "waiting_for_owner": "Wir warten noch darauf, dass der Raumbesitzer den Raum schließt, bevor die Ergebnisse berechnet werden!"
+  },
+  "choices_edit": {
+    "update_success": "Optionen wurden erfolgreich aktualisiert",
+    "choice_placeholder": "Meine neue Option",
+    "choice_label": "Option {index}",
+    "choice_description": "Gib den Titel von Option #{index} ein. Halte sie kurz und prägnant.",
+    "remove_choice": "Diese Option entfernen",
+    "add_choice": "Option hinzufügen",
+    "reset_changes": "Änderungen zurücksetzen",
+    "save_choices": "Optionen speichern",
+    "edit_room_choices": "Optionen bearbeiten",
+    "edit_room_choices_description": "Du kannst so viele Optionen hinzufügen, wie Du magst. Beachte, dass mehr Optionen mehr Aufwand beim Ranking erfordern. Die Optionen werden den Abstimmenden in zufälliger Reihenfolge angezeigt.",
+    "error_loading": "Fehler beim Laden der Optionen"
+  },
+  "room_edit": {
+    "back_to_room_overview": "Zurück zur Raumübersicht",
+    "edit_room": "Raum bearbeiten: <strong>{name}</strong>",
+    "error_loading": "Fehler beim Laden des Raums",
+    "name_label": "Raumname",
+    "name_description": "Das ist der Name deines Raums. Er sollte beschreibend und leicht zu merken sein. Wähle ihn weise, da die URL deines Raums davon abhängt.",
+    "name_placeholder": "Fantastischer Buchclub-Abstimmungsraum",
+    "description_label": "Raumbeschreibung",
+    "description_description": "Das ist die Beschreibung deines Raums. Sie sollte etwas länger sein und mehr Kontext darüber geben, wofür der Raum gedacht ist. Sie ist optional, du kannst sie also leer lassen. Alle Abstimmenden werden sie vor der Abstimmung angezeigt bekommen.",
+    "description_placeholder": "Eine längere Beschreibung des Raums. Sie kann Zeilenumbrüche enthalten.",
+    "update_success": "Raum wurde erfolgreich aktualisiert",
+    "save_changes": "Änderungen speichern"
+  },
+  "rooms": {
+    "error_loading": "Fehler beim Laden der Räume",
+    "all_rooms": "Alle deine Räume",
+    "create_new_room": "Neuen Raum erstellen",
+    "create_new_room_description": "Du kannst jederzeit einen neuen Raum erstellen, indem du hier unten klickst!",
+    "start_creating_room": "Anfangen, einen Raum zu erstellen",
+    "no_title": "Kein Titel",
+    "no_description": "Du hast noch keine Beschreibung hinzugefügt.",
+    "view_room_results": "Raumergebnisse anzeigen",
+    "room_overview": "Raumübersicht",
+    "edit_details": "Details",
+    "edit_choices": "Optionen"
+  },
+  "room_overview": {
+    "back_to_list_of_rooms": "Zurück zur Liste der Räume",
+    "room": "Raum <strong>{name}</strong>",
+    "description": "Hier kannst du die Raumdetails bearbeiten, Optionen zum Raum hinzufügen und den Raum zur Abstimmung öffnen.",
+    "edit_room_details": "Raumdetails anpassen",
+    "add_and_edit_choices": "Optionen anpassen",
+    "view_room_results": "Raumergebnisse anzeigen",
+    "current_room_status": "Aktueller Raumstatus: <strong>{status}</strong>",
+    "private_status_description": "Der Raum ist derzeit privat und nicht zur Abstimmung geöffnet. Nur du hast Zugriff auf ihn. Du kannst Optionen zum Raum hinzufügen und ihn zur Abstimmung öffnen.",
+    "open_status_description": "Der Raum ist gerade zur Abstimmung geöffnet. Teile den Link mit deinen Freunden und lass sie die Auswahlen ranken! Link:",
+    "results_status_description": "Der Raum ist für die Abstimmung geschlossen. Du und alle, die abgestimmt haben, können die Ergebnisse des Raums einsehen.",
+    "error_loading_room": "Fehler beim Laden des Raums",
+    "error_loading_choices": "Fehler beim Laden der Optionen",
+    "private": "Privat",
+    "open": "Zur Abstimmung geöffnet",
+    "results": "Ergebnisse verfügbar"
+  },
+  "new_room": {
+    "title": "Einen neuen Raum erstellen",
+    "subtitle": "Wie möchten du den Raum nennen?"
+  },
+  "room_status_form": {
+    "change_room_status": "Raumstatus ändern",
+    "open_room_confirmation": "Bist du sicher, dass du den Raum öffnen möchtest?",
+    "calculate_results_confirmation": "Bist du sicher, dass du die Ergebnisse berechnen möchtest?",
+    "open_room_description": "Diese Aktion wird den Raum öffentlich machen und jedem erlauben, abzustimmen. Dies kann nicht rückgängig gemacht werden. Du wirst die Details oder Optionen des Raums nach dieser Aktion nicht mehr ändern können.",
+    "calculate_results_description": "Das wird die Ergebnisse des Raums berechnen und kann nicht rückgängig gemacht werden. Alle, die im Raum abgestimmt hat, werden die Ergebnisse sehen können.",
+    "cancel": "Nein, abbrechen",
+    "open_room_button": "Ja, Raum öffnen",
+    "calculate_results_button": "Ja, Ergebnisse berechnen"
+  },
+  "room_deletion_form": {
+    "delete_room": "Raum löschen",
+    "confirmation_title": "Bist du dir absolut sicher?",
+    "confirmation_description": "Diese Aktion kann nicht rückgängig gemacht werden. Es wird den Raum und alle hinzugefügten Optionen dauerhaft löschen.",
+    "cancel": "Nein, abbrechen",
+    "confirm_button": "Ja, Raum löschen"
+  },
+  "voting_page": {
+    "welcome_message": "Hallo, willkommen bei <strong>stimmi.app</strong>!",
+    "instruction_message": "Wer auch immer dir diesen Link geschickt hat, möchte, dass du einige Optionen sortierst.",
+    "error_loading_room": "Fehler beim Laden des Raums",
+    "error_fetching_room_users": "Fehler beim Abrufen der Raumbenutzer",
+    "metadata_default_title": "Im Raum abstimmen | stimmi.app",
+    "metadata_title": "Im Raum {roomName} abstimmen | stimmi.app",
+    "metadata_description": "Jemand möchte, dass du im Raum {roomName} abstimmst! Ranke jetzt die Optionen auf stimmi.app."
+  },
+  "voting_section": {
+    "join_button": "Tritt dem Raum bei und leg' los!",
+    "error_adding_room_user": "Fehler beim Hinzufügen des Raumbenutzers",
+    "error_fetching_choices": "Fehler beim Abrufen der Optionen",
+    "rank_instructions": "Sortiere die folgenden Optionen, indem du sie in die gewünschte Reihenfolge ziehst. Die oberste Option ist die, die dir am besten gefällt, die unterste Option ist die, die dir am wenigsten gefällt.",
+    "submit_ranking": "Ich hab fertig sortiert!",
+    "submit_success": "Deine Bewertung wurde erfolgreich übermittelt!"
+  },
+  "results_page": {
+    "error_loading_room": "Fehler beim Laden des Raums",
+    "error_loading_room_users": "Fehler beim Laden der Raumbenutzer",
+    "error_loading_choices": "Fehler beim Laden der Optionen",
+    "results_title": "Ergebnisse von <nameWrapper>{roomName}</nameWrapper>"
+  },
+  "show_results": {
+    "results_in": "Die Ergebnisse sind da...",
+    "winner_announcement": "Und wir haben einen Gewinner!",
+    "points_label": "({points} Punkte)"
+  },
+  "footer": {
+    "github_button_title": "Quellcode auf Github ansehen"
+  },
+  "room_creation": {
+    "name_label": "Raumname",
+    "name_description": "Das ist der Name deines Raums. Er sollte beschreibend und leicht zu merken sein.",
+    "name_placeholder": "Fantastischer Buchclub-Abstimmungsraum",
+    "create_success": "Raum wurde erfolgreich erstellt",
+    "create_button": "Raum erstellen"
+  },
+  "room_checks": {
+    "details_are_filled": "Room-Details sind ausgefüllt.",
+    "choices_are_filled": "Mindestens drei Optionen wurden hinzugefügt."
+  },
+  "account": {
+    "account_settings": "Kontoeinstellungen",
+    "select_locale": "Wähle deine bevorzugte Sprache:",
+    "english": "Englisch",
+    "german": "Deutsch"
+  }
 }

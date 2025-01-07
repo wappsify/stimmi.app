@@ -20,7 +20,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Create a `.env.local` file in the root of your project, take a look at the `.env.example` file to know which variables you need to set.
 
-
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
