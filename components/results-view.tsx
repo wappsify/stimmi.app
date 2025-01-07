@@ -5,12 +5,12 @@ import { LoaderPinwheel } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 
+import { useRealtimeResults } from "@/lib/hooks/useRealtimeResults";
+import { useRealtimeRoom } from "@/lib/hooks/useRealtimeRoom";
 import type { Choice } from "@/lib/supabase/choice.types";
 import type { Room } from "@/lib/supabase/room.types";
 import type { RoomUser } from "@/lib/supabase/room_user.types";
 
-import { useRealtimeResults } from "../lib/hooks/useRealtimeResults";
-import { useRealtimeRoom } from "../lib/hooks/useRealtimeRoom";
 import { ActiveUsersText } from "./active-users-text";
 import { RoomStatusForm } from "./RoomStatusForm";
 import { ShowResults } from "./show-results";

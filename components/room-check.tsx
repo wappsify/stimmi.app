@@ -3,8 +3,7 @@ import { useTranslations } from "next-intl";
 
 import type { Choice } from "@/lib/supabase/choice.types";
 import type { Room } from "@/lib/supabase/room.types";
-
-import { roomChecks } from "../lib/utils";
+import { roomChecks } from "@/lib/utils";
 
 export const RoomCheck: React.FC<{ room: Room; choices: Choice[] }> = ({
   room,

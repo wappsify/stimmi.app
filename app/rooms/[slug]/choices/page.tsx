@@ -1,9 +1,8 @@
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 
+import ChoiceEditForm from "@/components/ChoicesEditForm";
 import { createClient } from "@/lib/supabase/server";
-
-import ChoiceEditForm from "../../../../components/ChoicesEditForm";
 
 const RoomEditPage: React.FC<{
   params: Promise<{ slug: string }>;

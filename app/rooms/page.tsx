@@ -12,8 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getUserOrRedirect } from "@/lib/server/utils";
-
-import { createClient } from "../../lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 
 const RoomsPage = async () => {
   const t = await getTranslations("rooms");

@@ -1,8 +1,9 @@
 import { cookies } from "next/headers";
 import { getRequestConfig } from "next-intl/server";
 
+import { createClient } from "@/lib/supabase/server";
+
 import type { Messages } from "../global";
-import { createClient } from "../lib/supabase/server";
 import { getLocale } from "./getLocale";
 
 export default getRequestConfig(async () => {

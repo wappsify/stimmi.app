@@ -12,13 +12,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { submitVotes } from "@/lib/actions/votes";
+import type { FormValues } from "@/lib/schemas/submit-votes";
+import { votingSchema } from "@/lib/schemas/submit-votes";
 import type { Choice } from "@/lib/supabase/choice.types";
 import type { Room } from "@/lib/supabase/room.types";
+import { objectToFormData } from "@/lib/utils";
 
-import { submitVotes } from "../lib/actions/votes";
-import type { FormValues } from "../lib/schemas/submit-votes";
-import { votingSchema } from "../lib/schemas/submit-votes";
-import { objectToFormData } from "../lib/utils";
 import { FormHiddenInputField } from "./forms/elements/form-hidden-input-field";
 import { FormSubmitButton } from "./forms/elements/form-submit-button";
 import { SortableItem } from "./sortable-item";

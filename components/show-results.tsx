@@ -3,8 +3,8 @@ import { delay, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import type { ResultWithChoice } from "../lib/hooks/useRealtimeResults";
-import { cn, shootConfetti } from "../lib/utils";
+import type { ResultWithChoice } from "@/lib/hooks/useRealtimeResults";
+import { cn, shootConfetti } from "@/lib/utils";
 
 const MotionCheck = motion.create(CheckCircle);
 

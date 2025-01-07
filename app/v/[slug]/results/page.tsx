@@ -3,10 +3,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
+import { ResultsView } from "@/components/results-view";
 import { Separator } from "@/components/ui/separator";
 import { createClient } from "@/lib/supabase/server";
-
-import { ResultsView } from "../../../../components/results-view";
 
 const ResultsPage: React.FC<{
   params: Promise<{ slug: string }>;
