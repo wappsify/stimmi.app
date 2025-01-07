@@ -5,9 +5,9 @@ import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-interface HeaderProps {
+type HeaderProps = {
   hideNavigation?: boolean;
-}
+};
 
 const Header: React.FC<HeaderProps> = async ({ hideNavigation }) => {
   const supabase = createClient(cookies());

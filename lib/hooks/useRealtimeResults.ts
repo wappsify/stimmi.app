@@ -36,7 +36,7 @@ export const useRealtimeResults = (roomId: string) => {
       }));
 
       const sorted = [...resultsWithChoices].sort(
-        (a, b) => b.points - a.points
+        (a, b) => b.points - a.points,
       );
       setResults(sorted);
     };
@@ -51,14 +51,14 @@ export const useRealtimeResults = (roomId: string) => {
           table: "results",
           filter: `room_id=eq.${roomId}`,
         },
-        fetchResults
+        () => void fetchResults(),
       )
       .subscribe();
 
-    fetchResults();
+    void fetchResults();
 
     return () => {
-      supabase.removeChannel(changes);
+      void supabase.removeChannel(changes);
     };
   }, [roomId]);
 

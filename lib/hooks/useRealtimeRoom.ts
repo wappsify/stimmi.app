@@ -7,6 +7,19 @@ export const useRealtimeRoom = (initialRoom: Room) => {
   useEffect(() => {
     const supabase = createClient();
 
+    const fetchRoom = async () => {
+      const { data, error } = await supabase
+        .from("rooms")
+        .select()
+        .eq("id", initialRoom.id)
+        .single();
+      if (error) {
+        console.error("Error fetching room", error);
+        return;
+      }
+      setRoom(data);
+    };
+
     const changes = supabase
       .channel("messages-room")
       .on<Room>(
@@ -17,23 +30,12 @@ export const useRealtimeRoom = (initialRoom: Room) => {
           table: "rooms",
           filter: `id=eq.${initialRoom.id}`,
         },
-        async () => {
-          const { data, error } = await supabase
-            .from("rooms")
-            .select()
-            .eq("id", initialRoom.id)
-            .single();
-          if (error) {
-            console.error("Error fetching room", error);
-            return;
-          }
-          setRoom(data);
-        }
+        () => void fetchRoom(),
       )
       .subscribe();
 
     return () => {
-      supabase.removeChannel(changes);
+      void supabase.removeChannel(changes);
     };
   }, [initialRoom.id]);
 

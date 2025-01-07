@@ -39,7 +39,11 @@ export const LanguageForm: React.FC<{ initialValue: string }> = ({
       <label htmlFor="locale" className="block text-xl mb-2">
         {t("select_locale")}
       </label>
-      <Select value={locale} onValueChange={handleLocaleChange} name="locale">
+      <Select
+        value={locale}
+        onValueChange={(value) => void handleLocaleChange(value)}
+        name="locale"
+      >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder={t("select_locale")} />
         </SelectTrigger>

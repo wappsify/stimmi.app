@@ -25,7 +25,10 @@ const Form = <TFieldValues extends FieldValues = FieldValues>({
 }) => {
   return (
     <FormProvider {...props}>
-      <form className="grid gap-4 max-w-md mx-auto w-full" onSubmit={onSubmit}>
+      <form
+        className="grid gap-4 max-w-md mx-auto w-full"
+        onSubmit={(values) => void onSubmit(values)}
+      >
         {children}
       </form>
     </FormProvider>
@@ -40,7 +43,7 @@ type FormFieldContextValue<
 };
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
+  {} as FormFieldContextValue,
 );
 
 const FormField = <
@@ -84,7 +87,7 @@ type FormItemContextValue = {
 };
 
 const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
+  {} as FormItemContextValue,
 );
 
 const FormItem = React.forwardRef<

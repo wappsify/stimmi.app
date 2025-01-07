@@ -6,7 +6,7 @@ export const useUser = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const supabase = createClient();
       let {
         data: { user },

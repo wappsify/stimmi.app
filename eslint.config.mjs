@@ -21,7 +21,9 @@ const nextPlugin = {
   },
 };
 
-const ignores = { ignores: ["node_modules", ".next", "*.config.mjs"] };
+const ignores = {
+  ignores: ["node_modules", ".next", "*.config.mjs", "database.types.ts"],
+};
 
 const ruleOverrides = {
   rules: {

@@ -7,7 +7,8 @@ const AccountPage: React.FC = async () => {
   const t = await getTranslations("account");
   const user = await getUserOrRedirect();
 
-  const initialLocale = user.user_metadata.locale ?? getLocale(user);
+  const initialLocale: string =
+    user.user_metadata.locale ?? (await getLocale(user));
 
   return (
     <>

@@ -77,7 +77,7 @@ export const VotingSection: React.FC<{
       setChoices(shuffleArray(fetchedChoices, user.id));
     };
 
-    fetchChoices();
+    void fetchChoices();
   }, [room, user, choices, supabase, t]);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export const VotingSection: React.FC<{
         ) : (
           <Button
             className="place-self-center"
-            onClick={handleJoinClick}
+            onClick={() => void handleJoinClick()}
             disabled={isJoining}
           >
             {isJoining ? <Loader2 className="animate-spin" /> : <DoorOpen />}

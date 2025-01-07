@@ -13,7 +13,7 @@ export const objectToFormData = (obj: Record<string, unknown>): FormData => {
   const formData = new FormData();
   const appendFormData = (key: string, value: unknown) => {
     if (Array.isArray(value)) {
-      value.forEach((item, index) => {
+      value.forEach((item: object, index) => {
         if (typeof item === "object" && item !== null) {
           Object.entries(item).forEach(([subKey, subValue]) => {
             appendFormData(`${key}[${index}][${subKey}]`, subValue);
@@ -32,12 +32,12 @@ export const objectToFormData = (obj: Record<string, unknown>): FormData => {
 };
 
 export const formDataToObject = (
-  formData: FormData
+  formData: FormData,
 ): Record<string, unknown> => {
   const obj: Record<string, unknown> = {};
 
   formData.forEach((value, key) => {
-    const keys = key.split(/[\[\]]/).filter(Boolean);
+    const keys = key.split(/[[\]]/).filter(Boolean);
     keys.reduce((acc, currKey, index) => {
       if (index === keys.length - 1) {
         if (Array.isArray(acc[currKey])) {
@@ -87,12 +87,12 @@ export const shootConfetti = () => {
 
     const particleCount = 50 * (timeLeft / duration);
     // since particles fall down, start a bit higher than random
-    confetti({
+    void confetti({
       ...defaults,
       particleCount,
       origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
     });
-    confetti({
+    void confetti({
       ...defaults,
       particleCount,
       origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },

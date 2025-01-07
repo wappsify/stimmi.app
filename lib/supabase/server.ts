@@ -8,13 +8,16 @@ export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        getAll() {
-          return cookieStore.getAll();
+        async getAll() {
+          const cookies = await cookieStore;
+          const allCookies = cookies.getAll();
+          return allCookies;
         },
-        setAll(cookiesToSet) {
+        async setAll(cookiesToSet) {
+          const cookies = await cookieStore;
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              cookies.set(name, value, options),
             );
           } catch {
             // The `setAll` method was called from a Server Component.
@@ -23,6 +26,6 @@ export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
           }
         },
       },
-    }
+    },
   );
 };

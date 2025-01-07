@@ -136,16 +136,13 @@ export const changeRoomStatus = async (formData: FormData) => {
       throw new Error("Failed to fetch votes");
     }
 
-    const votesByUsers = votes.reduce<{ [key: string]: Vote[] }>(
-      (acc, vote) => {
-        if (!acc[vote.user_id]) {
-          acc[vote.user_id] = [];
-        }
-        acc[vote.user_id].push(vote);
-        return acc;
-      },
-      {}
-    );
+    const votesByUsers = votes.reduce<Record<string, Vote[]>>((acc, vote) => {
+      if (!acc[vote.user_id]) {
+        acc[vote.user_id] = [];
+      }
+      acc[vote.user_id].push(vote);
+      return acc;
+    }, {});
 
     const ballots: Ballot[] = Object.values(votesByUsers).map((userVotes) => ({
       ranking: [...userVotes]
@@ -170,7 +167,7 @@ export const changeRoomStatus = async (formData: FormData) => {
       const randomTieBreaker = new RandomCandidates({ candidates: ranking[0] });
       const [tiebreakWinner] = randomTieBreaker.ranking();
       const tiebreakWinningIndex = placements.findIndex(
-        (p) => p.choice_id === tiebreakWinner[0]
+        (p) => p.choice_id === tiebreakWinner[0],
       );
       const tiebreak = placements[tiebreakWinningIndex];
       tiebreak.points += 1;

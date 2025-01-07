@@ -4,11 +4,23 @@ import { RoomUser } from "../../room_user.types";
 
 export const useRealtimeRoomUsers = (
   roomId: string,
-  initialValues: RoomUser[]
+  initialValues: RoomUser[],
 ) => {
   const [roomUsers, setRoomUsers] = useState(initialValues);
   useEffect(() => {
     const supabase = createClient();
+
+    const fetchRoomUsers = async () => {
+      const { data, error } = await supabase
+        .from("room_users")
+        .select("*")
+        .eq("room_id", roomId);
+      if (error) {
+        console.error("Error fetching room users", error);
+        return;
+      }
+      setRoomUsers(data);
+    };
 
     const changes = supabase
       .channel("messages-roomusers")
@@ -20,22 +32,12 @@ export const useRealtimeRoomUsers = (
           table: "room_users",
           filter: `room_id=eq.${roomId}`,
         },
-        async () => {
-          const { data, error } = await supabase
-            .from("room_users")
-            .select("*")
-            .eq("room_id", roomId);
-          if (error) {
-            console.error("Error fetching room users", error);
-            return;
-          }
-          setRoomUsers(data);
-        }
+        () => void fetchRoomUsers(),
       )
       .subscribe();
 
     return () => {
-      supabase.removeChannel(changes);
+      void supabase.removeChannel(changes);
     };
   }, [roomId]);
 

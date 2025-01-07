@@ -3,9 +3,9 @@ import { Button, ButtonProps } from "@/components/ui/button";
 import { ArrowBigRightDash, Loader2 } from "lucide-react";
 import { useFormState } from "react-hook-form";
 
-interface FormSubmitButtonProps extends ButtonProps {
+type FormSubmitButtonProps = {
   isLoading?: boolean;
-}
+} & ButtonProps;
 
 export const FormSubmitButton: React.FC<FormSubmitButtonProps> = ({
   isLoading,
@@ -14,7 +14,7 @@ export const FormSubmitButton: React.FC<FormSubmitButtonProps> = ({
 }) => {
   const { isSubmitting } = useFormState();
 
-  const isLoadingOrPending = isLoading || isSubmitting;
+  const isLoadingOrPending = isLoading ?? isSubmitting;
   return (
     <Button disabled={isLoadingOrPending || props.disabled} {...props}>
       {isLoadingOrPending ? (

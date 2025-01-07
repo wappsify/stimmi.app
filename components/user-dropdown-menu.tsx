@@ -36,7 +36,7 @@ const UserDropdownMenu: React.FC = () => {
             <DropdownMenuItem asChild>
               <Link href="/account">{t("account")}</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleSignOut}>
+            <DropdownMenuItem onClick={() => void handleSignOut()}>
               <LogOut />
               {t("logout")}
             </DropdownMenuItem>
@@ -52,7 +52,7 @@ const UserDropdownMenu: React.FC = () => {
           <Link href="/account">{t("account")}</Link>
         </Button>
 
-        <Button variant="ghost" onClick={handleSignOut}>
+        <Button variant="ghost" onClick={() => void handleSignOut()}>
           <LogOut /> {t("logout")}
         </Button>
       </div>
