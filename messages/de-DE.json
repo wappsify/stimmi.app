@@ -48,7 +48,7 @@
         "update_success": "Optionen wurden erfolgreich aktualisiert",
         "choice_placeholder": "Meine neue Option",
         "choice_label": "Option {index}",
-        "choice_description": "Gib den Titel von Option #{index} ein. Halten Sie kurz und prägnant.",
+        "choice_description": "Gib den Titel von Option #{index} ein. Halte sie kurz und prägnant.",
         "remove_choice": "Diese Option entfernen",
         "add_choice": "Option hinzufügen",
         "reset_changes": "Änderungen zurücksetzen",
