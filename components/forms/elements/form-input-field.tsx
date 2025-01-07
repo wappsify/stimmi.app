@@ -1,14 +1,16 @@
+import type { FieldValues } from "react-hook-form";
+
 import {
-  FormItem,
-  FormLabel,
   FormControl,
   FormDescription,
-  FormMessage,
   FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
 import type { FormFieldProps } from "./types";
-import type { FieldValues } from "react-hook-form";
 
 export const FormInputField = <TFieldValues extends FieldValues = FieldValues>({
   control,

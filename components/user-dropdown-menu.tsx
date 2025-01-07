@@ -1,15 +1,16 @@
 "use client";
+import { LogOut, Menu } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import { LogOut, Menu } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 const UserDropdownMenu: React.FC = () => {
   const handleSignOut = async () => {

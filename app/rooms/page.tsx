@@ -1,17 +1,19 @@
-import { createClient } from "../../lib/supabase/server";
+import { Crown, Edit, Eye, PlusCircle } from "lucide-react";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from "@/components/ui/card";
 import { getUserOrRedirect } from "@/lib/server/utils";
-import { Crown, Edit, Eye, PlusCircle } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+
+import { createClient } from "../../lib/supabase/server";
 
 const RoomsPage = async () => {
   const t = await getTranslations("rooms");

@@ -1,7 +1,8 @@
 import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+
+import { Button } from "@/components/ui/button";
 
 async function RoomSubpageLayout({
   children,

@@ -1,5 +1,7 @@
-import { FormField } from "@/components/ui/form";
 import type { FieldValues } from "react-hook-form";
+
+import { FormField } from "@/components/ui/form";
+
 import type { HiddenFormFieldProps } from "./types";
 
 export const FormHiddenInputField = <

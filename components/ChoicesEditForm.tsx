@@ -1,5 +1,11 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { DatabaseBackup, Plus, Trash } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useFieldArray, useForm } from "react-hook-form";
+import { toast } from "sonner";
+
 import { FormInputField } from "@/components/forms/elements/form-input-field";
 import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
 import { Button } from "@/components/ui/button";
@@ -7,14 +13,9 @@ import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { updateChoices } from "@/lib/actions/choices";
 import type { FormValues } from "@/lib/schemas/choices-edit";
 import { choicesEditSchema } from "@/lib/schemas/choices-edit";
-import { objectToFormData } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { DatabaseBackup, Plus, Trash } from "lucide-react";
-import { useFieldArray, useForm } from "react-hook-form";
-import { toast } from "sonner";
 import type { Choice } from "@/lib/supabase/choice.types";
 import type { Room } from "@/lib/supabase/room.types";
-import { useTranslations } from "next-intl";
+import { objectToFormData } from "@/lib/utils";
 
 const getInitialChoices = (choices: Choice[]) =>
   choices.length > 0 ? choices.map(({ name }) => ({ name })) : [{ name: "" }];

@@ -1,10 +1,12 @@
-import { Separator } from "@/components/ui/separator";
-import { createClient } from "@/lib/supabase/server";
+import type { User } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ResultsView } from "../../../../components/results-view";
 import { getTranslations } from "next-intl/server";
-import type { User } from "@supabase/supabase-js";
+
+import { Separator } from "@/components/ui/separator";
+import { createClient } from "@/lib/supabase/server";
+
+import { ResultsView } from "../../../../components/results-view";
 
 const ResultsPage: React.FC<{
   params: Promise<{ slug: string }>;

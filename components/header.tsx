@@ -1,9 +1,10 @@
+import { cookies } from "next/headers";
+import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
 import { Button } from "@/components/ui/button";
 import { UserDropdownMenu } from "@/components/user-dropdown-menu";
 import { createClient } from "@/lib/supabase/server";
-import { getTranslations } from "next-intl/server";
-import { cookies } from "next/headers";
-import Link from "next/link";
 
 type HeaderProps = {
   hideNavigation?: boolean;

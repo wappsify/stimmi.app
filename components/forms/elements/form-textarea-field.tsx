@@ -1,3 +1,5 @@
+import type { FieldValues } from "react-hook-form";
+
 import {
   FormControl,
   FormDescription,
@@ -7,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import type { FieldValues } from "react-hook-form";
+
 import type { FormFieldProps } from "./types";
 
 export const FormTextareaField = <

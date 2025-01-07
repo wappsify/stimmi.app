@@ -1,6 +1,7 @@
-import RoomCreationForm from "@/components/RoomCreationForm";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+
+import RoomCreationForm from "@/components/RoomCreationForm";
 
 export const metadata: Metadata = {
   title: "Create a new room | stimmi.app",

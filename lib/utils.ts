@@ -1,7 +1,8 @@
-import { clsx, type ClassValue } from "clsx";
+import confetti from "canvas-confetti";
+import { type ClassValue, clsx } from "clsx";
 import seedrandom from "seedrandom";
 import { twMerge } from "tailwind-merge";
-import confetti from "canvas-confetti";
+
 import type { Choice } from "@/lib/supabase/choice.types";
 import type { Room } from "@/lib/supabase/room.types";
 

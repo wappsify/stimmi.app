@@ -1,25 +1,27 @@
 "use client";
 
 import { DoorOpen, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
 } from "@/components/ui/card";
-import type { Room } from "@/lib/supabase/room.types";
 import type { Choice } from "@/lib/supabase/choice.types";
-import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { useRealtimeRoomUsers } from "../lib/hooks/useRealtimeRoomUsers";
+import type { Room } from "@/lib/supabase/room.types";
 import type { RoomUser } from "@/lib/supabase/room_user.types";
+
+import { useRealtimeRoomUsers } from "../lib/hooks/useRealtimeRoomUsers";
 import { useUser } from "../lib/hooks/useUser";
+import { shuffleArray } from "../lib/utils";
 import { Skeleton } from "./ui/skeleton";
 import { VotingForm } from "./voting-form";
-import { shuffleArray } from "../lib/utils";
-import { useTranslations } from "next-intl";
 
 export const VotingSection: React.FC<{
   room: Room;

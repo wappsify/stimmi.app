@@ -1,6 +1,7 @@
 "use server";
 import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
+
 import { votingSchema } from "../schemas/submit-votes";
 import { getUserOrRedirect } from "../server/utils";
 import { createClient } from "../supabase/server";
@@ -37,7 +38,7 @@ export const submitVotes = async (formData: FormData) => {
       room_id: values.roomId,
       choice_id: choice.id,
       user_id: user.id,
-    }))
+    })),
   );
 
   if (submitError) {

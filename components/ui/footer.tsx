@@ -1,7 +1,8 @@
 import { Github } from "lucide-react";
-import * as React from "react";
-import { Button } from "./button";
 import { useTranslations } from "next-intl";
+import * as React from "react";
+
+import { Button } from "./button";
 
 const Footer: React.FC = () => {
   const t = useTranslations("footer");

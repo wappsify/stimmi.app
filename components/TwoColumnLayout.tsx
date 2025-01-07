@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 type TwoColumnLayoutProps = {
   children: ReactNode;

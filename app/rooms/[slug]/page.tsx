@@ -1,13 +1,15 @@
-import { createClient } from "@/lib/supabase/server";
+import { ArrowLeft, Crown, Edit } from "lucide-react";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Crown, Edit } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
+
 import { RoomDeletionForm } from "../../../components/RoomDeletionForm";
-import { Separator } from "../../../components/ui/separator";
 import { RoomStatusForm } from "../../../components/RoomStatusForm";
 import { Input } from "../../../components/ui/input";
-import { getTranslations } from "next-intl/server";
+import { Separator } from "../../../components/ui/separator";
 
 const RoomOverviewPage: React.FC<{
   params: Promise<{ slug: string }>;

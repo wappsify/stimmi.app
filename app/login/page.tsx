@@ -1,7 +1,8 @@
+import { getTranslations } from "next-intl/server";
+
 import { LoginForm } from "@/components/LoginForm";
 import { TwoColumnLayout } from "@/components/TwoColumnLayout";
 import { redirectIfAuthenticated } from "@/lib/server/utils";
-import { getTranslations } from "next-intl/server";
 
 export default async function LoginPage() {
   await redirectIfAuthenticated();

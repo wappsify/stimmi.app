@@ -1,28 +1,29 @@
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
 import {
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogTrigger,
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
 import { Form } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
+import { deleteRoom } from "@/lib/actions/rooms";
 import type { FormValues } from "@/lib/schemas/room-deletion";
 import { roomDeletionSchema } from "@/lib/schemas/room-deletion";
-import { zodResolver } from "@hookform/resolvers/zod";
 import type { Room } from "@/lib/supabase/room.types";
 import { objectToFormData } from "@/lib/utils";
-import { deleteRoom } from "@/lib/actions/rooms";
-import { toast } from "sonner";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
 
 export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({
   className,

@@ -1,30 +1,32 @@
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { DoorOpen } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
 import {
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogTrigger,
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
 import { Form } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { Room } from "@/lib/supabase/room.types";
-import { objectToFormData, validateRoom } from "@/lib/utils";
 import { changeRoomStatus } from "@/lib/actions/rooms";
-import { toast } from "sonner";
-import { useState } from "react";
 import type { FormValues } from "@/lib/schemas/room-status";
 import { roomStatusSchema } from "@/lib/schemas/room-status";
-import { RoomCheck } from "./room-check";
 import type { Choice } from "@/lib/supabase/choice.types";
-import { useTranslations } from "next-intl";
+import type { Room } from "@/lib/supabase/room.types";
+import { objectToFormData, validateRoom } from "@/lib/utils";
+
+import { RoomCheck } from "./room-check";
 
 export const RoomStatusForm: React.FC<{
   room: Room;

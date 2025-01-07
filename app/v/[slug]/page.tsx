@@ -1,10 +1,11 @@
-import { Separator } from "@/components/ui/separator";
-import { VotingSection } from "@/components/voting-section";
-import { createClient } from "@/lib/supabase/server";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+
+import { Separator } from "@/components/ui/separator";
+import { VotingSection } from "@/components/voting-section";
+import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata({
   params,

@@ -1,10 +1,11 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
-import { cookies } from "next/headers";
-import { UserDropdownMenu } from "@/components/user-dropdown-menu";
 import { SquareArrowRight } from "lucide-react";
+import { cookies } from "next/headers";
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+
+import { Button } from "@/components/ui/button";
+import { UserDropdownMenu } from "@/components/user-dropdown-menu";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
   const supabase = createClient(cookies());

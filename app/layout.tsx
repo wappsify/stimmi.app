@@ -1,11 +1,13 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
-import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
-import NextTopLoader from "nextjs-toploader";
-import Footer from "@/components/ui/footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import NextTopLoader from "nextjs-toploader";
+
+import Footer from "@/components/ui/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const noto = Noto_Sans({ subsets: ["latin"], display: "swap" });
 

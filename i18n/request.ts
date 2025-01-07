@@ -1,8 +1,9 @@
-import { getRequestConfig } from "next-intl/server";
 import { cookies } from "next/headers";
+import { getRequestConfig } from "next-intl/server";
+
+import type { Messages } from "../global";
 import { createClient } from "../lib/supabase/server";
 import { getLocale } from "./getLocale";
-import type { Messages } from "../global";
 
 export default getRequestConfig(async () => {
   const supabase = createClient(cookies());

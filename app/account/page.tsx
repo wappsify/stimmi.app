@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+
 import { getLocale } from "../../i18n/getLocale";
 import { getUserOrRedirect } from "../../lib/server/utils";
 import { LanguageForm } from "./language-form";

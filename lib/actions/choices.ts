@@ -1,11 +1,12 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { choicesEditSchema } from "../schemas/choices-edit";
-import { createClient } from "../supabase/server";
-import { getUserOrRedirect } from "../server/utils";
-import { formDataToObject } from "../utils";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+
+import { choicesEditSchema } from "../schemas/choices-edit";
+import { getUserOrRedirect } from "../server/utils";
+import { createClient } from "../supabase/server";
+import { formDataToObject } from "../utils";
 
 export const updateChoices = async (formData: FormData) => {
   const transformedFormData = formDataToObject(formData);

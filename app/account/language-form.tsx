@@ -1,15 +1,17 @@
 "use client";
-import { useState } from "react";
-import { createClient } from "../../lib/supabase/client";
-import { useUser } from "../../lib/hooks/useUser";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+
 import {
   Select,
-  SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import { useUser } from "../../lib/hooks/useUser";
+import { createClient } from "../../lib/supabase/client";
 
 export const LanguageForm: React.FC<{ initialValue: string }> = ({
   initialValue,

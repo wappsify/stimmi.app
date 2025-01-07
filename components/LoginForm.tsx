@@ -1,17 +1,18 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { createClient } from "@/lib/supabase/client";
-import Link from "next/link";
-import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
-import { FormInputField } from "@/components/forms/elements/form-input-field";
-import { Form } from "@/components/ui/form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { toast } from "sonner";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import { FormInputField } from "@/components/forms/elements/form-input-field";
+import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { createClient } from "@/lib/supabase/client";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -51,7 +52,7 @@ export function LoginForm() {
           <strong>{t("login_success")}</strong>
           <br />
           {t("login_success_message")}
-        </div>
+        </div>,
       );
     }
   };
