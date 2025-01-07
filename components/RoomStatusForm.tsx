@@ -54,7 +54,7 @@ export const RoomStatusForm: React.FC<{
       <AlertDialogTrigger asChild>
         <Button size="lg" className={className}>
           <DoorOpen />
-          {t("change_room_status")}
+          <span className="truncate">{t("change_room_status")}</span>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

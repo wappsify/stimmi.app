@@ -110,7 +110,7 @@ const RoomOverviewPage: React.FC<{
             <Button asChild className="col-span-2">
               <Link href={`/v/${room.slug}/results`}>
                 <Crown />
-                {t("view_room_results")}
+                <span className="truncate">{t("view_room_results")}</span>
               </Link>
             </Button>
           ) : (

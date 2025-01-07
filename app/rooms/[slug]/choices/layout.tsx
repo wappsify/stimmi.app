@@ -20,7 +20,7 @@ async function RoomSubpageLayout({
       >
         <Link href="./">
           <ArrowLeft />
-          {t("back_to_room_overview")}
+          <span className="truncate">{t("back_to_room_overview")}</span>
         </Link>
       </Button>
       {children}

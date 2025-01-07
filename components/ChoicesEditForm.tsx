@@ -80,15 +80,15 @@ const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
           onClick={() => append({ name: "" })}
         >
           <Plus />
-          {t("add_choice")}
+          <span className="truncate">{t("add_choice")}</span>
         </Button>
         <Button type="button" variant="outline" onClick={() => form.reset()}>
           <DatabaseBackup />
-          {t("reset_changes")}
+          <span className="truncate">{t("reset_changes")}</span>
         </Button>
 
         <FormSubmitButton type="submit" className="col-span-2">
-          {t("save_choices")}
+          <span className="truncate">{t("save_choices")}</span>
         </FormSubmitButton>
       </div>
     </Form>

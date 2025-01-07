@@ -50,7 +50,7 @@ export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({
       <AlertDialogTrigger asChild>
         <Button size="sm" variant="destructive" className={className}>
           <Trash />
-          {t("delete_room")}
+          <span className="truncate">{t("delete_room")}</span>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -62,9 +62,11 @@ export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogCancel>
+              <span className="truncate">{t("cancel")}</span>
+            </AlertDialogCancel>
             <FormSubmitButton variant="destructive">
-              {t("confirm_button")}
+              <span className="truncate">{t("confirm_button")}</span>
             </FormSubmitButton>
           </AlertDialogFooter>
         </Form>

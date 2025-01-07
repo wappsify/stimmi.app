@@ -46,7 +46,7 @@ const RoomsPage = async () => {
               <Button variant="secondary" asChild>
                 <Link href={`/rooms/new`}>
                   <PlusCircle />
-                  {t("start_creating_room")}
+                  <span className="truncate">{t("start_creating_room")}</span>
                 </Link>
               </Button>
             </CardContent>
@@ -80,13 +80,13 @@ const RoomsPage = async () => {
                     <Button variant="outline" size="sm" asChild>
                       <Link href={`/rooms/${room.slug}/details`}>
                         <Edit />
-                        {t("edit_details")}
+                        <span className="truncate">{t("edit_details")}</span>
                       </Link>
                     </Button>
                     <Button variant="outline" size="sm" asChild>
                       <Link href={`/rooms/${room.slug}/choices`}>
                         <Edit />
-                        {t("edit_choices")}
+                        <span className="truncate">{t("edit_choices")}</span>
                       </Link>
                     </Button>
                   </>
