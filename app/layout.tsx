@@ -6,7 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import NextTopLoader from "nextjs-toploader";
 
-import Footer from "@/components/ui/footer";
+import { Footer } from "@/components/ui/footer";
 import { Toaster } from "@/components/ui/sonner";
 
 const noto = Noto_Sans({ subsets: ["latin"], display: "swap" });

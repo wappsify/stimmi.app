@@ -12,7 +12,7 @@ import type { FormValues } from "@/lib/schemas/room-creation";
 import { roomCreationSchema } from "@/lib/schemas/room-creation";
 import { objectToFormData } from "@/lib/utils";
 
-const RoomCreationForm: React.FC = () => {
+export const RoomCreationForm: React.FC = () => {
   const t = useTranslations("room_creation");
   const form = useForm<FormValues>({
     resolver: zodResolver(roomCreationSchema),
@@ -42,5 +42,3 @@ const RoomCreationForm: React.FC = () => {
     </Form>
   );
 };
-
-export default RoomCreationForm;

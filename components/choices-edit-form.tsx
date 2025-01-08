@@ -20,7 +20,7 @@ import { objectToFormData } from "@/lib/utils";
 const getInitialChoices = (choices: Choice[]) =>
   choices.length > 0 ? choices.map(({ name }) => ({ name })) : [{ name: "" }];
 
-const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
+export const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
   room,
   choices,
 }) => {
@@ -96,5 +96,3 @@ const ChoicesEditForm: React.FC<{ room: Room; choices: Choice[] }> = ({
     </Form>
   );
 };
-
-export default ChoicesEditForm;

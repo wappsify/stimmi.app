@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { Button } from "./button";
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
   const t = useTranslations("footer");
 
   return (
@@ -27,5 +27,3 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
-
-export default Footer;

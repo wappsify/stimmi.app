@@ -15,7 +15,7 @@ import { roomEditSchema } from "@/lib/schemas/room-edit";
 import type { Room } from "@/lib/supabase/room.types";
 import { objectToFormData } from "@/lib/utils";
 
-const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {
+export const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {
   const t = useTranslations("room_edit");
   const form = useForm<FormValues>({
     resolver: zodResolver(roomEditSchema),
@@ -63,5 +63,3 @@ const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {
     </Form>
   );
 };
-
-export default RoomEditForm;
