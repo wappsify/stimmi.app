@@ -12,7 +12,7 @@ import type { Room } from "@/lib/supabase/room.types";
 import type { RoomUser } from "@/lib/supabase/room_user.types";
 
 import { ActiveUsersText } from "./active-users-text";
-import { RoomStatusForm } from "./RoomStatusForm";
+import { RoomStatusForm } from "./room-status-form";
 import { ShowResults } from "./show-results";
 
 const MotionPinwheel = motion.create(LoaderPinwheel);

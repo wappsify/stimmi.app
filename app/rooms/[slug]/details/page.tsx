@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 
-import RoomEditForm from "@/components/RoomEditForm";
+import RoomEditForm from "@/components/room-edit-form";
 import { createClient } from "@/lib/supabase/server";
 
 const RoomEditPage: React.FC<{

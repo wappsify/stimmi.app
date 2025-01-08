@@ -1,9 +1,8 @@
 import { getTranslations } from "next-intl/server";
 
+import { LanguageForm } from "@/components/language-form";
 import { getLocale } from "@/i18n/getLocale";
 import { getUserOrRedirect } from "@/lib/server/utils";
-
-import { LanguageForm } from "./language-form";
 
 const AccountPage: React.FC = async () => {
   const t = await getTranslations("account");

@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
-import { RoomDeletionForm } from "@/components/RoomDeletionForm";
-import { RoomStatusForm } from "@/components/RoomStatusForm";
+import { RoomDeletionForm } from "@/components/room-deletion-form";
+import { RoomStatusForm } from "@/components/room-status-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";

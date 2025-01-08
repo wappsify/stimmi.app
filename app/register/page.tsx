@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
-import { RegisterForm } from "@/components/RegisterForm";
-import { TwoColumnLayout } from "@/components/TwoColumnLayout";
+import { RegisterForm } from "@/components/register-form";
+import { TwoColumnLayout } from "@/components/two-column-layout";
 import { redirectIfAuthenticated } from "@/lib/server/utils";
 
 export default async function RegisterPage() {
