@@ -5,7 +5,7 @@ import { redirect, RedirectType } from "next/navigation";
 import { votingSchema } from "../schemas/submit-votes";
 import { getUserOrRedirect } from "../server/utils";
 import { createClient } from "../supabase/server";
-import { formDataToObject } from "../utils";
+import { formDataToObject } from "../utils/formDataToObject";
 
 export const submitVotes = async (formData: FormData) => {
   const transformedFormData = formDataToObject(formData);

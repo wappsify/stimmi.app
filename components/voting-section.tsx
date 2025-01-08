@@ -18,7 +18,7 @@ import type { Choice } from "@/lib/supabase/choice.types";
 import { createClient } from "@/lib/supabase/client";
 import type { Room } from "@/lib/supabase/room.types";
 import type { RoomUser } from "@/lib/supabase/room_user.types";
-import { shuffleArray } from "@/lib/utils";
+import { shuffleArray } from "@/lib/utils/shuffleArray";
 
 import { Skeleton } from "./ui/skeleton";
 import { VotingForm } from "./voting-form";

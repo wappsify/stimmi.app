@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { FormSubmitButton } from "@/components/forms/elements/form-submit-button";
+import { RoomCheck } from "@/components/room-check";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -24,9 +25,8 @@ import type { FormValues } from "@/lib/schemas/room-status";
 import { roomStatusSchema } from "@/lib/schemas/room-status";
 import type { Choice } from "@/lib/supabase/choice.types";
 import type { Room } from "@/lib/supabase/room.types";
-import { objectToFormData, validateRoom } from "@/lib/utils";
-
-import { RoomCheck } from "./room-check";
+import { objectToFormData } from "@/lib/utils/objectToFormData";
+import { validateRoom } from "@/lib/utils/validateRoom";
 
 export const RoomStatusForm: React.FC<{
   room: Room;

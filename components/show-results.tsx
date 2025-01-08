@@ -4,7 +4,8 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import type { ResultWithChoice } from "@/lib/hooks/useRealtimeResults";
-import { cn, shootConfetti } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
+import { shootConfetti } from "@/lib/utils/shootConfetti";
 
 const MotionCheck = motion.create(CheckCircle);
 

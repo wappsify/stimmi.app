@@ -23,7 +23,7 @@ import { deleteRoom } from "@/lib/actions/rooms";
 import type { FormValues } from "@/lib/schemas/room-deletion";
 import { roomDeletionSchema } from "@/lib/schemas/room-deletion";
 import type { Room } from "@/lib/supabase/room.types";
-import { objectToFormData } from "@/lib/utils";
+import { objectToFormData } from "@/lib/utils/objectToFormData";
 
 export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({
   className,

@@ -17,7 +17,7 @@ import type { FormValues } from "@/lib/schemas/submit-votes";
 import { votingSchema } from "@/lib/schemas/submit-votes";
 import type { Choice } from "@/lib/supabase/choice.types";
 import type { Room } from "@/lib/supabase/room.types";
-import { objectToFormData } from "@/lib/utils";
+import { objectToFormData } from "@/lib/utils/objectToFormData";
 
 import { FormHiddenInputField } from "./forms/elements/form-hidden-input-field";
 import { FormSubmitButton } from "./forms/elements/form-submit-button";

@@ -10,7 +10,7 @@ import { Form } from "@/components/ui/form";
 import { createRoom } from "@/lib/actions/rooms";
 import type { FormValues } from "@/lib/schemas/room-creation";
 import { roomCreationSchema } from "@/lib/schemas/room-creation";
-import { objectToFormData } from "@/lib/utils";
+import { objectToFormData } from "@/lib/utils/objectToFormData";
 
 export const RoomCreationForm: React.FC = () => {
   const t = useTranslations("room_creation");

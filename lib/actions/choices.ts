@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { choicesEditSchema } from "../schemas/choices-edit";
 import { getUserOrRedirect } from "../server/utils";
 import { createClient } from "../supabase/server";
-import { formDataToObject } from "../utils";
+import { formDataToObject } from "../utils/formDataToObject";
 
 export const updateChoices = async (formData: FormData) => {
   const transformedFormData = formDataToObject(formData);

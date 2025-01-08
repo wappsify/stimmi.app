@@ -15,7 +15,7 @@ import type { FormValues } from "@/lib/schemas/choices-edit";
 import { choicesEditSchema } from "@/lib/schemas/choices-edit";
 import type { Choice } from "@/lib/supabase/choice.types";
 import type { Room } from "@/lib/supabase/room.types";
-import { objectToFormData } from "@/lib/utils";
+import { objectToFormData } from "@/lib/utils/objectToFormData";
 
 const getInitialChoices = (choices: Choice[]) =>
   choices.length > 0 ? choices.map(({ name }) => ({ name })) : [{ name: "" }];
