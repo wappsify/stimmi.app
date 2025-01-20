@@ -1,5 +1,5 @@
 {
-  "name": "stimmi-v2",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.17.0",
+    "@next/swc-linux-arm64-gnu": "15.1.5",
     "@types/canvas-confetti": "1.9.0",
     "@types/node": "22.10.5",
     "@types/react": "19.0.3",
