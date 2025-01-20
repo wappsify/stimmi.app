@@ -13,3 +13,17 @@ services:
       - "/app/packages/frontend/node_modules"
     working_dir: /app/packages/frontend
     command: bun dev
+  api:
+    build:
+      context: ./
+      dockerfile: docker/api/Dockerfile.dev
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/app
+      - "/app/node_modules"
+      - "/app/packages/api/node_modules"
+    working_dir: /app/packages/api
+    command: bun dev
