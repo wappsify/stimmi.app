@@ -84,7 +84,7 @@ const config = tseslint.config(
   simpleImportSortPluginConfig,
   importPluginConfig,
   ...ruleOverrideConfigs,
-  ignoreConfig
+  ignoreConfig,
 );
 
 export default config;
