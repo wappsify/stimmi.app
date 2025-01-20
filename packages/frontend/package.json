@@ -74,8 +74,5 @@
   "overrides": {
     "@types/react": "19.0.3",
     "@types/react-dom": "19.0.2"
-  },
-  "volta": {
-    "node": "20.18.1"
   }
 }
