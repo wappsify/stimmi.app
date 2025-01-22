@@ -1,3 +1,4 @@
+import type { InferSelectModel } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -24,10 +25,18 @@ export const accountsTable = pgTable("accounts", {
 
 export const usersTable = pgTable("users", {
   id: uuid().primaryKey().defaultRandom(),
-  account_id: uuid()
-    .references(() => accountsTable.id)
-    .unique(),
+  account_id: uuid().references(() => accountsTable.id),
   created_at: timestamp().notNull().defaultNow(),
+  updated_at: timestamp().notNull().defaultNow(),
+});
+
+export const sessionsTable = pgTable("sessions", {
+  id: uuid().primaryKey(),
+  user_id: uuid()
+    .references(() => usersTable.id)
+    .notNull(),
+  created_at: timestamp().notNull().defaultNow(),
+  expires_at: timestamp({ withTimezone: true, mode: "date" }).notNull(),
 });
 
 export const roomsTable = pgTable("rooms", {
@@ -108,3 +117,12 @@ export const resultsTable = pgTable(
     { pk: primaryKey({ columns: [table.room_id, table.choice_id] }) },
   ],
 );
+
+export type Account = InferSelectModel<typeof accountsTable>;
+export type User = InferSelectModel<typeof usersTable>;
+export type Session = InferSelectModel<typeof sessionsTable>;
+export type Room = InferSelectModel<typeof roomsTable>;
+export type Choice = InferSelectModel<typeof choicesTable>;
+export type RoomUser = InferSelectModel<typeof roomUsersTable>;
+export type Vote = InferSelectModel<typeof votesTable>;
+export type Result = InferSelectModel<typeof resultsTable>;

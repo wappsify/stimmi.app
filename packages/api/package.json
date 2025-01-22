@@ -2,9 +2,12 @@
   "name": "api",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
+    "build": "bun build --target=bun --outfile=dist/server.js src/index.ts",
     "pre-commit": "lint-staged"
   },
   "dependencies": {
+    "@oslojs/crypto": "1.0.1",
+    "@oslojs/encoding": "1.1.0",
     "dotenv": "16.4.7",
     "drizzle-orm": "0.38.4",
     "hono": "4.6.17",
