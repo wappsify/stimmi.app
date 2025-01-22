@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "pre-commit": "bun --filter '*' pre-commit",
+    "dev": "bun --filter '*' dev",
     "prepare": "husky"
   },
   "devDependencies": {

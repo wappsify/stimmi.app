@@ -1,5 +1,4 @@
-import type { Choice } from "@/lib/supabase/choice.types";
-import type { Room } from "@/lib/supabase/room.types";
+import type { Choice, Room } from "@packages/api/src/db/schema";
 
 export const roomChecks = [
   {

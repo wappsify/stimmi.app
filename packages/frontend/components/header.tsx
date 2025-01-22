@@ -1,21 +1,17 @@
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { Button } from "@/components/ui/button";
 import { UserDropdownMenu } from "@/components/user-dropdown-menu";
-import { createClient } from "@/lib/supabase/server";
+
+import { getCurrentSession } from "../lib/server/getCurrentSession";
 
 type HeaderProps = {
   hideNavigation?: boolean;
 };
 
 const Header: React.FC<HeaderProps> = async ({ hideNavigation }) => {
-  const supabase = createClient(cookies());
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { user } = await getCurrentSession();
 
   const t = await getTranslations();
 
@@ -33,7 +29,7 @@ const Header: React.FC<HeaderProps> = async ({ hideNavigation }) => {
         </Link>
         {!hideNavigation && (
           <div className="user-menu flex items-center gap-4 pr-2">
-            {user && !user.is_anonymous ? (
+            {user?.account_id ? (
               <UserDropdownMenu />
             ) : (
               <>

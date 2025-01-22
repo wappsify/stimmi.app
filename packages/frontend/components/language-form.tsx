@@ -1,4 +1,5 @@
 "use client";
+import type { User } from "@packages/api/src/db/schema";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -9,15 +10,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useUser } from "@/lib/hooks/useUser";
 import { createClient } from "@/lib/supabase/client";
 
-export const LanguageForm: React.FC<{ initialValue: string }> = ({
+export const LanguageForm: React.FC<{ initialValue: string; user: User }> = ({
   initialValue,
+  user,
 }) => {
   const [locale, setLocale] = useState(initialValue);
   const supabase = createClient();
-  const user = useUser();
   const t = useTranslations("account");
 
   const handleLocaleChange = async (newLocale: string) => {

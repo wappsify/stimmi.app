@@ -1,5 +1,6 @@
 "use client";
 
+import type { User } from "@packages/api/src/db/schema";
 import { DoorOpen, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -13,7 +14,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useRealtimeRoomUsers } from "@/lib/hooks/useRealtimeRoomUsers";
-import { useUser } from "@/lib/hooks/useUser";
 import type { Choice } from "@/lib/supabase/choice.types";
 import { createClient } from "@/lib/supabase/client";
 import type { Room } from "@/lib/supabase/room.types";
@@ -26,12 +26,11 @@ import { VotingForm } from "./voting-form";
 export const VotingSection: React.FC<{
   room: Room;
   roomUsers: RoomUser[];
-}> = ({ room, roomUsers: serverRoomUsers }) => {
+  user: User | null;
+}> = ({ room, roomUsers: serverRoomUsers, user }) => {
   const t = useTranslations("voting_section");
   const [isJoining, setIsJoining] = useState(false);
   const [isInRoom, setIsInRoom] = useState(false);
-
-  const user = useUser();
 
   const supabase = createClient();
 

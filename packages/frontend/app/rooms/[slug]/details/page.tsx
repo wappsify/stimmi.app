@@ -1,24 +1,17 @@
-import { cookies } from "next/headers";
+import { getRoomBySlug } from "@packages/api/src/entities/rooms";
 import { getTranslations } from "next-intl/server";
 
 import { RoomEditForm } from "@/components/room-edit-form";
-import { createClient } from "@/lib/supabase/server";
 
 const RoomEditPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
-  const supabase = createClient(cookies());
   const { slug } = await params;
   const t = await getTranslations("room_edit");
 
-  const { data: room, error } = await supabase
-    .from("rooms")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  const room = await getRoomBySlug(slug);
 
-  if (error) {
-    console.error("Error fetching room:", error);
+  if (!room) {
     return <div>{t("error_loading")}</div>;
   }
 

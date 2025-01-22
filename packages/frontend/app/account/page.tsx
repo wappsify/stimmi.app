@@ -8,15 +8,15 @@ const AccountPage: React.FC = async () => {
   const t = await getTranslations("account");
   const user = await getUserOrRedirect();
 
-  const initialLocale: string =
-    user.user_metadata.locale ?? (await getLocale(user));
+  const initialLocale = await getLocale(user);
 
   return (
     <>
       <h1 className="text-3xl text-center font-bold mb-6">
         {t("account_settings")}
       </h1>
-      <LanguageForm initialValue={initialLocale} />
+
+      <LanguageForm initialValue={initialLocale} user={user} />
     </>
   );
 };

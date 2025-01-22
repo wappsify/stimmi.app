@@ -1,4 +1,3 @@
-import type { User } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -6,6 +5,8 @@ import { getTranslations } from "next-intl/server";
 import { ResultsView } from "@/components/results-view";
 import { Separator } from "@/components/ui/separator";
 import { createClient } from "@/lib/supabase/server";
+
+import { getCurrentSession } from "../../../../lib/server/getCurrentSession";
 
 const ResultsPage: React.FC<{
   params: Promise<{ slug: string }>;
@@ -27,9 +28,7 @@ const ResultsPage: React.FC<{
   }
 
   // check if user is in room_users and has voted
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { user } = await getCurrentSession();
 
   if (!user) {
     redirect(`/v/${slug}`);
@@ -80,7 +79,7 @@ const ResultsPage: React.FC<{
         room={room}
         roomUsers={roomUsers}
         choices={choices}
-        user={user as User}
+        user={user}
       />
     </div>
   );

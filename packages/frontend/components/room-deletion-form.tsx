@@ -1,5 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { Room } from "@packages/api/src/db/schema";
 import { Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -22,7 +23,6 @@ import { Form } from "@/components/ui/form";
 import { deleteRoom } from "@/lib/actions/rooms";
 import type { FormValues } from "@/lib/schemas/room-deletion";
 import { roomDeletionSchema } from "@/lib/schemas/room-deletion";
-import type { Room } from "@/lib/supabase/room.types";
 import { objectToFormData } from "@/lib/utils/objectToFormData";
 
 export const RoomDeletionForm: React.FC<{ room: Room; className?: string }> = ({

@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { Choice, Room } from "@packages/api/src/db/schema";
 import { DatabaseBackup, Plus, Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -13,8 +14,6 @@ import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { updateChoices } from "@/lib/actions/choices";
 import type { FormValues } from "@/lib/schemas/choices-edit";
 import { choicesEditSchema } from "@/lib/schemas/choices-edit";
-import type { Choice } from "@/lib/supabase/choice.types";
-import type { Room } from "@/lib/supabase/room.types";
 import { objectToFormData } from "@/lib/utils/objectToFormData";
 
 const getInitialChoices = (choices: Choice[]) =>

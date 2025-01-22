@@ -1,8 +1,7 @@
+import type { Choice, Room } from "@packages/api/src/db/schema";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import type { Choice } from "@/lib/supabase/choice.types";
-import type { Room } from "@/lib/supabase/room.types";
 import { roomChecks } from "@/lib/utils/validateRoom";
 
 export const RoomCheck: React.FC<{ room: Room; choices: Choice[] }> = ({

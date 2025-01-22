@@ -1,18 +1,13 @@
 import { SquareArrowRight } from "lucide-react";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { Button } from "@/components/ui/button";
 import { UserDropdownMenu } from "@/components/user-dropdown-menu";
-import { createClient } from "@/lib/supabase/server";
+import { getCurrentSession } from "@/lib/server/utils";
 
 export default async function Home() {
-  const supabase = createClient(cookies());
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { user } = await getCurrentSession();
 
   const t = await getTranslations("home");
 

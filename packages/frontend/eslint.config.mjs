@@ -39,12 +39,7 @@ const nextPluginConfig = {
 
 const ignoreConfig = {
   name: "ignore",
-  ignores: [
-    "node_modules",
-    ".next",
-    "*.config.mjs",
-    "lib/supabase/database.types.ts",
-  ],
+  ignores: ["node_modules", ".next", "*.config.mjs"],
 };
 
 const ruleOverrideConfigs = [
@@ -84,7 +79,7 @@ const config = tseslint.config(
   simpleImportSortPluginConfig,
   importPluginConfig,
   ...ruleOverrideConfigs,
-  ignoreConfig,
+  ignoreConfig
 );
 
 export default config;

@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
-    "generate": "npx supabase gen types --lang=typescript --project-id riqtseunihgzwlsgzkkx --schema public > lib/supabase/database.types.ts",
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
@@ -22,6 +21,7 @@
     "@dnd-kit/modifiers": "9.0.0",
     "@dnd-kit/sortable": "9.0.0",
     "@hookform/resolvers": "3.10.0",
+    "@packages/api": "workspace:api@*",
     "@radix-ui/react-alert-dialog": "1.1.4",
     "@radix-ui/react-avatar": "1.1.2",
     "@radix-ui/react-dropdown-menu": "2.1.4",
@@ -32,6 +32,7 @@
     "@radix-ui/react-tabs": "1.1.2",
     "@supabase/ssr": "0.5.2",
     "@supabase/supabase-js": "2.47.10",
+    "arctic": "^3.2.0",
     "canvas-confetti": "1.9.3",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
@@ -50,8 +51,7 @@
     "tailwind-merge": "2.6.0",
     "tailwindcss-animate": "1.0.7",
     "votes": "3.0.0",
-    "zod": "3.24.1",
-    "@packages/api": "workspace:api@*"
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@eslint/js": "9.17.0",

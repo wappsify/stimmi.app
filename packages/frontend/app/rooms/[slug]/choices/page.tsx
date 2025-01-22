@@ -1,36 +1,23 @@
-import { cookies } from "next/headers";
+import { getChoicesByRoomId } from "@packages/api/src/entities/choices";
+import { getRoomBySlug } from "@packages/api/src/entities/rooms";
 import { getTranslations } from "next-intl/server";
 
 import { ChoicesEditForm } from "@/components/choices-edit-form";
-import { createClient } from "@/lib/supabase/server";
 
 const RoomEditPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
-  const supabase = createClient(cookies());
   const { slug } = await params;
   const t = await getTranslations("choices_edit");
 
-  const { data: room, error: roomError } = await supabase
-    .from("rooms")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  const room = await getRoomBySlug(slug);
 
-  if (roomError) {
-    console.error("Error fetching room:", roomError);
+  if (!room) {
+    console.error("Error fetching room, room not found");
     return <div>{t("error_loading")}</div>;
   }
 
-  const { data: choices, error: choicesError } = await supabase
-    .from("choices")
-    .select("*")
-    .eq("room_id", room.id);
-
-  if (choicesError) {
-    console.error("Error fetching data:", choicesError);
-    return <div>{t("error_loading")}</div>;
-  }
+  const choices = await getChoicesByRoomId(room.id);
 
   return (
     <div className="max-w-md mx-auto">

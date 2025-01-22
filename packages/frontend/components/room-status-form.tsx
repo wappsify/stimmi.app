@@ -1,5 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { Choice, Room } from "@packages/api/src/db/schema";
 import { DoorOpen } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -23,8 +24,6 @@ import { Form } from "@/components/ui/form";
 import { changeRoomStatus } from "@/lib/actions/rooms";
 import type { FormValues } from "@/lib/schemas/room-status";
 import { roomStatusSchema } from "@/lib/schemas/room-status";
-import type { Choice } from "@/lib/supabase/choice.types";
-import type { Room } from "@/lib/supabase/room.types";
 import { objectToFormData } from "@/lib/utils/objectToFormData";
 import { validateRoom } from "@/lib/utils/validateRoom";
 

@@ -1,5 +1,5 @@
+import { getRoomsByAccountId } from "@packages/api/src/entities/rooms";
 import { Crown, Edit, Eye, PlusCircle } from "lucide-react";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
@@ -12,24 +12,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getUserOrRedirect } from "@/lib/server/utils";
-import { createClient } from "@/lib/supabase/server";
 
 const RoomsPage = async () => {
   const t = await getTranslations("rooms");
-  const supabase = createClient(cookies());
 
   const user = await getUserOrRedirect();
 
-  const { data: rooms, error } = await supabase
-    .from("rooms")
-    .select("*")
-    .eq("user_id", user.id)
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error("Error fetching rooms:", error);
-    return <div>{t("error_loading")}</div>;
-  }
+  const rooms = await getRoomsByAccountId(user.account_id!);
 
   return (
     <div>

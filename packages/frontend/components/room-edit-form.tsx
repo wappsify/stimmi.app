@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { Room } from "@packages/api/src/db/schema";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -12,7 +13,6 @@ import { Form } from "@/components/ui/form";
 import { updateRoom } from "@/lib/actions/rooms";
 import type { FormValues } from "@/lib/schemas/room-edit";
 import { roomEditSchema } from "@/lib/schemas/room-edit";
-import type { Room } from "@/lib/supabase/room.types";
 import { objectToFormData } from "@/lib/utils/objectToFormData";
 
 export const RoomEditForm: React.FC<{ room: Room }> = ({ room }) => {

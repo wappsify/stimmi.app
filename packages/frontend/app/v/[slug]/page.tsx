@@ -1,3 +1,4 @@
+import { getPublicRoomBySlug } from "@packages/api/src/entities/rooms";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -5,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 
 import { Separator } from "@/components/ui/separator";
 import { VotingSection } from "@/components/voting-section";
+import { getCurrentSession } from "@/lib/server/utils";
 import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata({
@@ -15,13 +17,7 @@ export async function generateMetadata({
   const t = await getTranslations("voting_page");
   const slug = (await params).slug;
 
-  const supabase = createClient(cookies());
-
-  const { data: room } = await supabase
-    .from("rooms")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  const room = await getPublicRoomBySlug(slug);
 
   if (!room) {
     return {
@@ -55,9 +51,7 @@ const VotingPage: React.FC<{
     return <div>{t("error_loading_room")}</div>;
   }
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { user } = await getCurrentSession();
 
   const { error: roomUsersError, data: existingUsers } = await supabase
     .from("room_users")
@@ -88,7 +82,7 @@ const VotingPage: React.FC<{
       <p className="text-xl text-center">{t("instruction_message")}</p>
 
       <Separator className="my-6" />
-      <VotingSection room={room} roomUsers={existingUsers} />
+      <VotingSection room={room} roomUsers={existingUsers} user={user} />
     </div>
   );
 };

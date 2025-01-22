@@ -18,22 +18,24 @@ export const roomStatusEnum = pgEnum("room_status", [
 
 export const accountsTable = pgTable("accounts", {
   id: uuid().primaryKey().defaultRandom(),
-  locale: varchar({ length: 10 }).notNull().default("en"),
-  email: varchar({ length: 255 }).notNull().unique(),
-  password: varchar({ length: 255 }).notNull(),
+  locale: varchar({ length: 10 }).notNull().default("en-US"),
+  googleId: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull(),
 });
 
 export const usersTable = pgTable("users", {
   id: uuid().primaryKey().defaultRandom(),
-  account_id: uuid().references(() => accountsTable.id),
+  account_id: uuid().references(() => accountsTable.id, {
+    onDelete: "cascade",
+  }),
   created_at: timestamp().notNull().defaultNow(),
   updated_at: timestamp().notNull().defaultNow(),
 });
 
 export const sessionsTable = pgTable("sessions", {
-  id: uuid().primaryKey(),
+  id: varchar({ length: 255 }).primaryKey(),
   user_id: uuid()
-    .references(() => usersTable.id)
+    .references(() => usersTable.id, { onDelete: "cascade" })
     .notNull(),
   created_at: timestamp().notNull().defaultNow(),
   expires_at: timestamp({ withTimezone: true, mode: "date" }).notNull(),
@@ -47,7 +49,7 @@ export const roomsTable = pgTable("rooms", {
   created_at: timestamp().notNull().defaultNow(),
   updated_at: timestamp().notNull().defaultNow(),
   account_id: uuid()
-    .references(() => accountsTable.id)
+    .references(() => accountsTable.id, { onDelete: "cascade" })
     .notNull(),
   status: roomStatusEnum().notNull().default("private"),
   slug: varchar({ length: 255 }).notNull(),
@@ -56,10 +58,10 @@ export const roomsTable = pgTable("rooms", {
 export const choicesTable = pgTable("choices", {
   id: uuid().primaryKey().defaultRandom(),
   room_id: uuid()
-    .references(() => roomsTable.id)
+    .references(() => roomsTable.id, { onDelete: "cascade" })
     .notNull(),
   account_id: uuid()
-    .references(() => accountsTable.id)
+    .references(() => accountsTable.id, { onDelete: "cascade" })
     .notNull(),
   name: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 500 }).notNull().default(""),
@@ -71,51 +73,47 @@ export const roomUsersTable = pgTable(
   "room_users",
   {
     room_id: uuid()
-      .references(() => roomsTable.id)
+      .references(() => roomsTable.id, { onDelete: "cascade" })
       .notNull(),
     user_id: uuid()
-      .references(() => usersTable.id)
+      .references(() => usersTable.id, { onDelete: "cascade" })
       .notNull(),
     created_at: timestamp().notNull().defaultNow(),
     has_voted: boolean().notNull().default(false),
   },
-  (table) => [{ pk: primaryKey({ columns: [table.room_id, table.user_id] }) }],
+  (table) => [{ pk: primaryKey({ columns: [table.room_id, table.user_id] }) }]
 );
 
 export const votesTable = pgTable(
   "votes",
   {
     user_id: uuid()
-      .references(() => usersTable.id)
+      .references(() => usersTable.id, { onDelete: "cascade" })
       .notNull(),
     room_id: uuid()
-      .references(() => roomsTable.id)
+      .references(() => roomsTable.id, { onDelete: "cascade" })
       .notNull(),
     choice_id: uuid()
-      .references(() => choicesTable.id)
+      .references(() => choicesTable.id, { onDelete: "cascade" })
       .notNull(),
     created_at: timestamp().notNull().defaultNow(),
     rank: integer().notNull(),
   },
-  (table) => [
-    { pk: primaryKey({ columns: [table.user_id, table.choice_id] }) },
-  ],
+  (table) => [{ pk: primaryKey({ columns: [table.user_id, table.choice_id] }) }]
 );
 
 export const resultsTable = pgTable(
   "results",
   {
     room_id: uuid()
-      .references(() => roomsTable.id)
+      .references(() => roomsTable.id, { onDelete: "cascade" })
       .notNull(),
     choice_id: uuid()
-      .references(() => choicesTable.id)
+      .references(() => choicesTable.id, { onDelete: "cascade" })
       .notNull(),
     points: integer().notNull(),
   },
-  (table) => [
-    { pk: primaryKey({ columns: [table.room_id, table.choice_id] }) },
-  ],
+  (table) => [{ pk: primaryKey({ columns: [table.room_id, table.choice_id] }) }]
 );
 
 export type Account = InferSelectModel<typeof accountsTable>;

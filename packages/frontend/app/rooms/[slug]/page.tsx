@@ -1,5 +1,6 @@
+import { getChoicesByRoomId } from "@packages/api/src/entities/choices";
+import { getRoomBySlugAndAccount } from "@packages/api/src/entities/rooms";
 import { ArrowLeft, Crown, Edit } from "lucide-react";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
@@ -8,35 +9,24 @@ import { RoomStatusForm } from "@/components/room-status-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { createClient } from "@/lib/supabase/server";
+
+import { getAccountOrRedirect } from "../../../lib/server/utils";
 
 const RoomOverviewPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
-  const supabase = createClient(cookies());
   const { slug } = await params;
   const t = await getTranslations("room_overview");
 
-  const { data: room, error } = await supabase
-    .from("rooms")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  const { account } = await getAccountOrRedirect();
+  const room = await getRoomBySlugAndAccount(slug, account.id);
 
-  if (error) {
-    console.error("Error fetching room:", error);
+  if (!room) {
+    console.error("Error fetching room, room not found");
     return <div>{t("error_loading_room")}</div>;
   }
 
-  const { data: choices, error: choicesError } = await supabase
-    .from("choices")
-    .select("*")
-    .eq("room_id", room.id);
-
-  if (choicesError) {
-    console.error("Error fetching choices:", choicesError);
-    return <div>{t("error_loading_choices")}</div>;
-  }
+  const choices = await getChoicesByRoomId(room.id);
 
   return (
     <div className="grid gap-4">
