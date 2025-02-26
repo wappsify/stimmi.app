@@ -12,8 +12,8 @@ services:
       - ./:/app
       - "/app/node_modules"
       - "/app/packages/frontend/node_modules"
-    working_dir: /app/packages/frontend
-    command: bun dev
+    working_dir: /app
+    command: bun --filter 'frontend' dev
     depends_on:
       - api
       - db
@@ -31,8 +31,8 @@ services:
       - ./:/app
       - "/app/node_modules"
       - "/app/packages/api/node_modules"
-    working_dir: /app/packages/api
-    command: bun dev
+    working_dir: /app
+    command: bun --filter 'api' dev
     depends_on:
       - db
   db:

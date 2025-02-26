@@ -6,10 +6,11 @@ WORKDIR /app
 
 # Copy package.json and bun.lockb files
 COPY package.json bun.lockb ./
-COPY packages/api/package.json ./packages/api/package.json
+COPY packages/api/package.json ./packages/api/
+COPY packages/frontend/package.json ./packages/frontend/
 
 # Install dependencies
-RUN bun install
+RUN bun install --frozen-lockfile
 
 # Copy the rest of the application code
 COPY ./ ./
