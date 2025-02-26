@@ -26,6 +26,6 @@ AFTER INSERT OR UPDATE OR DELETE ON room_users
 FOR EACH ROW EXECUTE FUNCTION notify_changes();
 
 -- Create a trigger for INSERT, UPDATE, DELETE operations on room table
-CREATE TRIGGER notify_changes_trigger_room
-AFTER INSERT OR UPDATE OR DELETE ON room
+CREATE TRIGGER notify_changes_trigger_rooms
+AFTER INSERT OR UPDATE OR DELETE ON rooms
 FOR EACH ROW EXECUTE FUNCTION notify_changes();
