@@ -1,25 +1,21 @@
 import { Hono } from "hono";
-import { Client } from "pg";
 
-import { db } from "./db";
-import { accountsTable } from "./db/schema";
+import { setupChangesListener } from "./db/listener";
+import { socket } from "./sockets";
+import { resultsSocket } from "./sockets/results";
+import { roomSocket } from "./sockets/room";
+import { roomUsersSocket } from "./sockets/roomUsers";
 
 const app = new Hono();
 
-app.get("/", async (c) => {
-  const accounts = await db.select().from(accountsTable);
-  return c.json(accounts);
-});
+app.get("/room/:id", roomSocket);
+app.get("/room-users/:id", roomUsersSocket);
+app.get("/results/:id", resultsSocket);
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-});
-void client.connect();
+setupChangesListener();
 
-client.on("notification", (msg) => {
-  console.log("Received notification:", msg.payload);
-});
-
-void client.query("LISTEN table_changes");
-
-export default { port: 3001, fetch: app.fetch };
+export default {
+  port: 3001,
+  fetch: app.fetch,
+  websocket: socket.websocket,
+};
