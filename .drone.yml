@@ -1,0 +1,29 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build-api
+    image: oven/bun:latest
+    commands:
+      - bun install --filter "api" --frozen-lockfile
+      - bun build
+  - name: publish
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: wappsify/stimmi
+      auto_tag: true
+      registry: docker.io
+  - name: migrate-database
+    image: oven/bun:latest
+    commands:
+      - bun run migrate
+
+trigger:
+  branch:
+    - refactor/ditch-supabase-for-my-own-postgres
