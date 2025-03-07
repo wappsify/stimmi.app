@@ -10,6 +10,7 @@ steps:
       - bun install --filter "api" --frozen-lockfile
       - cd packages/api
       - bun run build
+
   - name: publish
     image: plugins/docker
     settings:
@@ -18,8 +19,13 @@ steps:
       password:
         from_secret: docker_password
       repo: wappsify/stimmi
-      auto_tag: true
       registry: docker.io
+      tags:
+        - latest
+      environment:
+        DATABASE_URL:
+          from_secret: database_url
+
   - name: migrate-database
     image: oven/bun:latest
     commands:
