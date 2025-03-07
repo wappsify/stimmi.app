@@ -22,6 +22,7 @@ steps:
       registry: docker.io
       tags:
         - latest
+      dockerfile: docker/api/Dockerfile.dev
       environment:
         DATABASE_URL:
           from_secret: database_url
