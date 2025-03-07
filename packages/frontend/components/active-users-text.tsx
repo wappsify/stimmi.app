@@ -1,9 +1,9 @@
 "use client";
+import type { RoomUser } from "@packages/api/src/db/schema";
 import { useTranslations } from "next-intl";
 import React from "react";
 
 import { useRealtimeRoomUsers } from "@/lib/hooks/useRealtimeRoomUsers";
-import type { RoomUser } from "@/lib/supabase/room_user.types";
 
 export const ActiveUsersText: React.FC<{
   roomUsers: RoomUser[];

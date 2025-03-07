@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { UserDropdownMenu } from "@/components/user-dropdown-menu";
 
-import { getCurrentSession } from "../lib/server/getCurrentSession";
+import { getCurrentSession } from "../lib/server/utils";
 
 type HeaderProps = {
   hideNavigation?: boolean;

@@ -1,8 +1,10 @@
 import { getChoicesByRoomId } from "@packages/api/src/entities/choices";
-import { getRoomBySlug } from "@packages/api/src/entities/rooms";
+import { getRoomBySlugAndAccount } from "@packages/api/src/entities/rooms";
 import { getTranslations } from "next-intl/server";
 
 import { ChoicesEditForm } from "@/components/choices-edit-form";
+
+import { getAccountOrRedirect } from "../../../../lib/server/utils";
 
 const RoomEditPage: React.FC<{
   params: Promise<{ slug: string }>;
@@ -10,7 +12,8 @@ const RoomEditPage: React.FC<{
   const { slug } = await params;
   const t = await getTranslations("choices_edit");
 
-  const room = await getRoomBySlug(slug);
+  const { account } = await getAccountOrRedirect();
+  const room = await getRoomBySlugAndAccount(slug, account.id);
 
   if (!room) {
     console.error("Error fetching room, room not found");

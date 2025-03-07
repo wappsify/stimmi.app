@@ -1,13 +1,12 @@
 import { getPublicRoomBySlug } from "@packages/api/src/entities/rooms";
+import { getRoomUsersByRoomId } from "@packages/api/src/entities/roomUsers";
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { Separator } from "@/components/ui/separator";
 import { VotingSection } from "@/components/voting-section";
 import { getCurrentSession } from "@/lib/server/utils";
-import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata({
   params,
@@ -36,55 +35,49 @@ const VotingPage: React.FC<{
   params: Promise<{ slug: string }>;
 }> = async ({ params }) => {
   const t = await getTranslations("voting_page");
-  const supabase = createClient(cookies());
 
   const { slug } = await params;
 
-  const { data: room, error } = await supabase
-    .from("rooms")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  try {
+    const room = await getPublicRoomBySlug(slug);
 
-  if (error) {
-    console.error("Error fetching room:", error);
-    return <div>{t("error_loading_room")}</div>;
-  }
+    const { user } = await getCurrentSession();
 
-  const { user } = await getCurrentSession();
+    try {
+      const existingUsers = await getRoomUsersByRoomId(room.id);
 
-  const { error: roomUsersError, data: existingUsers } = await supabase
-    .from("room_users")
-    .select()
-    .eq("room_id", room.id);
+      if (user) {
+        // check if user has already voted
+        if (existingUsers.some((u) => u.id === user.id && u.hasVoted)) {
+          redirect(`/v/${room.slug}/results`);
+        }
+      }
 
-  if (roomUsersError) {
-    console.error(roomUsersError);
-    return <div>{t("error_fetching_room_users")}</div>;
-  }
+      return (
+        <div className="grid">
+          <h1 className="text-3xl text-center mb-4">
+            {t.rich("welcome_message", {
+              strong: (children) => <strong>{children}</strong>,
+            })}
+            <br />
+          </h1>
 
-  if (user) {
-    // check if user has already voted
-    if (existingUsers?.some((u) => u.user_id === user.id && u.has_voted)) {
-      redirect(`/v/${room.slug}/results`);
+          <p className="text-xl text-center">{t("instruction_message")}</p>
+
+          <Separator className="my-6" />
+          <VotingSection room={room} roomUsers={existingUsers} user={user} />
+        </div>
+      );
+    } catch (roomUsersError) {
+      console.error(roomUsersError);
+      return <div>{t("error_fetching_room_users")}</div>;
+    }
+  } catch (error) {
+    if (error) {
+      console.error("Error fetching room:", error);
+      return <div>{t("error_loading_room")}</div>;
     }
   }
-
-  return (
-    <div className="grid">
-      <h1 className="text-3xl text-center mb-4">
-        {t.rich("welcome_message", {
-          strong: (children) => <strong>{children}</strong>,
-        })}
-        <br />
-      </h1>
-
-      <p className="text-xl text-center">{t("instruction_message")}</p>
-
-      <Separator className="my-6" />
-      <VotingSection room={room} roomUsers={existingUsers} user={user} />
-    </div>
-  );
 };
 
 export default VotingPage;

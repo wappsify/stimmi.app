@@ -19,21 +19,30 @@ export const getPublicRoomBySlug = async (slug: string) => {
     .where(
       and(
         eq(roomsTable.slug, slug),
-        inArray(roomsTable.status, ["open", "results"])
-      )
+        inArray(roomsTable.status, ["open", "results"]),
+      ),
     );
   return room;
 };
 
 export const getRoomBySlugAndAccount = async (
   slug: string,
-  accountId: string
+  accountId: string,
 ) => {
   const [room] = await db
     .select()
     .from(roomsTable)
     .where(
-      and(eq(roomsTable.slug, slug), eq(roomsTable.account_id, accountId))
+      and(eq(roomsTable.slug, slug), eq(roomsTable.account_id, accountId)),
     );
+  return room;
+};
+
+export const getRoomByIdAndAccount = async (id: string, accountId: string) => {
+  const [room] = await db
+    .select()
+    .from(roomsTable)
+    .where(and(eq(roomsTable.id, id), eq(roomsTable.account_id, accountId)));
+
   return room;
 };

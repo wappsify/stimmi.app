@@ -1,23 +1,28 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { db } from "@packages/api/src/db";
+import type { Vote } from "@packages/api/src/db/schema";
+import {
+  choicesTable,
+  resultsTable,
+  roomsTable,
+  votesTable,
+} from "@packages/api/src/db/schema";
+import { getRoomByIdAndAccount } from "@packages/api/src/entities/rooms";
+import { and, eq } from "drizzle-orm";
 import { redirect, RedirectType } from "next/navigation";
 import type { Ballot } from "votes";
 import { Borda, RandomCandidates } from "votes";
 
 import { roomCreationSchema } from "@/lib/schemas/room-creation";
-import { getUserOrRedirect } from "@/lib/server/utils";
-import { createClient } from "@/lib/supabase/server";
+import { getAccountOrRedirect } from "@/lib/server/utils";
 
 import { roomDeletionSchema } from "../schemas/room-deletion";
 import { roomEditSchema } from "../schemas/room-edit";
 import { roomStatusSchema } from "../schemas/room-status";
-import type { Vote } from "../supabase/vote.types";
 
 export const createRoom = async (formData: FormData) => {
-  const user = await getUserOrRedirect();
-
-  const supabase = createClient(cookies());
+  const { account } = await getAccountOrRedirect();
 
   const { data: values, success } = roomCreationSchema.safeParse({
     name: formData.get("name"),
@@ -27,26 +32,25 @@ export const createRoom = async (formData: FormData) => {
     throw new Error("Invalid form data");
   }
 
-  const { data, error } = await supabase
-    .from("rooms")
-    .insert({
+  const [room] = await db
+    .insert(roomsTable)
+    .values({
       name: values.name,
-      user_id: user.id,
+      account_id: account.id,
       description: "",
       headline: "",
       slug: "",
     })
-    .select()
-    .single();
+    .returning();
 
-  if (error) {
-    throw new Error("Failed to create room");
-  }
+  console.log(room);
 
-  redirect(`/rooms/${data.slug}/choices`);
+  redirect(`/rooms/${room.slug}/choices`);
 };
 
 export const updateRoom = async (formData: FormData) => {
+  const { account } = await getAccountOrRedirect();
+
   const { data: values, success } = roomEditSchema.safeParse({
     id: formData.get("id"),
     name: formData.get("name"),
@@ -57,27 +61,31 @@ export const updateRoom = async (formData: FormData) => {
     throw new Error("Invalid form data");
   }
 
-  const supabase = createClient(cookies());
+  const room = await getRoomByIdAndAccount(values.id, account.id);
 
-  const { data, error } = await supabase
-    .from("rooms")
-    .update({
-      name: values.name,
-      description: values.description,
-    })
-    .eq("id", values.id)
-    .select()
-    .single();
+  if (!room) {
+    throw new Error("Room not found");
+  }
 
-  if (error) {
+  try {
+    const [updatedRoom] = await db
+      .update(roomsTable)
+      .set({
+        name: values.name,
+        description: values.description,
+      })
+      .where(eq(roomsTable.id, room.id))
+      .returning();
+    redirect(`/rooms/${updatedRoom.slug}/details`, RedirectType.replace);
+  } catch (error) {
     console.error("Error updating room:", error);
     throw new Error("Failed to update room");
   }
-
-  redirect(`/rooms/${data.slug}/details`, RedirectType.replace);
 };
 
 export const deleteRoom = async (formData: FormData) => {
+  const { account } = await getAccountOrRedirect();
+
   const { data: values, success } = roomDeletionSchema.safeParse({
     id: formData.get("id"),
   });
@@ -86,17 +94,16 @@ export const deleteRoom = async (formData: FormData) => {
     throw new Error("Invalid form data");
   }
 
-  const supabase = createClient(cookies());
-
-  const { error } = await supabase
-    .from("rooms")
-    .delete()
-    .eq("id", values.id)
-
-    .select()
-    .single();
-
-  if (error) {
+  try {
+    await db
+      .delete(roomsTable)
+      .where(
+        and(
+          eq(roomsTable.id, values.id),
+          eq(roomsTable.account_id, account.id),
+        ),
+      );
+  } catch (error) {
     console.error("Error deleting room:", error);
     throw new Error("Failed to delete room");
   }
@@ -105,6 +112,8 @@ export const deleteRoom = async (formData: FormData) => {
 };
 
 export const changeRoomStatus = async (formData: FormData) => {
+  const { account } = await getAccountOrRedirect();
+
   const { data: values, success } = roomStatusSchema.safeParse({
     id: formData.get("id"),
     status: formData.get("status"),
@@ -114,30 +123,23 @@ export const changeRoomStatus = async (formData: FormData) => {
     throw new Error("Invalid form data");
   }
 
-  const supabase = createClient(cookies());
-
   if (values.status === "results") {
     // fetch choices of room
-    const { data: choices, error: choicesError } = await supabase
-      .from("choices")
-      .select("id")
-      .eq("room_id", values.id);
-
-    if (choicesError) {
-      console.error("Error fetching choices:", choicesError);
-      throw new Error("Failed to fetch choices");
-    }
+    const choices = await db
+      .select()
+      .from(choicesTable)
+      .where(
+        and(
+          eq(choicesTable.room_id, values.id),
+          eq(choicesTable.account_id, account.id),
+        ),
+      );
 
     // fetch votes of room
-    const { data: votes, error: votesError } = await supabase
-      .from("votes")
+    const votes = await db
       .select()
-      .eq("room_id", values.id);
-
-    if (votesError) {
-      console.error("Error fetching votes:", votesError);
-      throw new Error("Failed to fetch votes");
-    }
+      .from(votesTable)
+      .where(eq(votesTable.room_id, values.id));
 
     const votesByUsers = votes.reduce<Record<string, Vote[]>>((acc, vote) => {
       if (!acc[vote.user_id]) {
@@ -176,33 +178,33 @@ export const changeRoomStatus = async (formData: FormData) => {
       tiebreak.points += 1;
     }
 
-    const { error: resultsError } = await supabase
-      .from("results")
-      .insert(placements);
-
-    if (resultsError) {
-      console.error("Error inserting results:", resultsError);
+    try {
+      await db.insert(resultsTable).values(placements);
+    } catch (error) {
+      console.error("Error inserting results:", error);
       throw new Error("Failed to insert results");
     }
   }
 
-  const { data, error } = await supabase
-    .from("rooms")
-    .update({
-      status: values.status,
-    })
-    .eq("id", values.id)
-    .select()
-    .single();
+  try {
+    const [room] = await db
+      .update(roomsTable)
+      .set({ status: values.status })
+      .where(
+        and(
+          eq(roomsTable.id, values.id),
+          eq(roomsTable.account_id, account.id),
+        ),
+      )
+      .returning();
 
-  if (error) {
+    if (values.status === "results") {
+      redirect(`/v/${room.slug}/results`, RedirectType.replace);
+    } else {
+      redirect(`/rooms/${room.slug}`, RedirectType.replace);
+    }
+  } catch (error) {
     console.error("Error updating room status:", error);
     throw new Error("Failed to update room status");
-  }
-
-  if (values.status === "results") {
-    redirect(`/v/${data.slug}/results`, RedirectType.replace);
-  } else {
-    redirect(`/rooms/${data.slug}`, RedirectType.replace);
   }
 };

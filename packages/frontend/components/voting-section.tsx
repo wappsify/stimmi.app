@@ -1,9 +1,9 @@
 "use client";
 
-import type { User } from "@packages/api/src/db/schema";
+import type { Choice, Room, User } from "@packages/api/src/db/schema";
 import { DoorOpen, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,72 +14,33 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useRealtimeRoomUsers } from "@/lib/hooks/useRealtimeRoomUsers";
-import type { Choice } from "@/lib/supabase/choice.types";
-import { createClient } from "@/lib/supabase/client";
-import type { Room } from "@/lib/supabase/room.types";
-import type { RoomUser } from "@/lib/supabase/room_user.types";
-import { shuffleArray } from "@/lib/utils/shuffleArray";
 
+import { addSessionUserToRoom } from "../lib/actions/room-users";
 import { Skeleton } from "./ui/skeleton";
 import { VotingForm } from "./voting-form";
 
 export const VotingSection: React.FC<{
   room: Room;
-  roomUsers: RoomUser[];
+  roomUsers: { id: string; hasVoted: boolean }[];
   user: User | null;
 }> = ({ room, roomUsers: serverRoomUsers, user }) => {
   const t = useTranslations("voting_section");
-  const [isJoining, setIsJoining] = useState(false);
   const [isInRoom, setIsInRoom] = useState(false);
 
-  const supabase = createClient();
+  const [choices, addUser, isJoining] = useActionState<Choice[]>(
+    () => addSessionUserToRoom(room.id),
+    [],
+  );
 
-  const handleJoinClick = async () => {
+  const handleJoinClick = () => {
     if (!user) {
       console.error("User not found");
       return;
     }
-
-    setIsJoining(true);
-
-    const { error: roomUsersError } = await supabase
-      .from("room_users")
-      .insert([{ room_id: room.id, user_id: user.id, has_voted: false }]);
-
-    if (roomUsersError) {
-      console.error(t("error_adding_room_user"), roomUsersError);
-      setIsJoining(false);
-      throw new Error(t("error_fetching_choices"));
-    }
-
-    setIsJoining(false);
+    addUser();
   };
 
   const roomUsers = useRealtimeRoomUsers(room.id, serverRoomUsers);
-
-  const [choices, setChoices] = useState<Choice[]>([]);
-
-  useEffect(() => {
-    const fetchChoices = async () => {
-      if (!room || !user || choices.length > 0) {
-        return;
-      }
-
-      const { data: fetchedChoices, error } = await supabase
-        .from("choices")
-        .select("*")
-        .eq("room_id", room.id);
-
-      if (error) {
-        console.error(t("error_fetching_choices"), error);
-        throw new Error(t("error_fetching_choices"));
-      }
-
-      setChoices(shuffleArray(fetchedChoices, user.id));
-    };
-
-    void fetchChoices();
-  }, [room, user, choices, supabase, t]);
 
   useEffect(() => {
     if (!user || !roomUsers) {

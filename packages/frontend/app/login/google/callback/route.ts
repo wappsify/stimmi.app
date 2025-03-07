@@ -8,7 +8,7 @@ import { decodeIdToken } from "arctic";
 import { cookies } from "next/headers";
 
 import { google } from "@/lib/auth/google";
-import { setSessionTokenCookie } from "@/lib/server/session";
+import { setSessionTokenCookie } from "@/lib/server/utils";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);

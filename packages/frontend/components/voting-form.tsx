@@ -7,6 +7,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { Choice, Room } from "@packages/api/src/db/schema";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -15,8 +16,6 @@ import { toast } from "sonner";
 import { submitVotes } from "@/lib/actions/votes";
 import type { FormValues } from "@/lib/schemas/submit-votes";
 import { votingSchema } from "@/lib/schemas/submit-votes";
-import type { Choice } from "@/lib/supabase/choice.types";
-import type { Room } from "@/lib/supabase/room.types";
 import { objectToFormData } from "@/lib/utils/objectToFormData";
 
 import { FormHiddenInputField } from "./forms/elements/form-hidden-input-field";
