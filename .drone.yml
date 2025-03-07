@@ -8,7 +8,8 @@ steps:
     image: oven/bun:latest
     commands:
       - bun install --filter "api" --frozen-lockfile
-      - bun build
+      - cd packages/api
+      - bun run build
   - name: publish
     image: plugins/docker
     settings:
