@@ -58,6 +58,18 @@ const ruleOverrideConfigs = [
       "import/no-default-export": "off",
     },
   },
+  {
+    name: "Allow underscore-prefixed unused vars",
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          varsIgnorePattern: "^_",
+          argsIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
 ];
 
 const importPluginConfig = {
