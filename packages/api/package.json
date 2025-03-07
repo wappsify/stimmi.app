@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "build": "bun build --target=bun --outfile=dist/server.js src/index.ts",
+    "migrate": "drizzle-kit migrate --config=drizzle.config.ts",
     "pre-commit": "lint-staged"
   },
   "dependencies": {
