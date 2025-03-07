@@ -15,6 +15,13 @@
       "when": 1737553237442,
       "tag": "0001_simple_dreadnoughts",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740670293816,
+      "tag": "0002_room-slug-functions",
+      "breakpoints": true
     }
   ]
 }
