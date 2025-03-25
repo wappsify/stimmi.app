@@ -34,7 +34,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <NextTopLoader color="#0f172a" showSpinner={false} />
-          <div className="flex-grow">{children}</div>
+          <div className="grow">{children}</div>
           <Toaster position="bottom-center" />
           <Footer />
         </NextIntlClientProvider>

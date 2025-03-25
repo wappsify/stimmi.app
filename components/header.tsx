@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = async ({ hideNavigation }) => {
       <div className="container mx-auto flex justify-between items-center">
         <Link
           href="/"
-          className="flex items-center ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded p-2"
+          className="flex items-center ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded p-2"
         >
           <div className="text-3xl mr-2">🗳️</div>
           <div className="logo text-xl font-semibold text-primary">

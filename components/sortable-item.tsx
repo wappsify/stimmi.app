@@ -31,7 +31,7 @@ export const SortableItem: React.FC<{
     <div
       ref={setNodeRef}
       style={style}
-      className="p-3 border border-gray-300 rounded bg-muted shadow-sm text-sm cursor-grab focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      className="p-3 border border-gray-300 rounded bg-muted shadow-xs text-sm cursor-grab focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       {...attributes}
       {...listeners}
     >

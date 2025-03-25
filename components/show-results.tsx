@@ -66,7 +66,7 @@ export const ShowResults: React.FC<{
         <motion.div
           key={result.choice_id}
           className={cn(
-            "p-4 border border-gray-300 rounded shadow-sm relative bg-background",
+            "p-4 border border-gray-300 rounded shadow-xs relative bg-background",
           )}
           variants={choiceVariants}
         >
