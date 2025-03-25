@@ -1,17 +1,62 @@
 import { a, type ClientSchema, defineData } from "@aws-amplify/backend";
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any unauthenticated user can "create", "read", "update", 
-and "delete" any "Todo" records.
-=========================================================================*/
 const schema = a.schema({
-  Todo: a
+  Vote: a
     .model({
-      content: a.string(),
+      rank: a.integer().required(),
+      choiceId: a.id().required(),
+      choice: a.belongsTo("Choice", "choiceId"),
+      roomId: a.id().required(),
+      room: a.belongsTo("Room", "roomId"),
+      ownerId: a.id().required(),
+      owner: a.belongsTo("User", "ownerId"),
     })
-    .authorization((allow) => [allow.guest()]),
+    .identifier(["choiceId", "ownerId"])
+    .authorization((allow) => [allow.authenticated()]),
+  Choice: a
+    .model({
+      name: a.string().required(),
+      description: a.string(),
+      roomId: a.id().required(),
+      room: a.belongsTo("Room", "roomId"),
+      ownerId: a.id().required(),
+      owner: a.belongsTo("User", "ownerId"),
+      votes: a.hasMany("Vote", "choiceId"),
+    })
+    .authorization((allow) => [allow.authenticated()]),
+  Room: a
+    .model({
+      name: a.string().required(),
+      description: a.string(),
+      slug: a.string().required(),
+      status: a.enum(["private", "open", "results"]),
+      ownerId: a.id().required(),
+      owner: a.belongsTo("User", "ownerId"),
+      choices: a.hasMany("Choice", "roomId"),
+      votes: a.hasMany("Vote", "roomId"),
+    })
+    .authorization((allow) => [allow.authenticated()]),
+  Result: a
+    .model({
+      points: a.integer().required(),
+      choiceId: a.id().required(),
+      choice: a.belongsTo("Choice", "choiceId"),
+      roomId: a.id().required(),
+      room: a.belongsTo("Room", "roomId"),
+    })
+    .identifier(["choiceId", "roomId"])
+    .authorization((allow) => [allow.authenticated()]),
+
+  RoomMember: a
+    .model({
+      owner: a.id().required(),
+      user: a.belongsTo("User", "userId"),
+      roomId: a.id().required(),
+      room: a.belongsTo("Room", "roomId"),
+      hasVoted: a.boolean().required(),
+    })
+    .identifier(["userId", "roomId"])
+    .authorization((allow) => [allow.authenticated()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
